@@ -1,7 +1,7 @@
 ---
 name: 'DEV LOG '
 about: 'DEV LOG template '
-title: "[DEV LOG] "
+title: "[DEV LOG]"
 labels: ''
 assignees: ''
 
