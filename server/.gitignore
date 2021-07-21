@@ -1,6 +1,7 @@
 .DS_Store
-.env
 /node_modules
+cert.pem
+key.pem
 
 # Logs
 logs
