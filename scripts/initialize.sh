@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /home/ubuntu/gallery-port/server
+sudo apt install npm
 npm install
 npm install pm2@latest -g
 sudo apt-get update
