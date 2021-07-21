@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      hello ogu
+      we are making the best application in the world! - gallery:port
     </div>
   );
 }
