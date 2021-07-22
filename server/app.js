@@ -4,9 +4,11 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
+const { sequelize } = require('./models/index')
 const { stream } = require('./config/winston')
 
 const app = express();
+sequelize.sync();
 
 require('dotenv').config();
 
@@ -33,9 +35,7 @@ app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
 app.use('/project', projectRouter);
 app.use('/profile', profileRouter);
-
 app.get('/', getRecentProjects);
-
 app.get('/:stack', getStackProjects);
 
 
