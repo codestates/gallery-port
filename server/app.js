@@ -14,8 +14,14 @@ sequelize.sync();
 require('dotenv').config();
 
 const upload = multer({
-    dest: 'uploads/',
-    
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'uploads/')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.originalname)
+        }
+    })
 });
 // fileFilter, limits 
 
@@ -44,6 +50,12 @@ app.use('/project', projectRouter);
 app.use('/profile', profileRouter);
 app.get('/', getRecentProjects);
 app.get('/:stack', getStackProjects);
+
+
+app.post('/', (req, res) => {
+    console.log(req)
+    res.send(req.file);
+});
 
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
