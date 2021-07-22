@@ -1,4 +1,4 @@
-const { users } = require('../../models');
+const { User } = require('../models');
 const {
     generateAccessToken,
     generateRefreshToken,
@@ -10,19 +10,20 @@ module.exports = {
 
     signin: async (req, res) => {
         const { email, password } = req.body;
-        const user = await users.findOne({ email });
-        if (!user) {
-            return res.status(401).send({
-                message: 'User not found',
+        const data = await User.findOne({
+            where: {
+                user_email: email,
+                user_password: password
+            }
+        });
+        if (!data) {
+            return res.status(404).send({
+                message: 'Not found',
             });
         }
-        if (!user.authenticate(password)) {
-            return res.status(401).send({
-                message: 'Wrong password',
-            });
-        }
-        const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
+        delete data.dataValues.user_password;
+        const accessToken = generateAccessToken(data.dataValues);
+        const refreshToken = generateRefreshToken(data.dataValues);
         sendRefreshToken(res, refreshToken);
         sendAccessToken(res, accessToken);
     },

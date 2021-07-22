@@ -8,6 +8,6 @@ module.exports = (sequelize, DataTypes) => {
             unique: true
         }
     },{
-        timestamp: false
+        timestamps: false
     });
 }
