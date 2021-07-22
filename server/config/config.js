@@ -2,9 +2,9 @@ require('dotenv').config()
 
 module.exports = {
 
-    dev: {
+    development: {
         username: "root",
-        password: null,
+        password: process.env.LOCAL_PASSWORD,
         database: "galleryport_dev",
         host: "localhost",
         dialect: "mysql"
@@ -18,7 +18,7 @@ module.exports = {
         dialect: "mysql"
     },
 
-    deploy: {
+    production: {
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
