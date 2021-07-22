@@ -4,13 +4,13 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('stack_for_projects', [
       {
-        "id": 0,
+        "id": 18,
         "stack_id": 1,
-        "project_id": 0
+        "project_id": 1
       },
       {
         "id": 1,
-        "stack_id": 1,
+        "stack_id": 2,
         "project_id": 1
       },
       {
@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         "id": 4,
-        "stack_id": 0,
+        "stack_id": 1,
         "project_id": 4
       },
       {
@@ -75,12 +75,12 @@ module.exports = {
       },
       {
         "id": 14,
-        "stack_id": 0,
+        "stack_id": 1,
         "project_id": 14
       },
       {
         "id": 15,
-        "stack_id": 0,
+        "stack_id": 1,
         "project_id": 15
       },
       {
@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         "id": 17,
-        "stack_id": 0,
+        "stack_id": 1,
         "project_id": 17
       }
     ])

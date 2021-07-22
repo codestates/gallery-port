@@ -5,10 +5,10 @@ module.exports = {
 
     await queryInterface.bulkInsert('project_contents', [
       {
-        "id": 0,
+        "id": 22,
         "content_text": "이미지에 관련된 설명입니다.",
         "content_image": "https://user-images.githubusercontent.com/81145387/126496101-1bc89289-fc66-422b-9450-c1b7eb6352c9.jpg",
-        "project_id": 0
+        "project_id": 18
       },
       {
         "id": 1,

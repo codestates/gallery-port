@@ -5,31 +5,31 @@ module.exports = {
 
     await queryInterface.bulkInsert('stacks', [
       {
-        "id": 0,
+        "id": 1,
         "stack_name": "etc"
       },
       {
-        "id": 1,
+        "id": 2,
         "stack_name": "javascript"
       },
       {
-        "id": 2,
+        "id": 3,
         "stack_name": "sql"
       },
       {
-        "id": 3,
+        "id": 4,
         "stack_name": "python"
       },
       {
-        "id": 4,
+        "id": 5,
         "stack_name": "java"
       },
       {
-        "id": 5,
+        "id": 6,
         "stack_name": "c#"
       },
       {
-        "id": 6,
+        "id": 7,
         "stack_name": "php"
       }
     ])

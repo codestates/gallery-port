@@ -5,7 +5,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('projects', [
       {
-        "id": 0,
+        "id": 18,
         "project_name": "mygoals",
         "project_start": "2021-04-01",
         "project_end": "2021-04-30",
