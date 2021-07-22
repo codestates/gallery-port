@@ -43,7 +43,8 @@ db.StackForProject = sequelize.define('stack_for_project', {id: {
     type: Sequelize.INTEGER,
     primaryKey: true, 
     autoIncrement: true
-  }
+  }},{
+    timestamps: false
 });
 db.Project.belongsToMany(db.Stack, {through: db.StackForProject, foreignKey:"project_id"});
 db.Stack.belongsToMany(db.Project, {through: db.StackForProject, foreignKey:"stack_id"});
@@ -52,7 +53,8 @@ db.ProjectByUser = sequelize.define('project_by_user', {id: {
     type: Sequelize.INTEGER,
     primaryKey: true, 
     autoIncrement: true
-  }
+  }},{
+    timestamps: false
 });
 db.User.belongsToMany(db.Project, {through: db.ProjectByUser, foreignKey: "user_id"});
 db.Project.belongsToMany(db.User, {through: db.ProjectByUser, foreignKey: "project_id"});

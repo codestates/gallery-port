@@ -15,7 +15,9 @@ require('dotenv').config();
 
 const upload = multer({
     dest: 'uploads/',
+    
 });
+// fileFilter, limits 
 
 const projectRouter = require('./router/projectRouter');
 const profileRouter = require('./router/profileRouter');
