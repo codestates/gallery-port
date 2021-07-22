@@ -4,7 +4,7 @@ module.exports = {
 
     development: {
         username: "root",
-        password: null,
+        password: process.env.LOCAL_PASSWORD,
         database: "galleryport_dev",
         host: "localhost",
         dialect: "mysql"
