@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
+const multer = require('multer');
 const { sequelize } = require('./models/index')
 const { stream } = require('./config/winston')
 
@@ -11,6 +12,10 @@ const app = express();
 sequelize.sync();
 
 require('dotenv').config();
+
+const upload = multer({
+    dest: 'uploads/',
+});
 
 const projectRouter = require('./router/projectRouter');
 const profileRouter = require('./router/profileRouter');
