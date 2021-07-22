@@ -16,10 +16,7 @@ module.exports = {
   sendAccessToken: (res, accessToken) => {
     res.status(200).json({ data: { accessToken }, message: "ok" });
   },
-  resendAccessToken: (res, accessToken, data) => {
-    res.json({ data: { accessToken, userInfo: data }, message: "ok" });
-  },
-  checkAccessToken: (req) => {
+  getAccessToken: (req) => {
     const authorization = req.headers["authorization"];
     if (!authorization) {
       return null;
@@ -31,7 +28,7 @@ module.exports = {
       return null;
     }
   },
-  checkRefreshToken: (req) => {
+  getRefreshToken: (req) => {
     try {
       return verify(req.cookies.refreshToken, process.env.REFRESH_SECRET);
     } catch (err) {
