@@ -35,4 +35,12 @@ module.exports = {
       return null;
     }
   },
+  getDataValues: (data) => {
+    delete data.dataValues.id;
+    delete data.dataValues.user_password;
+    delete data.dataValues.user_github;
+    delete data.dataValues.user_introduction;
+    delete data.dataValues.user_photo;
+    return data.dataValues;
+  }
 };

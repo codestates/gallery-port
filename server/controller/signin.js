@@ -4,6 +4,7 @@ const {
     generateRefreshToken,
     sendRefreshToken,
     sendAccessToken,
+    getDataValues
 } = require('./tokens/tokenFunctions');
 
 module.exports = {
@@ -21,9 +22,9 @@ module.exports = {
                 message: 'Not found',
             });
         }
-        delete data.dataValues.user_password;
-        const accessToken = generateAccessToken(data.dataValues);
-        const refreshToken = generateRefreshToken(data.dataValues);
+        const dataValues = getDataValues(data);
+        const accessToken = generateAccessToken(dataValues);
+        const refreshToken = generateRefreshToken(dataValues);
         sendRefreshToken(res, refreshToken);
         sendAccessToken(res, accessToken);
     },
