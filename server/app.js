@@ -52,7 +52,7 @@ app.get('/', getRecentProjects);
 app.get('/:stack', getStackProjects);
 
 
-app.post('/', (req, res) => {
+app.post('/', upload.single('image',), (req, res) => {
     console.log(req)
     res.send(req.file);
 });
