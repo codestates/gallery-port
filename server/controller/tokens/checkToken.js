@@ -45,7 +45,7 @@ module.exports = {
 		}
 		// case4: access token과 refresh token 모두가 유효한 경우 -> 다음 미들웨어로
 		if (accessTokenData !== null && refreshTokenData !== null) {
-			next();
+			next(); 
 		}
 
 	}
