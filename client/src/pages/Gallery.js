@@ -72,8 +72,8 @@ function Gallery() {
     axios
       .get('http://3.36.96.62/')
       .then((res) => {
-        console.log('res.landing', res.landing);
-        test = res.landing;
+        console.log('res.landing', res.data.landing);
+        test = res.data.landing;
         // return res.landing;
         // const images = [];
         // for (let i = 0; i < res.data.length; i++) {
