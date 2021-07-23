@@ -7,7 +7,7 @@ import LandingGallery from '../components/Landing/LandingGallery';
 import LandingProjects from '../components/Landing/LandingProjects';
 
 function Landing() {
-  const [mainTitle, setMainTitle] = useState('nothing');
+  const [mainTitle, setMainTitle] = useState('nothings');
 
   useEffect(() => {
     getTitle();
