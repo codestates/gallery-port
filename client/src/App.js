@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import './App.css';
-import Gallery from './pages/Gallery';
-import axios from 'axios';
+
+import Landing from './pages/Landing';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import Mypage from './pages/Mypage';
+import Profile from './pages/Profile';
+import Project from './pages/Project';
+import Loading from './pages/Loading';
+import ErrorPage from './pages/Error';
 
 function App() {
-  const [mainTitle, setMainTitle] = useState('nothing');
-
-  useEffect(() => {
-    getTitle();
-  });
-
-  async function getTitle() {
-    const response = await axios.get('http://3.36.96.62/');
-    if (response.data.landing !== '')
-      return setMainTitle(response.data.landing);
-    return mainTitle;
-  }
-
   return (
-    <div className="App">
-      {/* we are making the best application in the world! - gallery:port */}
-      <Gallery mainTitle={mainTitle} />
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/mypage" component={Mypage} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/project" component={Project} />
+          <Route path="/loading" component={Loading} />
+          <Route path="/error" component={ErrorPage} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
