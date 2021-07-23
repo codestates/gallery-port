@@ -3,7 +3,7 @@ import React, { useState, Suspense, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { MeshWobbleMaterial } from '@react-three/drei';
 import { a, useSpring } from '@react-spring/three';
-import data from '../data';
+import data from '../../data';
 
 function Image({ url, canvasWidth }) {
   const [active, setActive] = useState(0);
@@ -59,7 +59,7 @@ function Images() {
     </Suspense>
   ));
 }
-function Gallery(props) {
+function LandingGallery(props) {
   return (
     <div
       className="canvasWrapper"
@@ -67,9 +67,9 @@ function Gallery(props) {
         width: '100vw',
         height: '100vh',
         // position: 'absolute',
-        top: 0,
-        left: 0,
-        position: 'fixed',
+        // top: 0,
+        // left: 0,
+        // position: 'fixed',
       }}
     >
       <div className="back">{props.mainTitle}</div>
@@ -83,4 +83,4 @@ function Gallery(props) {
   );
 }
 
-export default Gallery;
+export default LandingGallery;
