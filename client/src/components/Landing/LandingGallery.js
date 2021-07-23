@@ -4,9 +4,12 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { MeshWobbleMaterial } from '@react-three/drei';
 import { a, useSpring } from '@react-spring/three';
 import data from '../../data';
+import arrow from '../../images/arrow_low_w.svg';
+import './LandingGallery.css';
 
 function Image({ url, canvasWidth }) {
   const [active, setActive] = useState(0);
+
   const mesh = useRef();
   const random = require('lodash.random');
   const { spring } = useSpring({
@@ -38,7 +41,7 @@ function Image({ url, canvasWidth }) {
       position={position}
       scale-x={scale}
       scale-y={scale}
-      onClick={() => setActive(!active)}
+      // onClick={() => setActive(!active)}
     >
       <planeBufferGeometry attach="geometry" args={[5, 8]} />
       <MeshWobbleMaterial
@@ -59,26 +62,45 @@ function Images() {
     </Suspense>
   ));
 }
-function LandingGallery(props) {
+function LandingGallery() {
   return (
-    <div
-      className="canvasWrapper"
-      style={{
-        width: '100vw',
-        height: '100vh',
-        // position: 'absolute',
-        // top: 0,
-        // left: 0,
-        // position: 'fixed',
-      }}
-    >
-      <div className="back">{props.mainTitle}</div>
+    <div className="canvasWrapper">
+      <div className="back stop-dragging">
+        Gallery:port
+        <br />
+        <div className="mainText">
+          당신의 프로젝트를 공유하고,
+          <br />
+          여러 작품과 소통할 수 있는 공간,
+          <br />
+          Gallery:port 입니다.
+        </div>
+        <img src={arrow} alt="arrow" className="mainArrow"></img>
+        <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
+          프로젝트 보러가기
+        </div>
+      </div>
+
       <Canvas camera={{ position: [0, 0, 15] }}>
         <Images />
         <directionalLight position={[0, 20, 20]} color="#ffffff" />
         <ambientLight color="#ffffff" />
       </Canvas>
-      <div className="front">{props.mainTitle}</div>
+      <div className="front stop-dragging">
+        Gallery:port
+        <br />
+        <div className="mainText">
+          당신의 프로젝트를 공유하고,
+          <br />
+          여러 작품과 소통할 수 있는 공간,
+          <br />
+          Gallery:port 입니다.
+        </div>
+        <img src={arrow} alt="arrow" className="mainArrow"></img>
+        <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
+          프로젝트 보러가기
+        </div>
+      </div>
     </div>
   );
 }
