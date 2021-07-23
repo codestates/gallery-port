@@ -1,11 +1,9 @@
 import * as THREE from 'three';
-import React, { useEffect, useState, Suspense, useMemo, useRef } from 'react';
+import React, { useState, Suspense, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { MeshWobbleMaterial } from '@react-three/drei';
 import { a, useSpring } from '@react-spring/three';
 import data from '../data';
-
-import axios from 'axios';
 
 function Image({ url, canvasWidth }) {
   const [active, setActive] = useState(0);
@@ -61,48 +59,26 @@ function Images() {
     </Suspense>
   ));
 }
-function Gallery() {
-  let test;
-
-  useEffect(() => {
-    data();
-  }, []);
-
-  function data() {
-    axios
-      .get('http://3.36.96.62/')
-      .then((res) => {
-        console.log('res.landing', res.data.landing);
-        test = res.data.landing;
-        // return res.landing;
-        // const images = [];
-        // for (let i = 0; i < res.data.length; i++) {
-        //   images.push(URL.createObjectURL(res.data[i].project_thumbnail));
-        // }
-        // console.log('images', images);
-        // return images;
-      })
-      .catch((err) => alert(err));
-  }
-
+function Gallery(props) {
   return (
     <div
       className="canvasWrapper"
       style={{
         width: '100vw',
         height: '100vh',
-        position: 'absolute',
+        // position: 'absolute',
         top: 0,
         left: 0,
+        position: 'fixed',
       }}
     >
-      <div className="back">{test}</div>
+      <div className="back">{props.mainTitle}</div>
       <Canvas camera={{ position: [0, 0, 15] }}>
         <Images />
         <directionalLight position={[0, 20, 20]} color="#ffffff" />
         <ambientLight color="#ffffff" />
       </Canvas>
-      <div className="front">{test}</div>
+      <div className="front">{props.mainTitle}</div>
     </div>
   );
 }
