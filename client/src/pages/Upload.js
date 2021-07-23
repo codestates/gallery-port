@@ -1,20 +1,15 @@
 import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
+import UploadWrapper from '../components/Upload/UploadWrapper';
 
 function Upload() {
   return (
     <>
       <Header />
-      <div
-        style={{
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'yellow',
-        }}
-      >
-        Upload
-      </div>
+      {/* <div className=""> */}
+      <UploadWrapper />
+      {/* </div> */}
       <Footer />
     </>
   );
