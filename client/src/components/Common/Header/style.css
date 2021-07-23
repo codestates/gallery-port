@@ -1,0 +1,14 @@
+.header {
+  width: 100vw;
+  height: 80px;
+  background-color: '#ffffff';
+  border-bottom: '1px solid #e0e2e7';
+  /* position: fixed; */
+  top: 100%;
+}
+
+.headerInner {
+  width: 1120px;
+  height: 100%;
+  margin: 0 auto;
+}

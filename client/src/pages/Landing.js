@@ -7,22 +7,22 @@ import LandingGallery from '../components/Landing/LandingGallery';
 import LandingProjects from '../components/Landing/LandingProjects';
 
 function Landing() {
-  const [mainTitle, setMainTitle] = useState('nothing');
+  // const [mainTitle, setMainTitle] = useState('nothing');
 
-  useEffect(() => {
-    getTitle();
-  });
+  // useEffect(() => {
+  //   getTitle();
+  // });
 
-  async function getTitle() {
-    const response = await axios.get('http://3.36.96.62/');
-    if (response.data.landing !== '')
-      return setMainTitle(response.data.landing);
-    return mainTitle;
-  }
+  // async function getTitle() {
+  //   const response = await axios.get('http://3.36.96.62/');
+  //   if (response.data.landing !== '')
+  //     return setMainTitle(response.data.landing);
+  //   return mainTitle;
+  // }
 
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <LandingGallery mainTitle={mainTitle} />
+      <LandingGallery />
       <Header />
       <LandingProjects />
       <Footer />
