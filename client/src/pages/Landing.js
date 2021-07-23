@@ -7,14 +7,14 @@ import LandingGallery from '../components/Landing/LandingGallery';
 import LandingProjects from '../components/Landing/LandingProjects';
 
 function Landing() {
-  const [mainTitle, setMainTitle] = useState('nothing');
+  const [mainTitle, setMainTitle] = useState('nothings');
 
   useEffect(() => {
     getTitle();
   });
 
   async function getTitle() {
-    const response = await axios.get('http://3.36.96.62/');
+    const response = await axios.get("https://gallery-port-server.com/");
     if (response.data.landing !== '')
       return setMainTitle(response.data.landing);
     return mainTitle;
