@@ -14,7 +14,7 @@ function Landing() {
   });
 
   async function getTitle() {
-    const response = await axios.get('https://gallery-port-server.com/');
+    const response = await axios.get("https://gallery-port-server.com/");
     if (response.data.landing !== '')
       return setMainTitle(response.data.landing);
     return mainTitle;
