@@ -4,7 +4,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
-const multer = require('multer');
 const { sequelize } = require('./models/index')
 const { stream } = require('./config/winston')
 
@@ -13,16 +12,13 @@ sequelize.sync();
 
 require('dotenv').config();
 
-const upload = multer({
-    dest: 'uploads/',
-});
-
+const landingRouter = require('./router/landingRouter');
 const projectRouter = require('./router/projectRouter');
 const profileRouter = require('./router/profileRouter');
 const mypageRouter = require('./router/mypageRouter');
 const signinRouter = require('./router/signinRouter');
 const signupRouter = require('./router/signupRouter');
-const { getRecentProjects, getStackProjects } = require('./controller/landing'); 
+const imageRouter = require('./router/imageRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,14 +31,13 @@ app.use(cors({
     })
 );
 
+app.use('/', landingRouter);
 app.use('/mypage', mypageRouter);
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
 app.use('/project', projectRouter);
 app.use('/profile', profileRouter);
-app.get('/', getRecentProjects);
-app.get('/:stack', getStackProjects);
-
+app.use('/image', imageRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 

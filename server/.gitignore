@@ -2,6 +2,7 @@
 /node_modules
 cert.pem
 key.pem
+/uploads
 
 # Logs
 logs
