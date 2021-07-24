@@ -3,6 +3,7 @@ import TextInputGender from './TextInputGender';
 import CheckboxInputGender from './CheckboxInputGender';
 import ImageUploaderOne from './ImageUploaderOne';
 import ImageUploaderMany from './ImageUploaderMany';
+import TextInputGenderRequired from './TextInputGenderRequired';
 
 function ProjectUploadInfo({
   project_info,
@@ -11,33 +12,55 @@ function ProjectUploadInfo({
   setProject_info,
   setProject_name,
   setProject_thumbnail,
-  postHandler,
   project_stackHandler,
   stackArray,
   curFiles,
   setCurFiles,
 }) {
   const textInputData = [
-    ['프로젝트 팀', 'project_team', '팀원', 72, 40],
+    ['프로젝트 팀', 'project_team', '팀원', 72, 40, 'text'],
     [
       '프로젝트 소개',
       'project_introduction',
       '50자 이내로 입력해주세요.',
       112,
       80,
+      'text',
     ],
-    ['프로젝트 기능', 'project_feature', '50자 이내로 입력해주세요.', 112, 80],
-    ['프로젝트 사이트', 'project_url', 'url', 72, 40],
-    ['프로젝트 깃허브', 'project_github', 'url', 72, 40],
+    [
+      '프로젝트 기능',
+      'project_feature',
+      '50자 이내로 입력해주세요.',
+      112,
+      80,
+      'text',
+    ],
+    ['프로젝트 사이트', 'project_url', 'url', 72, 40, 'url'],
+    ['프로젝트 깃허브', 'project_github', 'url', 72, 40, 'url'],
     [
       '프론트엔드 스택',
       'project_front_stack',
       '50자 이내로 입력해주세요.',
       112,
       80,
+      'text',
     ],
-    ['백엔드 스택', 'project_back_stack', '50자 이내로 입력해주세요.', 112, 80],
-    ['배포 스택', 'project_deploy_stack', '50자 이내로 입력해주세요.', 112, 80],
+    [
+      '백엔드 스택',
+      'project_back_stack',
+      '50자 이내로 입력해주세요.',
+      112,
+      80,
+      'text',
+    ],
+    [
+      '배포 스택',
+      'project_deploy_stack',
+      '50자 이내로 입력해주세요.',
+      112,
+      80,
+      'text',
+    ],
   ];
 
   function onChangeHandler(e, property) {
@@ -48,7 +71,7 @@ function ProjectUploadInfo({
 
   return (
     <>
-      <div className="project_name">
+      {/* <div className="project_name">
         <div className="subject_wrapper">
           프로젝트명<span className="required">(필수)</span>
         </div>
@@ -60,7 +83,15 @@ function ProjectUploadInfo({
           value={project_name}
           onChange={e => setProject_name(e.target.value)}
         />
-      </div>
+      </div> */}
+      <TextInputGenderRequired
+        inputname={'프로젝트명'}
+        detailString={'project_name'}
+        stateName={project_name}
+        stateFunc={setProject_name}
+        placeholder={'20자 이내로 입력해주세요.'}
+        type={'text'}
+      />
       <ImageUploaderOne
         project_info_detail={'프로필 썸네일'}
         required={'(필수)'}
@@ -134,6 +165,7 @@ function ProjectUploadInfo({
               height2={el[4]}
               project_info={project_info}
               onChangeHandler={onChangeHandler}
+              type={el[5]}
             />
           );
         })}

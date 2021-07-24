@@ -1,10 +1,12 @@
-.uploadWrapper {
+.uploadWrapper,
+.signupWrapper {
   position: relative;
   width: 100%;
   height: 100%;
   background: #ffffff;
   display: flex;
   justify-content: center;
+  /* overflow-x: hidden; */
 }
 
 /* ////////////////////ImageUploader////////////////////////// */
@@ -38,7 +40,7 @@ div.subject_wrapper {
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 8px 0px;
+  /* margin: 8px 0px; */
 }
 
 div.projectUploadPageContainer {
@@ -57,18 +59,30 @@ div.projectUploadPageContainer {
   font-size: 16px;
   line-height: 24px;
 }
-div.project_name {
+.project_name,
+.user_email,
+.user_password,
+.password_confirm {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
+
   position: static;
   width: 360px;
   height: 72px;
   left: 0px;
   top: 72px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 24px 0px;
 }
-div.project_name ::placeholder {
+.project_name ::placeholder,
+.user_email ::placeholder,
+.user_password ::placeholder,
+.password_confirm ::placeholder {
   position: absolute;
   width: 175px;
   height: 24px;
@@ -266,7 +280,7 @@ input.input_small {
   /* Inside Auto Layout */
 
   flex: none;
-  /* order: 1; */
+  order: 1;
   flex-grow: 0;
   margin: 8px 0px;
 }
@@ -371,7 +385,8 @@ img.preview {
   color: #d9d9d9;
 }
 
-.project_info {
+.project_info,
+.user_info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -388,7 +403,8 @@ img.preview {
   margin: 24px 0px;
 }
 
-.project_info_input {
+.project_info_input,
+.user_info_input {
   position: static;
   width: 360px;
   /* height: 40px; */
@@ -409,7 +425,8 @@ img.preview {
   flex-grow: 0;
   /* margin: 8px 0px; */
 }
-.project_info_input::placeholder {
+.project_info_input::placeholder,
+.user_info_input::placeholder {
   position: absolute;
   width: 175px;
   height: 24px;
