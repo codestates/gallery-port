@@ -41,7 +41,7 @@ function Image({ url, canvasWidth }) {
       position={position}
       scale-x={scale}
       scale-y={scale}
-      // onClick={() => setActive(!active)}
+      onClick={() => setActive(!active)}
     >
       <planeBufferGeometry attach="geometry" args={[5, 8]} />
       <MeshWobbleMaterial
@@ -64,7 +64,17 @@ function Images() {
 }
 function LandingGallery() {
   return (
-    <div className="canvasWrapper">
+    <div
+      className="canvasWrapper"
+      style={{
+        width: '100vw',
+        height: '100vh',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        overflow: 'hidden',
+      }}
+    >
       <div className="back stop-dragging">
         Gallery:port
         <br />
@@ -75,7 +85,9 @@ function LandingGallery() {
           <br />
           Gallery:port 입니다.
         </div>
-        <img src={arrow} alt="arrow" className="mainArrow"></img>
+        <p>
+          <img src={arrow} alt="arrow" className="mainArrow"></img>
+        </p>
         <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
           프로젝트 보러가기
         </div>
@@ -96,7 +108,9 @@ function LandingGallery() {
           <br />
           Gallery:port 입니다.
         </div>
-        <img src={arrow} alt="arrow" className="mainArrow"></img>
+        <p>
+          <img src={arrow} alt="arrow" className="mainArrow"></img>
+        </p>
         <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
           프로젝트 보러가기
         </div>

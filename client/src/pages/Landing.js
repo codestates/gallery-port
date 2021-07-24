@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
@@ -7,28 +6,12 @@ import LandingGallery from '../components/Landing/LandingGallery';
 import LandingProjects from '../components/Landing/LandingProjects';
 
 function Landing() {
-
-  // const [mainTitle, setMainTitle] = useState('nothing');
-
-
-  // useEffect(() => {
-  //   getTitle();
-  // });
-
-
-  // async function getTitle() {
-  //   const response = await axios.get('http://3.36.96.62/');
-  //   if (response.data.landing !== '')
-  //     return setMainTitle(response.data.landing);
-  //   return mainTitle;
-  // }
-
   return (
-    <div style={{ overflowX: 'hidden' }}>
+    <div>
       <LandingGallery />
-      <Header />
+      <Header Landing={true} />
       <LandingProjects />
-      <Footer />
+      <Footer Landing={true} />
     </div>
   );
 }

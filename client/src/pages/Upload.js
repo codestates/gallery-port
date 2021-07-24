@@ -5,13 +5,13 @@ import UploadWrapper from '../components/Upload/UploadWrapper';
 
 function Upload() {
   return (
-    <>
+    <div style={{ overflowX: 'hidden' }}>
       <Header />
-      {/* <div className=""> */}
+
       <UploadWrapper />
-      {/* </div> */}
+
       <Footer />
-    </>
+    </div>
   );
 }
 

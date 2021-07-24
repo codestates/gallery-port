@@ -37,7 +37,6 @@ function UploadWrapper() {
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
     setDescription(descElemArray);
-    console.log(descriptions);
   }, [curFiles, project_info]);
 
   function project_stackHandler(checked, itemName) {
@@ -65,14 +64,15 @@ function UploadWrapper() {
     formData.append('project_content', project_content);
     formData.append('project_info', project_info);
     // JSON.stringify({ text: descriptions[i].value, image: curFiles[i] })
-    // for (let el of formData.entries()) {
-    //   console.log(el);
-    // }
+    for (let el of formData.entries()) {
+      console.log(el);
+    }
     return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
-      .post('https://localhost:80/project/', formData, {
+      .post(`https://gallery-port-server.com/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials: true,
       })
       .then(res => {
         alert('성공');
@@ -84,7 +84,6 @@ function UploadWrapper() {
 
   function previewHandler() {
     setModalOn(!modalOn);
-    console.log(modalOn);
   }
 
   return (
@@ -118,6 +117,8 @@ function UploadWrapper() {
             setModalOn={setModalOn}
             descriptions={descriptions}
             curFiles={curFiles}
+            postHandler={postHandler}
+            project_info={project_info}
           />
         </div>
       </div>
