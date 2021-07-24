@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
+import ErrorText from '../components/Error';
 
 function Error() {
   return (
@@ -9,11 +10,10 @@ function Error() {
       <div
         style={{
           width: '100vw',
-          height: '100vh',
-          backgroundColor: 'yellow',
+          height: '82vh',
         }}
       >
-        Error
+        <ErrorText />
       </div>
       <Footer />
     </>

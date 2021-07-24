@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.landingProjects {
+  width: 100vw;
+  height: 1180px;
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.landingProjectsInner {
+  width: 1180px;
+  height: 100%;
+  margin: 0 auto;
+  padding-left: 20px;
+}

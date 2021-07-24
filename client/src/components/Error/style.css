@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.errorText {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #3d5afe;
+  font-family: 'NotoSansKR-B', sans-serif;
+  text-align: center;
+}
+
+.errorTitle {
+  font-size: 48px;
+}
+
+.errorTitle p {
+  font-size: 24px;
+  font-family: 'NotoSansKR-L', sans-serif;
+  padding-top: 10px;
+}
