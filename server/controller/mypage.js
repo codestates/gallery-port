@@ -3,6 +3,10 @@ const { User } = require('../models/index')
 module.exports = {
 
     getUserData: async (req, res) => {
+
+        const userId = req.params.id;
+
+        
         //TODO: req.params.id 에 맞는 user 정보를 조회하여 반환한다. 
         //TODO: status 200
         // { 

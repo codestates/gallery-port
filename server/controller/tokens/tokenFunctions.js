@@ -33,10 +33,7 @@ module.exports = {
     }
   },
   getDataValues: (data) => {
-    delete data.dataValues.user_password;
-    delete data.dataValues.user_github;
-    delete data.dataValues.user_introduction;
-    delete data.dataValues.user_photo;
-    return data.dataValues;
+    const { id, user_email } = data.dataValues;
+    return { id, user_email}
   }
 };
