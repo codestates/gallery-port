@@ -27,5 +27,6 @@ module.exports = {
         const refreshToken = generateRefreshToken(dataValues);
         sendRefreshToken(res, refreshToken);
         sendAccessToken(res, accessToken);
+        res.send('ok')
     },
 };

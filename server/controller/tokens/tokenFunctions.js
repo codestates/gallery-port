@@ -3,10 +3,10 @@ require("dotenv").config();
 
 module.exports = {
   generateAccessToken: (data) => {
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "30s" });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "1d" });
   },
   generateRefreshToken: (data) => {
-    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "60s" });
+    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "7d" });
   },
   sendRefreshToken: (res, refreshToken) => {
     res.cookie("refreshToken", refreshToken, {
@@ -14,16 +14,13 @@ module.exports = {
     });
   },
   sendAccessToken: (res, accessToken) => {
-    res.status(200).json({ data: { accessToken }, message: "ok" });
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+    });
   },
   verifyAccessToken: (req) => {
-    const authorization = req.headers["authorization"];
-    if (!authorization) {
-      return null;
-    }
-    const token = authorization.split(" ")[1];
     try {
-      return verify(token, process.env.ACCESS_SECRET);
+      return verify(req.cookies.accessToken, process.env.ACCESS_SECRET);
     } catch (err) {
       return null;
     }
@@ -36,7 +33,6 @@ module.exports = {
     }
   },
   getDataValues: (data) => {
-    delete data.dataValues.id;
     delete data.dataValues.user_password;
     delete data.dataValues.user_github;
     delete data.dataValues.user_introduction;
