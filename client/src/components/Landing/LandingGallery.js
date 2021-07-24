@@ -94,7 +94,7 @@ function LandingGallery() {
           <br />
           여러 작품과 소통할 수 있는 공간,
           <br />
-          Gallery:Port 입니다.
+          Gallery:port 입니다.
         </div>
         <img src={arrow} alt="arrow" className="mainArrow"></img>
         <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
