@@ -6,12 +6,19 @@ module.exports = {
 
     uploadProfileImage : (req, res, next) => {
 
+        const dir = './uploads/profile/'
+        try {
+            fs.accessSync(dir)
+        } catch (err) {
+            fs.mkdirSync(dir, {recursive: true})
+        }
+
         const userId = req.params.id || parseInt(Math.random()*100000)
 
         const upload = multer({
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, path.join('./uploads/profile'))
+                    cb(null, path.join(dir))
                 },
                 filename: async function (req, file, cb) {
                     cb(null, `profile_${userId}.` + file.mimetype.split('/')[1])
