@@ -5,7 +5,8 @@ const {
 	sendRefreshToken,
 	verifyAccessToken,
 	verifyRefreshToken,
-	getDataValues
+	getDataValues,
+	sendAccessToken
 } = require('./tokenFunctions');
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
 
 		// case1: access token과 refresh token 모두가 만료된 경우 -> 에러 발생
 		if (accessTokenData === null && refreshTokenData === null) {
-				res.status(401).send({ message: 'Not found' });
+			res.status(401).send({ message: 'Not found' });
 		}
 		// case2: access token은 만료됐지만, refresh token은 유효한 경우 -> access token 재발급
 		if (accessTokenData === null && refreshTokenData !== null) {
@@ -27,7 +28,7 @@ module.exports = {
 			});
 			const dataValues = getDataValues(data);
 			const newAccessToken = generateAccessToken(dataValues);
-			req.headers.authorization = `Bearer ${newAccessToken}`;
+			sendAccessToken(res, newAccessToken); 
 			next();
 		}
 		// case3: access token은 유효하지만, refresh token은 만료된 경우 -> refresh token 재발급
