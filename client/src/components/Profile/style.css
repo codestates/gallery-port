@@ -3,3 +3,83 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.ProfileWrapper {
+  position: relative;
+  width: 1120px;
+  height: 100%;
+  background: #ffffff;
+  margin: 0 auto;
+  position: static;
+  top: 80px;
+}
+
+.profileUserInfo {
+  width: 360px;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 80px;
+  padding-top: 72px;
+  padding-bottom: 50px;
+}
+
+.photoWraaper {
+  position: relative;
+  height: 150px;
+}
+
+.profileUserPhoto {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.setting {
+  position: absolute;
+  bottom: -5px;
+  right: 30%;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profileUserContent {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.profileUserContent.name {
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.profileUserContent.introduction {
+  font-family: 'NotoSansKR-L', sans-serif;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.profileUserContent.email {
+  font-family: 'NotoSansKR-L', sans-serif;
+  font-size: 16px;
+}
+
+.profileUserInfo button {
+  width: 135px;
+  height: 45px;
+  background-color: #3d5afe;
+  color: #ffffff;
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 18px;
+  border-radius: 4px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
