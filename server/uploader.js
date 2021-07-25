@@ -30,11 +30,13 @@ module.exports = {
 
     uploadProjectImage : (req, res, next) => {
 
-        const projectId = req.params.id || req.headers.temp_id 
+        const projectId = req.params.projectid || req.headers.temp_id 
         
         const dir = `./uploads/project/${projectId}`
         try {
             fs.accessSync(dir)
+            fs.rmdirSync(dir, {recursive: true})
+            fs.mkdirSync(dir, {recursive: true})
         } catch (err) {
             fs.mkdirSync(dir, {recursive: true})
         }
