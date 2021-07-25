@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import {
-  addFileHandler,
   deleteHandler,
   inputFilesHandler,
   addFilesHandler,
@@ -56,9 +55,11 @@ function ImageUploaderMany({
           ? null
           : stateName.map((el, idx) => {
               return (
-                <div style={{ display: 'flex', marginBottom: '8px' }}>
+                <div
+                  key={`project_img_preview_desc${idx}`}
+                  style={{ display: 'flex', marginBottom: '8px' }}
+                >
                   <div
-                    key={idx}
                     id={idx}
                     className="img_preview"
                     style={{

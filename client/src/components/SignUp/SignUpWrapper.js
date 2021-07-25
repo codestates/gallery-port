@@ -69,7 +69,7 @@ function SignUpWrapper() {
 
   return (
     <div className="signupWrapper">
-      <div className="projectUploadPageContainer">
+      <div className="signupPageContainer">
         <SignUpInfo
           user_email={user_email}
           setUser_email={setUser_email}
