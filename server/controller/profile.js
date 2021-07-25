@@ -3,29 +3,41 @@ const { User, ProjectByUser, Project } = require('../models/index')
 module.exports = {
 
     getProfileData: async (req, res) => {
-        //TODO: req.params.id 에 맞는 user 의 개인정보와 프로젝트 정보를 불러온다. 
-        //TODO: status 200
-        // { "data" : 
-        //     { 
-        //     "projects: [
-        //         {
-        //             "project_thumbnail": path,
-        //             "project_name": "example"
-        //         }
-        //     ], 
-        //     "user_name" : "user_name",
-        //     "user_photo" : path,
-        //     "user_email" : "user_email",
-        //     "user_github" : "user_github",
-        //     "user_introduction" : "user_introduction"
-        //     }
-        //     "message" : "ok"
-        // } 
-        //TODO: status 404
-        // {
-        //     "message": "Not Found"
-        // }
-        res.json({'profile' : 'page'})
+        const id = req.params.id;
+
+        const user = await User.findOne({ 
+            where: {
+                id
+            }
+        });
+        
+        if (!user) {
+            return res.status(404).send({ message: 'Not Found' });
+        }
+        
+        const projectsId = await ProjectByUser.findAll({
+            where: {
+                user_id: id,
+            },
+            attributes: ['project_id'],
+        }).then(data => data.map(project => project.project_id));
+        
+        const projects = await Project.findAll({
+            where: {
+                id: projectsId
+            },
+            attributes: ['id','project_thumbnail', 'project_name']
+        });
+        
+        delete user.dataValues.id;
+        delete user.dataValues.user_password;
+        res.status(200).json({
+            "data": {
+                projects,
+                ...(user.dataValues)
+            },
+            "message": "Ok"
+        });
     }
-    
+
 };
