@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
 import ProjectUploadInfo from './ProjectUploadInfo';
+import { scrollTo } from '../../utils/etc';
 import './UploadWrapper.css';
+
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadWrapper() {
   const [project_info, setProject_info] = useState({
@@ -68,7 +71,7 @@ function UploadWrapper() {
       console.log(el);
     }
     return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
-      .post(`https://gallery-port-server.com/upload`, formData, {
+      .post(`${END_POINT}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -109,7 +112,14 @@ function UploadWrapper() {
             alignItems: 'center',
           }}
         >
-          <div className="previewBtn" onClick={() => previewHandler()}>
+          <div
+            className="previewBtn"
+            onClick={() =>
+              project_name && project_stack && project_thumbnail && curFiles
+                ? previewHandler()
+                : scrollTo(0)
+            }
+          >
             프로젝트 미리보기
           </div>
           <Modal

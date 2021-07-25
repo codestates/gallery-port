@@ -1,7 +1,14 @@
 import React from 'react';
 import { objectToArray } from '../../utils/etc';
 
-function ProjectInfoRender({ curFiles, descriptions, project_info }) {
+function ProjectInfoRender({
+  curFiles,
+  descriptions,
+  project_info,
+  modalOn,
+  setModalOn,
+  postHandler,
+}) {
   const project_info_array = objectToArray(project_info);
   return (
     <div className="project_info_render_container">
@@ -34,6 +41,19 @@ function ProjectInfoRender({ curFiles, descriptions, project_info }) {
           return '';
         }
       })}
+      <div className="modal_button_wrapper">
+        <div
+          className="modal_button_cancel"
+          onClick={() => {
+            setModalOn(!modalOn);
+          }}
+        >
+          취소
+        </div>
+        <div className="modal_button_upload" onClick={postHandler}>
+          등록
+        </div>
+      </div>
     </div>
   );
 }

@@ -18,20 +18,10 @@ function Modal({
               curFiles={curFiles}
               descriptions={descriptions}
               project_info={project_info}
+              modalOn={modalOn}
+              setModalOn={setModalOn}
+              postHandler={postHandler}
             />
-            <div className="modal_button_wrapper">
-              <div
-                className="modal_button_cancel"
-                onClick={() => {
-                  setModalOn(!modalOn);
-                }}
-              >
-                취소
-              </div>
-              <div className="modal_button_upload" onClick={postHandler}>
-                등록
-              </div>
-            </div>
           </div>
         </div>
       ) : null}

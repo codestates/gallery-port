@@ -6,6 +6,7 @@ import { a, useSpring } from '@react-spring/three';
 import data from '../../data';
 import arrow from '../../images/arrow_low_w.svg';
 import './LandingGallery.css';
+import { scrollTo } from '../../utils/etc';
 
 function Image({ url, canvasWidth }) {
   const [active, setActive] = useState(0);
@@ -55,8 +56,8 @@ function Image({ url, canvasWidth }) {
   );
 }
 function Images() {
-  const size = useThree((state) => state.size);
-  return data.map((el) => (
+  const size = useThree(state => state.size);
+  return data.map(el => (
     <Suspense fallback={null}>
       <Image key={el} url={el} canvasWidth={size.width} />
     </Suspense>
@@ -88,7 +89,11 @@ function LandingGallery() {
         <p>
           <img src={arrow} alt="arrow" className="mainArrow"></img>
         </p>
-        <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
+        <div
+          className="mainProjectGo"
+          style={{ cursor: 'pointer' }}
+          onClick={() => scrollTo(200)}
+        >
           프로젝트 보러가기
         </div>
       </div>
@@ -111,7 +116,11 @@ function LandingGallery() {
         <p>
           <img src={arrow} alt="arrow" className="mainArrow"></img>
         </p>
-        <div className="mainProjectGo" style={{ cursor: 'pointer' }}>
+        <div
+          className="mainProjectGo"
+          style={{ cursor: 'pointer' }}
+          onClick={() => scrollTo(window.innerHeight)}
+        >
           프로젝트 보러가기
         </div>
       </div>
