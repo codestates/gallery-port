@@ -21,8 +21,7 @@ function Footer(props) {
         </div>
         <div className="okteam">
           회사명 : 200ok | 서비스 소개 : Gallery:port Github | 공동 대표 및
-          연락처 : 강하은 Github, 권효승 ${process.env.TEST}, 박성현 Github,
-          박종아 Github
+          {`연락처 : 강하은 Github, 권효승 ${process.env.REACT_APP_TEST}, 박성현 Github, 박종아 Github`}
         </div>
       </div>
     </div>
