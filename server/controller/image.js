@@ -1,11 +1,21 @@
 module.exports = {
-    getProjectImage: (req, res) => {
-        //TODO: req.params.path 에 맞는 이미지를 res.sendfile 로 보낸다.
-        res.send('ok')
-    },
 
     getProfileImage: (req, res) => {
-        //TODO: req.params.path 에 맞는 이미지를 res.sendfile 로 보낸다.
-        res.send('ok')
+
+        // https://localhost:80/image/profile/profile_87.png
+
+        res.sendFile(req.params.path, {root: './uploads/profile/'});
+
+    },
+
+    getProjectImage: (req, res) => {
+
+        // https://localhost:80/image/project/project_1_thumbnail_profile.jpeg
+        
+        const fileId = req.params.path.split('_')[1];
+        res.sendFile(req.params.path, {root: `./uploads/project/${fileId}/`});
+
     }
+
 }
+

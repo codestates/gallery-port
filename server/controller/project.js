@@ -1,4 +1,6 @@
-const { User, ProjectByUser, Project, Content } = require('../models/index')
+const { ProjectByUser, Project, Content, StackForProject } = require('../models/index')
+const fs = require('fs');
+require('dotenv').config();
 
 module.exports = {
 
@@ -38,19 +40,38 @@ module.exports = {
         res.json({'project' : 'page'})
     },
 
-    addProjectData: async (req, res) => {
-        // TODO: 새로운 Project 를 생성한다.
-        // 중요: image path 수정하고, update 해야 함
-        // TODO: status 201
-        // {
-        //     "message": "ok",
-        //         "id": id
-        // }
-        // TODO: status 404 
-        // {
-        //     "message": "Not Found"
-        // }
-        res.json({'project' : 'page'})
+    createProjectData: async (req, res) => {
+
+        // Project 테이블에 받아온 data 저장 후 id 확보 
+        const { project_name, project_content } = req.body
+        const project_info = JSON.parse(req.body.project_info);
+        let data;
+        try {
+            data = await Project.create({project_name, project_content, ...project_info, project_thumbnail: 'temp'})
+        } catch (err) {
+            return res.status(404).json({"message": "Not Found"})
+        }
+        // thumbnail 사진 path 변경 후 테이블에 저장
+        let newFile = req.files.thumbnail[0].filename.split('_')
+        newFile.splice(1,1, data.id)
+        newFile = newFile.join('_')
+        // https://localhost:80/image/project/project_1_thumbnail_8asdf7.png
+        data.project_thumbnail = process.env.IMAGE_ENDPOINT + '/image/project/' + newFile
+        await data.save();
+
+        // 서버 로컬 디렉토리에 저장된 폴더 이름 변경 
+        const oldPath = __dirname + `/../${req.files.thumbnail[0].destination}`;
+        const newPath = __dirname + `/../uploads/project/${data.id}`
+        fs.renameSync(oldPath, newPath);
+
+        // 서버 로컬 디렉토리에 저장된 파일 이름 변경
+        fs.renameSync(oldPath + '/' + req.files.thumbnail[0], newPath + '/' + newFile);
+
+        // ProjectByUser 에 저장
+        // Content 에 image, content 저장
+        // StackForProject 에 저장
+
+        return res.status(201).json({"message":"ok"})
     },
 
     fixProjectData: async (req, res) => {
@@ -82,3 +103,5 @@ module.exports = {
     }
     
 };
+
+// https://localhost:80/image/project/project_1_thumbnail_profile.jpeg

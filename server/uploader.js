@@ -45,7 +45,7 @@ module.exports = {
                     cb(null, path.join(dir))
                 },
                 filename: async function (req, file, cb) {
-                    cb(null, `project_${projectId}_${file.fieldname}.` + file.originalname)
+                    cb(null, `project_${projectId}_${file.fieldname}_` + file.originalname)
                 }
             })
         })
