@@ -13,7 +13,7 @@ function Modal({
     <>
       {modalOn && curFiles ? (
         <div className="modalBackdrop">
-          <div className="modalView">
+          <div className="modalView" style={{ overflow: 'hidden' }}>
             <ProjectInfoRender
               curFiles={curFiles}
               descriptions={descriptions}

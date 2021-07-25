@@ -466,14 +466,13 @@ div.modalBackdrop {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
-  overflow-y: hidden;
 }
 
 .modalView {
   z-index: 2000;
   position: relative;
   overflow-x: hidden;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   z-index: 1000;
   background-color: #fff;
   width: 40vw;
@@ -568,7 +567,8 @@ div.temper_image_viewer {
   align-items: center;
   padding: 0px;
 
-  position: relative;
+  position: absolute;
+  /* position: relative; */
   width: 236px;
   height: 40px;
   /* right: 163px; */
