@@ -5,26 +5,24 @@ const { generateAccessToken,
         sendAccessToken, 
         sendRefreshToken,
         getDataValues } = require('./tokens/tokenFunctions')
-
+require('dotenv').config();
 
 module.exports = {
 
     createNewUser : async (req, res) => {   
 
-        const { user_email, user_password, user_name, user_introduction, user_github } = req.body;
+        const {user_email, user_password, user_info} = req.body;
 
         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if(!emailRegex.test(user_email)) {
-            return res.status(400).send("invalid email!").end();
+            return res.status(400).send("invalid email!");
         }
 
         let data; 
         try {
-            data = await User.create({
-                user_email, user_password, user_name, user_introduction, user_github
-            })
+            data = await User.create({user_email, user_password, ...user_info})
         } catch (err) {
-            return res.status(409).send(`${err.errors[0].value} already exists!`).end();
+            return res.status(409).send(`${err.errors[0].value} already exists!`);
         }
 
         if (req.file) {
@@ -33,7 +31,8 @@ module.exports = {
             const newPath = __dirname + `/../${req.file.destination}` + newFile;
             fs.renameSync(oldPath, newPath);
 
-            data.user_photo = req.file.destination + newFile;
+            // https://localhost:80/image/profile/profile_87.png
+            data.user_photo = process.env.IMAGE_ENDPOINT + "/image/profile/" + newFile;
             await data.save();
         }
 
