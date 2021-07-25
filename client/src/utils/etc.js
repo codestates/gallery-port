@@ -6,3 +6,11 @@ export function inputBtnClick(e, inputRef) {
 export function objectToArray(object) {
   return Object.entries(object);
 }
+
+export function scrollTo(scrollValue) {
+  const scrollOptions = {
+    top: scrollValue,
+    behavior: 'smooth',
+  };
+  window.scrollTo(scrollOptions);
+}

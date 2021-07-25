@@ -6,7 +6,6 @@
   background: #ffffff;
   display: flex;
   justify-content: center;
-  /* overflow-x: hidden; */
 }
 
 /* ////////////////////ImageUploader////////////////////////// */
@@ -47,7 +46,7 @@ div.projectUploadPageContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 72px 0px;
+  margin-bottom: 80px;
   position: relative;
   width: 360px;
   height: 100%;
@@ -58,8 +57,9 @@ div.projectUploadPageContainer {
   font-weight: bold;
   font-size: 16px;
   line-height: 24px;
+  padding: 72px 0px;
 }
-.project_name,
+
 .user_email,
 .user_password,
 .password_confirm {
@@ -77,7 +77,24 @@ div.projectUploadPageContainer {
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 24px 0px;
+  margin-bottom: 24px;
+}
+
+.project_name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: static;
+  width: 360px;
+  height: 72px;
+  left: 0px;
+  top: 72px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 .project_name ::placeholder,
 .user_email ::placeholder,
@@ -104,7 +121,12 @@ div.projectUploadPageContainer {
 
   color: #d9d9d9;
 }
-
+.isValidIndicator {
+  margin-top: -10px;
+  font-size: 10px;
+  color: #536dfe;
+  font-weight: normal;
+}
 div.ImageUploaderOneCon {
   display: flex;
   flex-direction: column;

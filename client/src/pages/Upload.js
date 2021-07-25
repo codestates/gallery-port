@@ -7,9 +7,7 @@ function Upload() {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Header />
-
       <UploadWrapper />
-
       <Footer />
     </div>
   );

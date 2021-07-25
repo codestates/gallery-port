@@ -16,6 +16,7 @@ function SignUpInfo({
   setUser_info,
   email_isValid,
   pw_isValid,
+  pw_confirm,
 }) {
   const textInputData = [
     ['유저 이름', 'user_name', '팀원', 72, 40, 'text'],
@@ -56,7 +57,7 @@ function SignUpInfo({
       setPassword_confirm,
       '비밀번호 확인',
       'password',
-      '',
+      pw_confirm,
     ],
   ];
   function onChangeHandler(e, property) {
@@ -76,6 +77,7 @@ function SignUpInfo({
             stateFunc={el[3]}
             placeholder={el[4]}
             type={el[5]}
+            isValid={el[6]}
           />
         );
       })}
