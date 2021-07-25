@@ -68,9 +68,10 @@ function SignUpInfo({
 
   return (
     <>
-      {requiredTextInputData.map(el => {
+      {requiredTextInputData.map((el, idx) => {
         return (
           <TextInputGenderRequired
+            key={`TextInputGenderRequired${idx}`}
             inputname={el[0]}
             detailString={el[1]}
             stateName={el[2]}
@@ -90,9 +91,10 @@ function SignUpInfo({
         condition_desc={'170x280(px), 25KB 이하, jpg, jpeg, png만 가능'}
       />
       <div className="textInputContainer">
-        {textInputData.map(el => {
+        {textInputData.map((el, idx) => {
           return (
             <TextInputGender
+              key={`TextInputGender${idx}`}
               inputname={el[0]}
               detailString={el[1]}
               placeholder={el[2]}

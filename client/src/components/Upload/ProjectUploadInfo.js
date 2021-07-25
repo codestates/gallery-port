@@ -71,19 +71,6 @@ function ProjectUploadInfo({
 
   return (
     <>
-      {/* <div className="project_name">
-        <div className="subject_wrapper">
-          프로젝트명<span className="required">(필수)</span>
-        </div>
-        <input
-          type="text"
-          name="project_name"
-          placeholder="20자 이내로 입력해주세요."
-          className="input_small"
-          value={project_name}
-          onChange={e => setProject_name(e.target.value)}
-        />
-      </div> */}
       <TextInputGenderRequired
         inputname={'프로젝트명'}
         detailString={'project_name'}
@@ -127,7 +114,7 @@ function ProjectUploadInfo({
             return (
               <CheckboxInputGender
                 stackName={el}
-                index={idx}
+                key={`CheckboxInput${idx}`}
                 project_stackHandler={project_stackHandler}
               />
             );
@@ -155,9 +142,10 @@ function ProjectUploadInfo({
         </div>
       </div>
       <div className="textInputContainer">
-        {textInputData.map(el => {
+        {textInputData.map((el, idx) => {
           return (
             <TextInputGender
+              key={`TextInput${idx}`}
               inputname={el[0]}
               detailString={el[1]}
               placeholder={el[2]}
