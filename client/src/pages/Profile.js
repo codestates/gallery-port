@@ -1,22 +1,15 @@
 import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
+import ProfileWrapper from '../components/Profile';
 
 function Profile() {
   return (
-    <>
+    <div style={{ overflowX: 'hidden' }}>
       <Header />
-      <div
-        style={{
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'yellow',
-        }}
-      >
-        Profile
-      </div>
+      <ProfileWrapper />
       <Footer />
-    </>
+    </div>
   );
 }
 
