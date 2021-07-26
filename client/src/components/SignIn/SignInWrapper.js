@@ -29,7 +29,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .then(data => {
         console.log(data);
         setHasUserId(data);
-        return data.id;
+        return data;
       })
       .then(userId => {
         console.log(userId);

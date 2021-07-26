@@ -7,7 +7,7 @@ function Mypage({ logoutHandler, hasUserId }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Header logoutHandler={logoutHandler} hasUserId={hasUserId} />
-      <MyPageWrapper />
+      <MyPageWrapper hasUserId={hasUserId} />
       <Footer />
     </div>
   );

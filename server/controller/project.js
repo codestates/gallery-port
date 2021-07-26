@@ -98,6 +98,7 @@ module.exports = {
                 }
                 
                 // image 배열 순차적으로 이름 변경 후 Content 테이블에 image, content 저장
+                console.log(req.files)
                 const projectImages = req.files.image;
                 const projectContents = JSON.parse(req.body.project_content);
                 for (let i=0; i < projectImages.length; i++) {
