@@ -14,8 +14,8 @@ function ProfileWrapper({ hasUserId }) {
 
   // ! axios 연결됐을 때 사용
   useEffect(() => {
-    const getProfileData = async () => {
-      await axios
+    const getProfileData = () => {
+      axios
         .get(`${END_POINT}/profile/${hasUserId}`, {
           withCredentials: true,
         })
