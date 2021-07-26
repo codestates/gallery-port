@@ -25,12 +25,14 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
-      .then(res => res.json())
+      .then(res => res.data.id)
       .then(data => {
-        setHasUserId(data.id);
+        console.log(data);
+        setHasUserId(data);
         return data.id;
       })
       .then(userId => {
+        console.log(userId);
         loginHandler(userId);
         window.history.go(-1);
       })
