@@ -15,7 +15,7 @@ module.exports = {
             }).then(stack => {
                 return stack.id;
             }).catch(err => {
-                return res.status(404).send({ "message": "Not Found" });
+                return res.status(404).send({ "message": "Invalid stack" });
             });
 
             // 스택에 해당하는 프로젝트 id
@@ -24,20 +24,32 @@ module.exports = {
                     stack_id: stackId
                 },
                 attributes: ['project_id']
-            }).then(data => data.map(project => (project.project_id)));
+            }).then(data => {
+                if (data) {
+                    return data.map(project => (project.project_id));
+                } else {
+                    return [];
+                }
+            });
 
             // 해당 프로젝트 id 조회
             const projects = await Project.findAll({
+                limit: 18,
                 where: {
                     id: projectsId
                 },
-                attributes: ['id','project_thumbnail', 'project_name']
+                attributes: ['id','project_thumbnail', 'project_name'],
+                order: [['id', 'DESC']]
             });
             
-            res.status(200).json({ "data": projects, "message": "Ok" });
+            res.status(200).json({ "data": { projects }, "message": `Projects for ${stack} successfully found` });
         } else {
-            const projects = await Project.findAll();
-            res.status(200).json({ "data": projects, "message": "Ok" });
+            const projects = await Project.findAll({
+                limit: 18,
+                attributes: ['id','project_thumbnail', 'project_name'],
+                order: [['id', 'DESC']]
+            });
+            res.status(200).json({ "data": { projects }, "message": "Projects successfully found" });
         }
     },
     
