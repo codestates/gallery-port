@@ -20,8 +20,51 @@ function Footer(props) {
           <p className="csWorkTime">평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</p>
         </div>
         <div className="okteam">
-          회사명 : 200ok | 서비스 소개 : Gallery:port Github | 공동 대표 및
-          {`연락처 : 강하은 Github, 권효승 ${process.env.REACT_APP_TEST}, 박성현 Github, 박종아 Github`}
+          회사명 : 200ok | 서비스 소개 :
+          <a
+            href="https://github.com/codestates/gallery-por"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer' }}
+          >
+            Gallery:port Github
+          </a>
+          | 공동 대표 및 연락처 :
+          <a
+            href="https://github.com/vodkamitlime"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer' }}
+          >
+            강하은 Github
+          </a>
+          ,
+          <a
+            href="https://github.com/hyoogu"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer' }}
+          >
+            권효승 Github
+          </a>
+          ,
+          <a
+            href="https://github.com/bmaner"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer' }}
+          >
+            박성현 Github
+          </a>
+          ,
+          <a
+            href="https://github.com/jong-ah"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer' }}
+          >
+            박종아 Github
+          </a>
         </div>
       </div>
     </div>

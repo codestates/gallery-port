@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
@@ -14,9 +13,7 @@ import ErrorPage from './pages/Error';
 
 function App() {
   const [hasUserId, setHasUserId] = useState(undefined);
-  // const [isLogin, setIsLogin] = useState(false);
-  // const [userData, setUserData] = useState(null);
-  let history = useHistory();
+  const [projectId, setProjectId] = useState('');
 
   useEffect(() => {
     if (hasUserId !== '') {
@@ -42,7 +39,11 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/">
-            <Landing logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Landing
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setProjectId={setProjectId}
+            />
           </Route>
           <Route path="/signin">
             <Signin

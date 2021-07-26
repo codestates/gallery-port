@@ -14,18 +14,17 @@ function ProfileWrapper({ hasUserId }) {
 
   // ! axios 연결됐을 때 사용
   useEffect(() => {
-    const getProfileData = () => {
-      axios
-        .get(`${END_POINT}/profile/${hasUserId}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          setProfile(res.data.data);
-        })
-        .catch((err) => {
-          alert('실패');
-        });
+    const getProfileData = async () => {
+      const profileDate = await axios.get(`${END_POINT}/profile/${hasUserId}`, {
+        withCredentials: true,
+      });
+
+      if (profileDate.data.data.user_photo === null) {
+        profileDate.data.data.user_photo =
+          'https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg';
+      }
+
+      setProfile(profileDate.data.data);
     };
     getProfileData();
   }, []);
@@ -33,13 +32,13 @@ function ProfileWrapper({ hasUserId }) {
   let history = useHistory();
 
   if (hasUserId !== undefined && !profile.projects[0].project_new === true) {
-    const abcsd = {
+    const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       project_new: true,
     };
 
-    profile.projects.unshift(abcsd);
+    profile.projects.unshift(newproject);
     setProfile(profile);
   }
 

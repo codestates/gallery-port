@@ -2,11 +2,12 @@ import React from 'react';
 import './ProjectList.css';
 import { useHistory } from 'react-router-dom';
 
-function ProjectList(project) {
+function ProjectList({ project, setProjectId }) {
   let history = useHistory();
 
   function handleClick(e) {
-    return history.push('/project');
+    setProjectId(project.project.id);
+    return history.push(`/project/${project.project.id}`);
   }
 
   function handleUpload(e) {
@@ -17,6 +18,7 @@ function ProjectList(project) {
     <div className="list" onClick={() => handleUpload()}>
       <div onClick={handleClick} style={{ cursor: 'pointer' }}>
         <img
+          className="listimg"
           src={project.project.project_thumbnail}
           alt={project.project.project_name}
         ></img>
