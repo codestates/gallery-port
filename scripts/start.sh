@@ -12,4 +12,4 @@ export IMAGE_ENDPOINT=$(aws ssm get-parameters --region ap-northeast-2 --names I
 export CLIENT_ENDPOINT=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT_ENDPOINT --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start app.js
-npx sequelize-cli db:seed:all
+# npx sequelize-cli db:seed:all 
