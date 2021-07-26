@@ -27,12 +27,12 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       })
       .then(res => res.data.id)
       .then(data => {
-        console.log(data)
+        console.log(data);
         setHasUserId(data);
         return data;
       })
       .then(userId => {
-        console.log(userId)
+        console.log(userId);
         loginHandler(userId);
         window.history.go(-1);
       })
