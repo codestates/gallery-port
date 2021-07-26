@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
@@ -12,29 +13,28 @@ import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
 function App() {
-  const [hasUserId, setHasUserId] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [hasUserId, setHasUserId] = useState(undefined);
+  // const [isLogin, setIsLogin] = useState(false);
   // const [userData, setUserData] = useState(null);
+  let history = useHistory();
 
   useEffect(() => {
     if (hasUserId !== '') {
       console.log('1111', hasUserId);
       console.log('들어왔습니다.');
-      console.log('888', hasUserId, isLogin);
+      console.log('888', hasUserId);
       // loginHandler(hasUserId);
     }
   });
 
-  console.log('999', hasUserId, isLogin);
+  console.log('999', hasUserId);
 
-  const loginHandler = userId => {
-    setIsLogin(true);
+  const loginHandler = (userId) => {
     setHasUserId(userId);
   };
 
   const logoutHandler = () => {
-    setIsLogin(false);
-    setHasUserId('');
+    setHasUserId(undefined);
   };
 
   return (
@@ -57,16 +57,16 @@ function App() {
             <Profile logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/project">
-            <Project logoutHandler={logoutHandler} />
+            <Project logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/upload">
-            <Upload logoutHandler={logoutHandler} />
+            <Upload logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/loading">
-            <Loading logoutHandler={logoutHandler} />
+            <Loading logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/error">
-            <ErrorPage logoutHandler={logoutHandler} />
+            <ErrorPage logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
         </Switch>
       </div>

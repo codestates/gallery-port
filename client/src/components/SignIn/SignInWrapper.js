@@ -4,6 +4,7 @@ import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 import mockSigup from './mockSignup';
+import { useHistory } from 'react-router-dom';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -12,6 +13,8 @@ function SignUpWrapper({ loginHandler }) {
     email: '',
     password: '',
   });
+
+  let history = useHistory();
 
   function onChangeHandler(e, property) {
     const copied = Object.assign({}, signInInfo);
@@ -29,7 +32,7 @@ function SignUpWrapper({ loginHandler }) {
   //       .then((res) => res.json())
   //       .then(data => setUserId(data.id)) //전역에 선언한 userId 앞으로 유저의 정보를 받아올 때는 userId와 token을 함께 요청 보낸다.
   //       .then(userId=> loginHandler(userId))
-  //       //.then((_)=> window.location = '/';) // 로그인 성공 후 landing으로 돌아가기
+  //       .then((_)=> window.history.go(-1);) // 로그인 성공 후 landing으로 돌아가기
   //       .catch((err) => {
   //         alert('실패');
   //       })
@@ -48,7 +51,6 @@ function SignUpWrapper({ loginHandler }) {
         loginHandler(mockSigup[i].id);
       }
     }
-    // window.location.href = './';
     window.history.go(-1);
   }
 
