@@ -10,23 +10,21 @@ const {
 module.exports = {
 
     signin: async (req, res) => {
-        const { email, password } = req.body;
+        const { user_email, user_password } = req.body;
         const data = await User.findOne({
             where: {
-                user_email: email,
-                user_password: password
+                user_email,
+                user_password
             }
         });
         if (!data) {
-            return res.status(404).send({
-                message: 'Not found',
-            });
+            return res.status(404).send({ message: "Invalid user" });
         }
         const dataValues = getDataValues(data);
         const accessToken = generateAccessToken(dataValues);
         const refreshToken = generateRefreshToken(dataValues);
         sendRefreshToken(res, refreshToken);
         sendAccessToken(res, accessToken);
-        res.send('ok')
+        res.status(200).send({ message: "Login success" })
     },
 };
