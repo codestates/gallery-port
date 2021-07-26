@@ -49,6 +49,7 @@ module.exports = {
                 attributes: ['id','project_thumbnail', 'project_name'],
                 order: [['id', 'DESC']]
             });
+
             res.status(200).json({ "data": { projects }, "message": "Projects successfully found" });
         }
     },

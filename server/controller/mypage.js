@@ -1,15 +1,20 @@
+const { token } = require('morgan');
 const { User } = require('../models/index')
+const { verifyAccessToken } = require('./tokens/tokenFunctions')
 require('dotenv').config()
 
 module.exports = {
 
     getUserData: async (req, res) => {
         try{
+
+            const tokenData = verifyAccessToken(req);
+
             const data = await User.findOne({where: {
                 id: req.params.id}
             });
 
-            if (!data) {
+            if (!data || tokenData.id !== req.params.id) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
 
@@ -22,11 +27,14 @@ module.exports = {
 
     fixUserData: async (req, res) => {
         try{
+            
+            const tokenData = verifyAccessToken(req);
+
             const data = await User.findOne({where: 
                 {id: req.params.id}
             });
 
-            if (!data) {
+            if (!data || tokenData.id !== req.params.id) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
             const {user_email, user_password} = req.body; 
@@ -42,9 +50,8 @@ module.exports = {
             }
             await data.save();
 
-            return res.redirect(200, process.env.CLIENT_ENDPOINT + `/profile`)
+            return res.sendStatus(200)
         } catch (err) {
-            console.log(err)
             return res.status(500).send(err)
         }
     }
