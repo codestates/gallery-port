@@ -39,7 +39,7 @@ module.exports = {
                     project_id: projectId  
                 }
             });
-            let project_stacks = [];
+            let project_stack = [];
             if (stackData) {
                 for (let value of stackData) {
                     let stackName = await Stack.findOne({ where: { id: value.stack_id }});
@@ -54,7 +54,7 @@ module.exports = {
             }});
 
             return res.status(200).json({
-                "projectdata": {...projectData, project_content, project_stacks}, 
+                "projectdata": {...projectData, project_content, project_stack}, 
                 "userdata": { user_photo: userData.user_photo, user_name: userData.user_name},
                 "message" : "Project successfully found"
             })

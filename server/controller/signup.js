@@ -1,4 +1,5 @@
 const fs = require('fs')
+const bcrypt = require('bcryptjs');
 const { User } = require('../models/index')
 const { generateAccessToken, 
         generateRefreshToken, 
@@ -18,10 +19,15 @@ module.exports = {
         if(!emailRegex.test(user_email)) {
             return res.status(400).send("Invalid email");
         }
-
+        console.log(user_email, user_password, user_info)
         try {
-            let data = await User.create({user_email, user_password, ...user_info})
             
+            // 비밀번호 해시 
+            const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
+            const data = await User.create({user_email, user_password, ...user_info})
+            
+            console.log(data)
+
             if (req.file) {
                 const oldPath = __dirname + `/../${req.file.path}`;
                 const newFile = `profile_${data.id}.` + req.file.mimetype.split('/')[1];
