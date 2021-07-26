@@ -5,30 +5,26 @@ import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const END_POINT = `${process.env.REACT_APP_API_URL}`;
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [stack, setStack] = useState('javascript');
+  // const [stack, setStack] = useState('javascript');
 
   let history = useHistory();
 
   // ! axios 연결됐을 때 사용
-  function postStackHandler(string) {
-    setStack(string);
-    console.log(stack);
-    return axios
-      .get(END_POINT, {
-        params: { stack },
-        withCredentials: true,
-      })
-      .then((res) => console.log(res.data.data.projects))
-      .catch((err) => {
-        alert('실패');
-      });
-  }
+  const postStackHandler = async (string) => {
+    const stackData = await axios.get(`${END_POINT}`, {
+      params: { stack: string },
+      withCredentials: true,
+    });
+
+    console.log(stackData.data.data.projects);
+    props.setStackProjectData(stackData.data.data.projects);
+  };
 
   useEffect(() => {
     console.log('0000header', props.hasUserId);
@@ -61,6 +57,15 @@ function Header(props) {
     props.logoutHandler();
     window.location.reload();
     setIsLogin(false);
+
+    // ! axios signout post
+    return axios
+      .post(`${END_POINT}/signout`, {
+        withCredentials: true,
+      })
+      .catch((err) => {
+        alert('실패');
+      });
   }
 
   function goProfilepage() {
@@ -89,7 +94,6 @@ function Header(props) {
                 <li onClick={() => postStackHandler('javascript')}>
                   JavaScript
                 </li>
-                {/* <li>JavaScript</li> */}
                 <li onClick={() => postStackHandler('sql')}>SQL</li>
                 <li onClick={() => postStackHandler('python')}>Python</li>
                 <li onClick={() => postStackHandler('java')}>Java</li>
@@ -99,7 +103,10 @@ function Header(props) {
               </ul>
             </nav>
             <div className="headerBtn">
-              <Link to="/profile" className="profile_link">
+              <Link
+                to={props.hasUserId !== undefined ? '/profile' : '/signin'}
+                className="profile_link"
+              >
                 <button
                   className="headerProfileBtn"
                   onClick={goProfilepage}
