@@ -9,7 +9,7 @@ function ProjectList(project) {
   function handleUpload(e) {
     window.location.href = './upload';
   }
-  console.log(project.project.project_new);
+  // console.log(project.project.project_new);
 
   return project.project.project_new ? (
     <div className="list" onClick={() => handleUpload()}>

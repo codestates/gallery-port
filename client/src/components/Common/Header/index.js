@@ -6,6 +6,12 @@ import logo from '../../../images/logo_b.svg';
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  // useEffect(() => {
+  //   console.log('되는건가?', props.isLogin);
+  //   props.logoutHandler ? setIsLogin(true) : setIsLogin(false);
+  // }, []);
 
   function handleScroll() {
     if (ScrollY > window.innerHeight) {
@@ -25,6 +31,22 @@ function Header(props) {
       window.removeEventListener('scroll', handleScroll);
     }; //  window 에서 스크롤을 감시를 종료
   });
+
+  function handleLogout() {
+    alert('로그아웃 되었습니다!');
+    props.logoutHandler();
+    setIsLogin(false);
+    // props.logoutHandler = false;
+    // window.location.href = '/';
+  }
+
+  function goProfilepage() {
+    window.location.href = '/profile';
+  }
+
+  // function goLandingpage() {
+  //   window.location.href = '/';
+  // }
 
   return (
     <div style={{ overflow: 'hidden' }}>
@@ -56,11 +78,23 @@ function Header(props) {
             </nav>
             <div className="headerBtn">
               <Link to="/profile" className="profile_link">
-                <button className="headerProfileBtn">프로필</button>
+                <button
+                  className="headerProfileBtn"
+                  onClick={goProfilepage}
+                  style={{ cursor: 'pointer' }}
+                >
+                  프로필
+                </button>
               </Link>
-              <Link to="/signin" className="signin_link">
-                <button className="headerSigninBtn">로그인</button>
-              </Link>
+              {isLogin ? (
+                <button className="headerSigninBtn" onClick={handleLogout}>
+                  로그아웃
+                </button>
+              ) : (
+                <Link to="/signin" className="signin_link">
+                  <button className="headerSigninBtn">로그인</button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
