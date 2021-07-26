@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
     "@react-spring/three": "^9.2.4",
     "@react-three/drei": "^7.2.2",
     "@react-three/fiber": "^7.0.6",
@@ -14,6 +16,7 @@
     "lodash.random": "^3.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-material-ui-carousel": "^2.2.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "three": "^0.130.1",

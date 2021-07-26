@@ -24,9 +24,9 @@ function SignUpWrapper() {
           withCredentials: true,
         })
         .then(res => res.json())
-        //   .then(data => setUserId(data.id)) //전역에 선언한 userId 앞으로 유저의 정보를 받아올 때는 userId와 token을 함께 요청 보낸다.
+        // .then(data => setUserId(data.id)) //전역에 선언한 userId 앞으로 유저의 정보를 받아올 때는 userId와 token을 함께 요청 보낸다.
         .catch(err => {
-          alert('실패');
+          alert('이메일과 비밀번호를 확인해주세요.');
         })
     );
   }
