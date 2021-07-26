@@ -30,11 +30,13 @@ module.exports = {
 
     uploadProjectImage : (req, res, next) => {
 
-        const projectId = req.params.id || req.headers.temp_id 
+        const projectId = req.params.projectid || req.headers.temp_id 
         
         const dir = `./uploads/project/${projectId}`
         try {
             fs.accessSync(dir)
+            fs.rmdirSync(dir, {recursive: true})
+            fs.mkdirSync(dir, {recursive: true})
         } catch (err) {
             fs.mkdirSync(dir, {recursive: true})
         }
@@ -45,7 +47,7 @@ module.exports = {
                     cb(null, path.join(dir))
                 },
                 filename: async function (req, file, cb) {
-                    cb(null, `project_${projectId}_${file.fieldname}.` + file.originalname)
+                    cb(null, `project_${projectId}_${file.fieldname}_` + file.originalname)
                 }
             })
         })

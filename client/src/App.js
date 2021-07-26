@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Landing from './pages/Landing';
@@ -12,19 +12,62 @@ import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
 function App() {
+  const [hasUserId, setHasUserId] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+  // const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (hasUserId !== '') {
+      console.log('1111', hasUserId);
+      console.log('들어왔습니다.');
+      console.log('888', hasUserId, isLogin);
+      // loginHandler(hasUserId);
+    }
+  });
+
+  console.log('999', hasUserId, isLogin);
+
+  const loginHandler = userId => {
+    setIsLogin(true);
+    setHasUserId(userId);
+  };
+
+  const logoutHandler = () => {
+    setIsLogin(false);
+    setHasUserId('');
+  };
+
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/mypage" component={Mypage} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/project" component={Project} />
-          <Route path="/upload" component={Upload} />
-          <Route path="/loading" component={Loading} />
-          <Route path="/error" component={ErrorPage} />
+          <Route exact path="/">
+            <Landing logoutHandler={logoutHandler} hasUserId={hasUserId} />
+          </Route>
+          <Route path="/signin">
+            <Signin loginHandler={loginHandler} />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/mypage">
+            <Mypage logoutHandler={logoutHandler} hasUserId={hasUserId} />
+          </Route>
+          <Route path="/profile">
+            <Profile logoutHandler={logoutHandler} hasUserId={hasUserId} />
+          </Route>
+          <Route path="/project">
+            <Project logoutHandler={logoutHandler} />
+          </Route>
+          <Route path="/upload">
+            <Upload logoutHandler={logoutHandler} />
+          </Route>
+          <Route path="/loading">
+            <Loading logoutHandler={logoutHandler} />
+          </Route>
+          <Route path="/error">
+            <ErrorPage logoutHandler={logoutHandler} />
+          </Route>
         </Switch>
       </div>
     </Router>

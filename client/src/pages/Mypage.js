@@ -3,10 +3,10 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import MyPageWrapper from '../components/MyPage/MyPageWrapper';
 
-function Mypage() {
+function Mypage(props) {
   return (
-    <div>
-      <Header />
+    <div style={{ overflowX: 'hidden' }}>
+      <Header logoutHandler={props.logoutHandler} isLogin={props.isLogin} />
       <MyPageWrapper />
       <Footer />
     </div>

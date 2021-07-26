@@ -22,12 +22,6 @@ fs
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
@@ -58,5 +52,11 @@ db.ProjectByUser = sequelize.define('project_by_user', {id: {
 });
 db.User.belongsToMany(db.Project, {through: db.ProjectByUser, foreignKey: "user_id"});
 db.Project.belongsToMany(db.User, {through: db.ProjectByUser, foreignKey: "project_id"});
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
 
 module.exports = db;

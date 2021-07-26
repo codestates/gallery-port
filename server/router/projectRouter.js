@@ -1,7 +1,7 @@
 const {
   getProjectData,
   fixProjectData,
-  addProjectData,
+  createProjectData,
   deleteProjectData,
 } = require('../controller/project');
 const { uploadProjectImage } = require('../uploader');
@@ -10,7 +10,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/:projectid', getProjectData);
-router.post('/', checkToken, uploadProjectImage, addProjectData);
+router.post('/', checkToken, uploadProjectImage, createProjectData);
 router.patch('/:projectid', checkToken, uploadProjectImage, fixProjectData);
 router.delete('/:projectid', checkToken, deleteProjectData);
 
