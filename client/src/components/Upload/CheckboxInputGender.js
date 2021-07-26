@@ -1,11 +1,12 @@
 import React from 'react';
 
-function CheckboxInputGender({ stackName, project_stackHandler }) {
+function CheckboxInputGender({ stackName, project_stackHandler, idx }) {
   return (
     <div style={{ display: 'flex', marginRight: '16px' }}>
       <input
         id={stackName}
         type="checkbox"
+        name={idx}
         onChange={e => project_stackHandler(e.target.checked, e.target.name)}
         className="project_stack"
         style={{ marginRight: '4px' }}

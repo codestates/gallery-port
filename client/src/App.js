@@ -45,7 +45,11 @@ function App() {
             <Landing logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/signin">
-            <Signin loginHandler={loginHandler} />
+            <Signin
+              loginHandler={loginHandler}
+              setHasUserId={setHasUserId}
+              hasUserId={hasUserId}
+            />
           </Route>
           <Route path="/signup">
             <Signup />

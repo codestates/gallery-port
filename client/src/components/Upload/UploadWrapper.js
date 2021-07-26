@@ -35,20 +35,24 @@ function UploadWrapper() {
     'Java',
     'C#',
     'PHP',
-    'etc.',
+    'etc',
   ];
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
     setDescription(descElemArray);
-  }, [curFiles, project_info]);
+    console.log(project_stack);
+  }, [curFiles, project_info, project_stack]);
 
   function project_stackHandler(checked, itemName) {
     if (checked && !project_stack.includes(stackArray[itemName])) {
-      setProject_stack([...project_stack, stackArray[itemName]]);
+      setProject_stack([
+        ...project_stack,
+        stackArray[itemName].toLocaleLowerCase(),
+      ]);
     } else {
       setProject_stack(
         project_stack.filter(el => {
-          return el !== stackArray[itemName];
+          return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
     }
@@ -71,7 +75,7 @@ function UploadWrapper() {
       console.log(el);
     }
     return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
-      .post(`${END_POINT}/upload`, formData, {
+      .post(`${END_POINT}/project`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

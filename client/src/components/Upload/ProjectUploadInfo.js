@@ -114,6 +114,7 @@ function ProjectUploadInfo({
             return (
               <CheckboxInputGender
                 stackName={el}
+                idx={idx}
                 key={`CheckboxInput${idx}`}
                 project_stackHandler={project_stackHandler}
               />
