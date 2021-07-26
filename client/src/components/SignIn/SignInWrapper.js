@@ -19,25 +19,25 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
     setSignInInfo(copied);
   }
 
-  // // ! axios 연결됐을 때 사용
-  // function postHandler() {
-  //   return axios
-  //     .post(`${END_POINT}/signin`, signInInfo, {
-  //       withCredentials: true,
-  //     })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setHasUserId(data.id);
-  //       return hasUserId; //data.id;
-  //     })
-  //     .then(userId => {
-  //       loginHandler(userId);
-  //       window.history.go(-1);
-  //     })
-  //     .catch(err => {
-  //       alert('실패');
-  //     });
-  // }
+  // ! axios 연결됐을 때 사용
+  function postHandler() {
+    return axios
+      .post(`${END_POINT}/signin`, signInInfo, {
+        withCredentials: true,
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setHasUserId(data.id);
+        return hasUserId; //data.id;
+      })
+      .then((userId) => {
+        loginHandler(userId);
+        window.history.go(-1);
+      })
+      .catch((err) => {
+        alert('실패');
+      });
+  }
 
   // // ! test용
   // function postHandler() {

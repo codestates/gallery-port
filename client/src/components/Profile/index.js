@@ -7,28 +7,28 @@ import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = `${process.env.REACT_APP_API_URL}/profile/${userId}`;
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId }) {
   const [profile, setProfile] = useState(mockProfile);
 
   // ! axios 연결됐을 때 사용
-  // useEffect(() => {
-  //   const getProfileData = async () => {
-  //     await axios
-  //       .get(END_POINT, {
-  //         withCredentials: true,
-  //       })
-  //       .then((res) => {
-  //         console.log(res.data.data);
-  //         setProfile(res.data.data);
-  //       })
-  //       .catch((err) => {
-  //         alert('실패');
-  //       });
-  //   };
-  //   getProfileData();
-  // }, []);
+  useEffect(() => {
+    const getProfileData = () => {
+      axios
+        .get(`${END_POINT}/profile/${hasUserId}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          setProfile(res.data.data);
+        })
+        .catch((err) => {
+          alert('실패');
+        });
+    };
+    getProfileData();
+  }, []);
 
   let history = useHistory();
 

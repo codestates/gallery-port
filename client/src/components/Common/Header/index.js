@@ -5,7 +5,7 @@ import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = `${process.env.REACT_APP_API_URL}`;
+const END_POINT = `${process.env.REACT_APP_API_URL}`;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
@@ -16,19 +16,19 @@ function Header(props) {
   let history = useHistory();
 
   // ! axios 연결됐을 때 사용
-  // function getStackHandler() {
-  //   return (
-  //     axios
-  //       .get(END_POINT,{
-  //        params: { stack }
-  //         withCredentials: true,
-  //       })
-  //       .then((res) => console.log(res))
-  //       .catch((err) => {
-  //         alert('실패');
-  //       })
-  //   );
-  // }
+  function postStackHandler(string) {
+    setStack(string);
+    console.log(stack);
+    return axios
+      .get(END_POINT, {
+        params: { stack },
+        withCredentials: true,
+      })
+      .then((res) => console.log(res.data.data.projects))
+      .catch((err) => {
+        alert('실패');
+      });
+  }
 
   useEffect(() => {
     console.log('0000header', props.hasUserId);
@@ -85,15 +85,17 @@ function Header(props) {
             </Link>
             <nav>
               <ul>
-                <li>ALL</li>
-                {/* <li onClick={() => postStackHandler()}>JavaScript</li> */}
-                <li>JavaScript</li>
-                <li>SQL</li>
-                <li>Python</li>
-                <li>Java</li>
-                <li>C#</li>
-                <li>PHP</li>
-                <li>Etc</li>
+                <li onClick={() => postStackHandler()}>ALL</li>
+                <li onClick={() => postStackHandler('javascript')}>
+                  JavaScript
+                </li>
+                {/* <li>JavaScript</li> */}
+                <li onClick={() => postStackHandler('sql')}>SQL</li>
+                <li onClick={() => postStackHandler('python')}>Python</li>
+                <li onClick={() => postStackHandler('java')}>Java</li>
+                <li onClick={() => postStackHandler('c#')}>C#</li>
+                <li onClick={() => postStackHandler('php')}>PHP</li>
+                <li onClick={() => postStackHandler('etc')}>Etc</li>
               </ul>
             </nav>
             <div className="headerBtn">
