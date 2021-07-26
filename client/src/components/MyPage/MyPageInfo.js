@@ -3,7 +3,7 @@ import TextInputGender from './TextInputGender';
 import ImageUploaderOne from './ImageUploaderOne';
 import TextInputGenderRequired from './TextInputGenderRequired';
 
-function SignUpInfo({
+function MyPageInfo({
   user_email,
   setUser_email,
   user_password,
@@ -17,6 +17,8 @@ function SignUpInfo({
   email_isValid,
   pw_isValid,
   pw_confirm,
+  isSecond,
+  setIsSecond,
 }) {
   const textInputData = [
     ['유저 이름', 'user_name', '팀원', 72, 40, 'text'],
@@ -89,6 +91,8 @@ function SignUpInfo({
         stateFunc={setUser_image}
         condition_subject={'등록조건'}
         condition_desc={'170x280(px), 25KB 이하, jpg, jpeg, png만 가능'}
+        isSecond={isSecond}
+        setIsSecond={setIsSecond}
       />
       <div className="textInputContainer">
         {textInputData.map((el, idx) => {
@@ -111,4 +115,4 @@ function SignUpInfo({
   );
 }
 
-export default SignUpInfo;
+export default MyPageInfo;
