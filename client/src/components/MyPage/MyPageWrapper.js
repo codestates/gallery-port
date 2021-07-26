@@ -7,7 +7,7 @@ import '../SignUp/SignUpWrapper.css';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function MyPageWrapper() {
+function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({
     user_name: '',
     user_introduction: '',
@@ -26,14 +26,14 @@ function MyPageWrapper() {
     const getUserData = async () => {
       await axios
         // .get(`${END_POINT}/mypage/${userId}`, {
-        .get(`${END_POINT}/mypage/`, {
+        .get(`${END_POINT}/mypage/${hasUserId}`, {
           //29번째 줄 지우고 28번재 줄 코드로 실행할 것
           withCredentials: true,
         })
         .then(res => {
           setUser_email(res.data.data.user_email);
           setUser_password(res.data.data.user_password); //패스워드는 빼는게 좋지 않을까? setUser_password('');
-          setUser_image(res.data.data.user_image);
+          setUser_image(res.data.data.user_photo);
           setUser_info({
             user_name: res.data.data.user_name,
             user_introduction: res.data.data.user_introduction,
@@ -72,7 +72,7 @@ function MyPageWrapper() {
     formData.append('user_email', user_email);
     formData.append('user_password', user_password);
     formData.append('image', user_image);
-    formData.append('user_info', user_info);
+    formData.append('user_info', JSON.stringify(user_info));
 
     for (let el of formData.entries()) {
       console.log(el);
@@ -80,7 +80,7 @@ function MyPageWrapper() {
     return (
       axios
         // .patch(`${END_POINT}/mypage/${userId}`, formData, {
-        .patch(`${END_POINT}/mypage/`, formData, {
+        .patch(`${END_POINT}/mypage/${hasUserId}`, formData, {
           //87번째 줄 지우고 86번재 줄 코드로 실행할 것
           headers: {
             'Content-Type': 'multipart/form-data',

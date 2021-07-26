@@ -38,7 +38,7 @@ function ImageUploaderOne({
               style={{
                 backgroundImage: isSecond
                   ? `url('${URL.createObjectURL(stateName)}')`
-                  : `url('${stateName}')`,
+                  : `url(${stateName})`,
                 backgroundSize: 'cover',
               }}
             ></div>

@@ -30,17 +30,21 @@ module.exports = {
                 return res.status(404).json({ "message": "Invalid user" })
             }
             const {user_email, user_password} = req.body; 
-            // TODO: json.parse 해야하는지 점검
+
             const user_info = JSON.parse(req.body.user_info)
             const updateData = {user_email, user_password, ...user_info}
 
-            Object.keys(updateData).forEach(key => {
-                data.dataValues[key] = updateData[key];
-            });
+            for (let key of Object.keys(updateData)) {
+                data[key] = await updateData[key];
+            }
+            if (req.file){
+                data.user_photo = process.env.IMAGE_ENDPOINT + '/image/profile/' + req.file.filename
+            }
             await data.save();
 
             return res.redirect(200, process.env.CLIENT_ENDPOINT + `/profile`)
         } catch (err) {
+            console.log(err)
             return res.status(500).send(err)
         }
     }
