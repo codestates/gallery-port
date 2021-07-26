@@ -25,18 +25,18 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
-      .then(res => res.data.id)
-      .then(data => {
+      .then((res) => res.data.id)
+      .then((data) => {
         console.log(data);
         setHasUserId(data);
         return data;
       })
-      .then(userId => {
+      .then((userId) => {
         console.log(userId);
         loginHandler(userId);
         window.history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }
