@@ -5,7 +5,7 @@ import ProfileWrapper from '../components/Profile';
 
 function Profile({ logoutHandler, hasUserId }) {
   useEffect(() => {
-    console.log('000000', hasUserId);
+    console.log('0000profile', hasUserId);
   }, []);
 
   return (
