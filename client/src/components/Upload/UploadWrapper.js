@@ -64,12 +64,15 @@ function UploadWrapper() {
     for (let i = 0; i < descriptions.length; i++) {
       project_content.push(descriptions[i].value);
     }
+    for (let el of curFiles){
+      formData.append('image', el);
+    }
+    // formData.append('image', JSON.stringify(curFiles));
     formData.append('project_name', project_name);
-    formData.append('project_stack', project_stack);
-    formData.append('image', curFiles);
+    formData.append('project_stack', JSON.stringify(project_stack));
     formData.append('thumbnail', project_thumbnail);
-    formData.append('project_content', project_content);
-    formData.append('project_info', project_info);
+    formData.append('project_content', JSON.stringify(project_content));
+    formData.append('project_info', JSON.stringify(project_info));
     // JSON.stringify({ text: descriptions[i].value, image: curFiles[i] })
     for (let el of formData.entries()) {
       console.log(el);

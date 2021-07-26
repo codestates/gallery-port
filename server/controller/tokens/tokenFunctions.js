@@ -11,11 +11,15 @@ module.exports = {
   sendRefreshToken: (res, refreshToken) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: 'None'
     });
   },
   sendAccessToken: (res, accessToken) => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: 'None'
     });
   },
   verifyAccessToken: (req) => {
