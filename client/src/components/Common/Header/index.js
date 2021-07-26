@@ -2,16 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 import logo from '../../../images/logo_b.svg';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+// const END_POINT = `${process.env.REACT_APP_API_URL}`;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [stack, setStack] = useState('javascript');
 
-  // useEffect(() => {
-  //   console.log('되는건가?', props.isLogin);
-  //   props.logoutHandler ? setIsLogin(true) : setIsLogin(false);
-  // }, []);
+  let history = useHistory();
+
+  // ! axios 연결됐을 때 사용
+  // function getStackHandler() {
+  //   return (
+  //     axios
+  //       .get(END_POINT,{
+  //        params: { stack }
+  //         withCredentials: true,
+  //       })
+  //       .then((res) => console.log(res))
+  //       .catch((err) => {
+  //         alert('실패');
+  //       })
+  //   );
+  // }
+
+  useEffect(() => {
+    console.log('0000header', props.hasUserId);
+    if (props.hasUserId !== undefined) {
+      setIsLogin(true);
+    }
+  }, []);
 
   function handleScroll() {
     if (ScrollY > window.innerHeight) {
@@ -35,18 +59,13 @@ function Header(props) {
   function handleLogout() {
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
+    window.location.reload();
     setIsLogin(false);
-    // props.logoutHandler = false;
-    // window.location.href = '/';
   }
 
   function goProfilepage() {
-    window.location.href = '/profile';
+    return history.push('/profile');
   }
-
-  // function goLandingpage() {
-  //   window.location.href = '/';
-  // }
 
   return (
     <div style={{ overflow: 'hidden' }}>
@@ -67,6 +86,7 @@ function Header(props) {
             <nav>
               <ul>
                 <li>ALL</li>
+                {/* <li onClick={() => postStackHandler()}>JavaScript</li> */}
                 <li>JavaScript</li>
                 <li>SQL</li>
                 <li>Python</li>
@@ -86,8 +106,11 @@ function Header(props) {
                   프로필
                 </button>
               </Link>
-              {isLogin ? (
-                <button className="headerSigninBtn" onClick={handleLogout}>
+              {props.hasUserId !== undefined ? (
+                <button
+                  className="headerSigninBtn"
+                  onClick={() => handleLogout()}
+                >
                   로그아웃
                 </button>
               ) : (

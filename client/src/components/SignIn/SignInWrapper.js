@@ -20,18 +20,19 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   }
 
   // ! axios 연결됐을 때 사용
-  async function postHandler() {
-    return await axios
+  function postHandler() {
+    return axios
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
       .then(res => res.json())
       .then(data => {
         setHasUserId(data.id);
-        return data.id; //or hasUserId
-      }) //전역에 선언한 userId 앞으로 유저의 정보를 받아올 때는 userId와 token을 함께 요청 보낸다.
+        return hasUserId; //data.id;
+      })
       .then(userId => {
         loginHandler(userId);
+        window.history.go(-1);
       })
       .catch(err => {
         alert('실패');
@@ -50,7 +51,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   //       loginHandler(mockSigup[i].id);
   //     }
   //   }
-  //   // window.location.href = './';
   //   window.history.go(-1);
   // }
 

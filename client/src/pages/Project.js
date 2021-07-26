@@ -2,10 +2,10 @@ import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 
-function Project(props) {
+function Project({ logoutHandler, hasUserId }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header logoutHandler={props.logoutHandler} isLogin={props.isLogin} />
+      <Header logoutHandler={logoutHandler} hasUserId={hasUserId} />
       <div
         style={{
           width: '100vw',
