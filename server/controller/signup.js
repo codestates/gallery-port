@@ -12,21 +12,19 @@ module.exports = {
 
     createNewUser : async (req, res) => {   
 
-        const {user_email, user_password} = req.body;
+        const {user_email} = req.body;
         const user_info = JSON.parse(req.body.user_info)
 
         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if(!emailRegex.test(user_email)) {
             return res.status(400).send("Invalid email");
         }
-        console.log(user_email, user_password, user_info)
+
         try {
             
             // 비밀번호 해시 
-            const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
-            const data = await User.create({user_email, user_password, ...user_info})
-            
-            console.log(data)
+            const hashedPassword = await bcrypt.hashSync(req.body.user_password, 10);
+            let data = await User.create({user_email, user_password: hashedPassword, ...user_info})
 
             if (req.file) {
                 const oldPath = __dirname + `/../${req.file.path}`;
