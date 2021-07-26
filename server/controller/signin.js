@@ -17,6 +17,7 @@ module.exports = {
                 user_password
             }
         });
+
         if (!data) {
             return res.status(404).send({ message: "Invalid user" });
         }
@@ -25,6 +26,6 @@ module.exports = {
         const refreshToken = generateRefreshToken(dataValues);
         sendRefreshToken(res, refreshToken);
         sendAccessToken(res, accessToken);
-        res.status(200).send({ message: "Login success" })
+        res.status(200).json({ message: "Login success", id: data.id })
     },
 };
