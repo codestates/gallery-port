@@ -16,13 +16,14 @@ function Header(props) {
   let history = useHistory();
 
   // ! axios 연결됐을 때 사용
-  // function postStackHandler() {
+  // function getStackHandler() {
   //   return (
   //     axios
-  //       .post(END_POINT, stack, {
+  //       .get(END_POINT,{
+  //        params: { stack }
   //         withCredentials: true,
   //       })
-  //       .then((res) => res.json())
+  //       .then((res) => console.log(res))
   //       .catch((err) => {
   //         alert('실패');
   //       })

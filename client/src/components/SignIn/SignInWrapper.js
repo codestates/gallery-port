@@ -4,17 +4,14 @@ import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 import mockSigup from './mockSignup';
-import { useHistory } from 'react-router-dom';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function SignUpWrapper({ loginHandler }) {
+function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   const [signInInfo, setSignInInfo] = useState({
-    email: '',
-    password: '',
+    user_email: '',
+    user_password: '',
   });
-
-  let history = useHistory();
 
   function onChangeHandler(e, property) {
     const copied = Object.assign({}, signInInfo);
@@ -23,36 +20,39 @@ function SignUpWrapper({ loginHandler }) {
   }
 
   // ! axios 연결됐을 때 사용
-  // function postHandler() {
-  //   return (
-  //     axios
-  //       .post(`${END_POINT}/signin`, signInInfo, {
-  //         withCredentials: true,
-  //       })
-  //       .then((res) => res.json())
-  //       .then(data => setUserId(data.id)) //전역에 선언한 userId 앞으로 유저의 정보를 받아올 때는 userId와 token을 함께 요청 보낸다.
-  //       .then(userId=> loginHandler(userId))
-  //       .then((_)=> window.history.go(-1);) // 로그인 성공 후 landing으로 돌아가기
-  //       .catch((err) => {
-  //         alert('실패');
-  //       })
-  //   );
-  // }
-
-  // ! test용
   function postHandler() {
-    console.log(signInInfo);
-    for (let i = 0; i < mockSigup.length; i++) {
-      if (
-        mockSigup[i].user_email === signInInfo.email &&
-        mockSigup[i].user_password === signInInfo.password
-      ) {
-        console.log({ message: 'ok', id: mockSigup[i].id });
-        loginHandler(mockSigup[i].id);
-      }
-    }
-    window.history.go(-1);
+    return axios
+      .post(`${END_POINT}/signin`, signInInfo, {
+        withCredentials: true,
+      })
+      .then(res => res.json())
+      .then(data => {
+        setHasUserId(data.id);
+        return hasUserId; //data.id;
+      })
+      .then(userId => {
+        loginHandler(userId);
+        window.history.go(-1);
+      })
+      .catch(err => {
+        alert('실패');
+      });
   }
+
+  // // ! test용
+  // function postHandler() {
+  //   console.log(signInInfo);
+  //   for (let i = 0; i < mockSigup.length; i++) {
+  //     if (
+  //       mockSigup[i].user_email === signInInfo.email &&
+  //       mockSigup[i].user_password === signInInfo.password
+  //     ) {
+  //       console.log({ message: 'ok', id: mockSigup[i].id });
+  //       loginHandler(mockSigup[i].id);
+  //     }
+  //   }
+  //   window.history.go(-1);
+  // }
 
   const requiredTextInputData = [
     ['email', '이메일 입력', 'email'],
@@ -89,4 +89,4 @@ function SignUpWrapper({ loginHandler }) {
     </div>
   );
 }
-export default SignUpWrapper;
+export default SignInWrapper;
