@@ -3,10 +3,10 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import ErrorText from '../components/Error';
 
-function Error() {
+function Error(props) {
   return (
-    <>
-      <Header />
+    <div style={{ overflowX: 'hidden' }}>
+      <Header logoutHandler={props.logoutHandler} isLogin={props.isLogin} />
       <div
         style={{
           width: '100vw',
@@ -16,7 +16,7 @@ function Error() {
         <ErrorText />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

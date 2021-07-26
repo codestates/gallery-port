@@ -3,10 +3,10 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import UploadWrapper from '../components/Upload/UploadWrapper';
 
-function Upload() {
+function Upload(props) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header />
+      <Header logoutHandler={props.logoutHandler} isLogin={props.isLogin} />
       <UploadWrapper />
       <Footer />
     </div>

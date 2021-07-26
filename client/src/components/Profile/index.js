@@ -5,7 +5,7 @@ import newProjectClick from '../../images/new_project.svg';
 import mockProfile from './mockProfile';
 import ProjectList from '../Landing/ProjectList';
 
-function ProfileWrapper() {
+function ProfileWrapper({ hasUserId }) {
   const [profile, setProfile] = useState(mockProfile);
   const [logged, setLogged] = useState(true);
 
@@ -23,7 +23,7 @@ function ProfileWrapper() {
       //   console.log(profile);
       setProfile(profile);
     }
-  }, []);
+  });
 
   function handleGithubLlik(user_github) {
     window.open(user_github, '_blank');
@@ -34,7 +34,7 @@ function ProfileWrapper() {
   }
 
   return (
-    <div className="ProfileWrapper">
+    <div className="ProfileWrapper" onClick={() => console.log(hasUserId)}>
       <div className="profileUserInfo">
         <div className="photoWraaper">
           <img
