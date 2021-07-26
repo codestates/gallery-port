@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SignUpInfo from './SignUpInfo';
+import MyPageInfo from './MyPageInfo';
 import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
-import './SignUpWrapper.css';
+import '../SignUp/SignUpWrapper.css';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function SignUpWrapper() {
+function MyPageWrapper() {
   const [user_info, setUser_info] = useState({
     user_name: '',
     user_introduction: '',
@@ -16,11 +16,36 @@ function SignUpWrapper() {
   const [email_isValid, setEmail_isValid] = useState(false);
   const [pw_isValid, setPw_isValid] = useState(false);
   const [pw_confirm, setPw_confirm] = useState(false);
-
+  const [isSecond, setIsSecond] = useState(false); //이미지 업로드 함수를 변경하기위한 state
   const [user_email, setUser_email] = useState(''); //필수
   const [user_password, setUser_password] = useState(''); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
+
+  useEffect(() => {
+    const getUserData = async () => {
+      await axios
+        // .get(`${END_POINT}/mypage/${userId}`, {
+        .get(`${END_POINT}/mypage/`, {
+          //29번째 줄 지우고 28번재 줄 코드로 실행할 것
+          withCredentials: true,
+        })
+        .then(res => {
+          setUser_email(res.data.data.user_email);
+          setUser_password(res.data.data.user_password); //패스워드는 빼는게 좋지 않을까? setUser_password('');
+          setUser_image(res.data.data.user_image);
+          setUser_info({
+            user_name: res.data.data.user_name,
+            user_introduction: res.data.data.user_introduction,
+            user_github: res.data.data.user_github,
+          });
+        })
+        .catch(err => {
+          alert('실패');
+        });
+    };
+    getUserData();
+  }, []);
 
   useEffect(() => {
     if (checkEmail(user_email)) {
@@ -41,7 +66,7 @@ function SignUpWrapper() {
     }
   }, [user_email, user_password, password_confirm]);
 
-  function postHandler() {
+  function patchHandler() {
     const formData = new FormData();
 
     formData.append('user_email', user_email);
@@ -52,25 +77,29 @@ function SignUpWrapper() {
     for (let el of formData.entries()) {
       console.log(el);
     }
-    return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
-      .post(`${END_POINT}/signup`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      })
-      .then(res => {
-        alert('성공');
-      })
-      .catch(err => {
-        alert('실패');
-      });
+    return (
+      axios
+        // .patch(`${END_POINT}/mypage/${userId}`, formData, {
+        .patch(`${END_POINT}/mypage/`, formData, {
+          //87번째 줄 지우고 86번재 줄 코드로 실행할 것
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        })
+        .then(res => {
+          alert('성공');
+        })
+        .catch(err => {
+          alert('실패');
+        })
+    );
   }
 
   return (
-    <div className="signupWrapper">
-      <div className="signupPageContainer">
-        <SignUpInfo
+    <div className="mypageWrapper">
+      <div className="mypagePageContainer">
+        <MyPageInfo
           user_email={user_email}
           setUser_email={setUser_email}
           user_password={user_password}
@@ -84,6 +113,8 @@ function SignUpWrapper() {
           email_isValid={email_isValid}
           pw_isValid={pw_isValid}
           pw_confirm={pw_confirm}
+          isSecond={isSecond}
+          setIsSecond={setIsSecond}
         />
         <div
           style={{
@@ -101,11 +132,11 @@ function SignUpWrapper() {
               email_isValid &&
               pw_isValid &&
               pw_confirm
-                ? postHandler()
+                ? patchHandler()
                 : scrollTo(0)
             }
           >
-            회원가입
+            정보수정
           </div>
         </div>
       </div>
@@ -113,4 +144,4 @@ function SignUpWrapper() {
   );
 }
 
-export default SignUpWrapper;
+export default MyPageWrapper;

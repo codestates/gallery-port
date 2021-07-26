@@ -1,4 +1,9 @@
-const { getProjectData, fixProjectData, createProjectData, deleteProjectData } = require('../controller/project');
+const {
+  getProjectData,
+  fixProjectData,
+  createProjectData,
+  deleteProjectData,
+} = require('../controller/project');
 const { uploadProjectImage } = require('../uploader');
 const { checkToken } = require('../controller/tokens/checkToken');
 const express = require('express');

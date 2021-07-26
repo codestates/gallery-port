@@ -1,5 +1,15 @@
 import React from 'react';
 import { objectToArray } from '../../utils/etc';
+import Carousel from 'react-material-ui-carousel';
+import { Paper, Button } from '@material-ui/core';
+
+function Item(props) {
+  return (
+    <Paper>
+      <img src={URL.createObjectURL(props.curFile)} style={{ width: '40vw' }} />
+    </Paper>
+  );
+}
 
 function ProjectInfoRender({
   curFiles,
@@ -12,7 +22,7 @@ function ProjectInfoRender({
   const project_info_array = objectToArray(project_info);
   return (
     <div className="project_info_render_container">
-      <div className="temper_image_viewer">
+      {/* <div className="temper_image_viewer">
         {curFiles.map((curFile, idx) => {
           //description과 함께 처리하는 부분 알아보자
           return (
@@ -26,7 +36,12 @@ function ProjectInfoRender({
             </div>
           );
         })}
-      </div>
+      </div> */}
+      <Carousel animation="slide">
+        {curFiles.map((curFile, idx) => {
+          return <Item key={idx} curFile={curFile} />;
+        })}
+      </Carousel>
       {project_info_array.map(project_info => {
         if (project_info[1]) {
           return (

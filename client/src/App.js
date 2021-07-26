@@ -27,7 +27,7 @@ function App() {
 
   console.log('999', hasUserId, isLogin);
 
-  const loginHandler = (userId) => {
+  const loginHandler = userId => {
     setIsLogin(true);
     setHasUserId(userId);
   };
@@ -44,13 +44,9 @@ function App() {
           <Route exact path="/">
             <Landing logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
-          {isLogin ? (
-            <Landing logoutHandler={logoutHandler} hasUserId={hasUserId} />
-          ) : (
-            <Route path="/signin">
-              <Signin loginHandler={loginHandler} />
-            </Route>
-          )}
+          <Route path="/signin">
+            <Signin loginHandler={loginHandler} />
+          </Route>
           <Route path="/signup">
             <Signup />
           </Route>
