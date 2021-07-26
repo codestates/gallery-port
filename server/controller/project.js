@@ -62,10 +62,7 @@ module.exports = {
             return res.status(500).send(err)
         }
             
-            // TODO: FE 와 논의 후 수정 필요 project 의 user 정보 받아서 projectData 에 추가할지, axios 요청 하나 더 보낼지
-            // user thumbnail, 이름, api docs 반영 
-            
-        },
+    },
         
         createProjectData: async (req, res) => {
             
@@ -123,7 +120,7 @@ module.exports = {
                 }
                 // 유저 프로필로 redirect 
                 
-                return res.redirect(201, process.env.CLIENT_ENDPOINT + `/profile`)
+                return res.sendStatus(200)
 
                 } catch (err) {
                     console.log(err)
@@ -136,6 +133,16 @@ module.exports = {
             const projectId = req.params.projectid;
             const { project_name } = req.body
             const project_info = JSON.parse(req.body.project_info);
+            
+            // 토큰 유효성 검사 통해 실제 프로젝트 주인이 데이터 변경하려고 하는 것인지 검토
+            const tokenData = verifyAccessToken(req);
+            const projectUser = await ProjectByUser.findAll({ where : {
+                user_id: tokenData.id
+            }})
+            const projectListofUser = await projectUser.map(el => el.project_id)
+            if(!projectListofUser.includes(Number(projectId))){
+                return res.status(401).json({"message": "Unauthorized user"})
+            }
 
             try {
                 // Project 테이블의 정보 업데이트
@@ -196,7 +203,7 @@ module.exports = {
                     });
                 }
 
-                return res.redirect(200, process.env.CLIENT_ENDPOINT + `/profile`)
+                return res.sendStatus(200)
             } catch (err) {
                 return res.status(500).json(err)
             }
@@ -206,6 +213,15 @@ module.exports = {
     deleteProjectData: async (req, res) => {
 
         const projectId = req.params.projectid;
+
+        const tokenData = verifyAccessToken(req);
+        const projectUser = await ProjectByUser.findAll({ where : {
+            user_id: tokenData.id
+        }})
+        const projectListofUser = await projectUser.map(el => el.project_id)
+        if(!projectListofUser.includes(Number(projectId))){
+            return res.status(401).json({"message": "Unauthorized user"})
+        }
 
         try {
             const checkUser = await Project.findOne({ where: { id: projectId }});
@@ -219,7 +235,7 @@ module.exports = {
 
             fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
 
-            return res.redirect(200, process.env.CLIENT_ENDPOINT + `/profile`)
+            return res.sendStatus(200)
         } catch (err) {
             return res.status(500).send(err)
         }

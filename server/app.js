@@ -19,6 +19,7 @@ const mypageRouter = require('./router/mypageRouter');
 const signinRouter = require('./router/signinRouter');
 const signupRouter = require('./router/signupRouter');
 const imageRouter = require('./router/imageRouter');
+const signoutRouter = require('./router/signoutRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +29,7 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   })
 );
 
@@ -39,6 +40,7 @@ app.use('/signup', signupRouter);
 app.use('/project', projectRouter);
 app.use('/profile', profileRouter);
 app.use('/image', imageRouter);
+app.use('/signout', signoutRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
