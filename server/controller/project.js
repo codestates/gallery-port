@@ -1,4 +1,4 @@
-const { ProjectByUser, Project, Content, StackForProject, Stack } = require('../models/index')
+const { ProjectByUser, Project, Content, StackForProject, Stack, User } = require('../models/index')
 const { verifyAccessToken } = require('./tokens/tokenFunctions')
 const fs = require('fs');
 require('dotenv').config();
@@ -47,8 +47,15 @@ module.exports = {
                 }
             }   
 
+            // user 정보 함께 반환할 수 있도록 조회
+            const tokenData = verifyAccessToken(req);
+            const userData = await User.findOne({where: {
+                id: tokenData.id
+            }});
+
             return res.status(200).json({
-                "data": {...projectData, project_content, project_stacks}, 
+                "projectdata": {...projectData, project_content, project_stacks}, 
+                "userdata": { user_photo: userData.user_photo, user_name: userData.user_name},
                 "message" : "Project successfully found"
             })
         } catch (err) {
@@ -56,6 +63,7 @@ module.exports = {
         }
             
             // TODO: FE 와 논의 후 수정 필요 project 의 user 정보 받아서 projectData 에 추가할지, axios 요청 하나 더 보낼지
+            // user thumbnail, 이름, api docs 반영 
             
         },
         
@@ -98,6 +106,7 @@ module.exports = {
                 }
                 
                 // image 배열 순차적으로 이름 변경 후 Content 테이블에 image, content 저장
+                console.log(req.files)
                 const projectImages = req.files.image;
                 const projectContents = JSON.parse(req.body.project_content);
                 for (let i=0; i < projectImages.length; i++) {
