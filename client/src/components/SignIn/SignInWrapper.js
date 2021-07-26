@@ -28,7 +28,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .then(res => res.json())
       .then(data => {
         setHasUserId(data.id);
-        return hasUserId; //data.id;
+        return data.id;
       })
       .then(userId => {
         loginHandler(userId);
@@ -55,8 +55,8 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   // }
 
   const requiredTextInputData = [
-    ['email', '이메일 입력', 'email'],
-    ['password', '비밀번호 입력', 'password'],
+    ['email', '이메일 입력', 'user_email'],
+    ['password', '비밀번호 입력', 'user_password'],
   ];
   return (
     <div className="signinWrapper">
