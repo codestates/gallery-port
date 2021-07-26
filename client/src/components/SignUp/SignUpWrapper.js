@@ -47,7 +47,7 @@ function SignUpWrapper() {
     formData.append('user_email', user_email);
     formData.append('user_password', user_password);
     formData.append('image', user_image);
-    formData.append('user_info', user_info);
+    formData.append('user_info', JSON.stringify(user_info));
 
     for (let el of formData.entries()) {
       console.log(el);
