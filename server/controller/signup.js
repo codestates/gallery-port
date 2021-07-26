@@ -39,7 +39,7 @@ module.exports = {
             sendAccessToken(res, accessToken);
             sendRefreshToken(res, refreshToken);
 
-            return res.redirect(201, process.env.CLIENT_ENDPOINT + '/signin')
+            return res.sendStatus(201);
         } catch (err) {
             if(err.errors[0].message === "users.user_email must be unique") {
                 return res.status(409).send(`${err.errors[0].value} already exists`);
