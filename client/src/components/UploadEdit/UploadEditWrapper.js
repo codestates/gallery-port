@@ -3,13 +3,13 @@ import axios from 'axios';
 import Modal from './Modal';
 import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
-import './UploadWrapper.css';
+import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-const END_POINT = 'https://localhost:80';
-// const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = process.env.REACT_APP_API_URL;
 
-function UploadWrapper() {
+function UploadEditWrapper({ hasUserId }) {
+  const [isSecond, setIsSecond] = useState(false);
   const [project_info, setProject_info] = useState({
     project_start: '',
     project_end: '',
@@ -22,7 +22,8 @@ function UploadWrapper() {
     project_deploy_stack: '',
     project_url: '',
   });
-
+  const [firstStack, setFirstStack] = useState([]);
+  const [firstDesc, setFirstDesc] = useState([]);
   const [project_name, setProject_name] = useState(''); //필수
   const [project_stack, setProject_stack] = useState([]); //필수
   const [project_thumbnail, setProject_thumbnail] = useState(''); //필수
@@ -40,10 +41,67 @@ function UploadWrapper() {
     'etc',
   ];
 
+  const stackArrayLower = [
+    'javascript',
+    'sql',
+    'python',
+    'java',
+    'c#',
+    'php',
+    'etc',
+  ];
+  useEffect(() => {
+    const getProjectData = () => {
+      axios
+        .get(`${END_POINT}/project/${hasUserId}`, {
+          // hasUserId 말고 projectId를 찾아야함 하은님한테 물어보기
+          withCredentials: true,
+        })
+        .then(res => {
+          const urlArr = [];
+          const descArr = [];
+
+          res.data.projectdata.project_content.forEach(el => {
+            urlArr.push(el.image);
+            descArr.push(el.text);
+          });
+          setFirstStack(
+            stackArrayLower.map((el, idx) => {
+              if (res.data.projectdata.project_stack.includes(el)) {
+                return [stackArray[idx], true];
+              } else {
+                return [stackArray[idx], false];
+              }
+            })
+          );
+          setFirstDesc(descArr);
+          setCurFiles(urlArr);
+          setProject_name(res.data.projectdata.project_name);
+          setProject_thumbnail(res.data.projectdata.project_thumbnail);
+          setProject_info({
+            project_start: res.data.projectdata.project_start,
+            project_end: res.data.projectdata.project_end,
+            project_team: res.data.projectdata.project_team,
+            project_introduction: res.data.projectdata.project_introduction,
+            project_feature: res.data.projectdata.project_feature,
+            project_github: res.data.projectdata.project_github,
+            project_front_stack: res.data.projectdata.project_front_stack,
+            project_back_stack: res.data.projectdata.project_back_stack,
+            project_deploy_stack: res.data.projectdata.project_deploy_stack,
+            project_url: res.data.projectdata.project_url,
+          });
+        })
+        .catch(err => {
+          alert('실패');
+        });
+    };
+    getProjectData();
+  }, []);
+
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
     setDescription(descElemArray);
-  }, [curFiles, project_info, project_stack]);
+  }, [curFiles]);
 
   function project_stackHandler(checked, itemName) {
     if (checked && !project_stack.includes(stackArray[itemName])) {
@@ -53,7 +111,7 @@ function UploadWrapper() {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter((el) => {
+        project_stack.filter(el => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -71,13 +129,11 @@ function UploadWrapper() {
     for (let el of curFiles) {
       formData.append('image', el);
     }
-    // formData.append('image', JSON.stringify(curFiles));
     formData.append('project_name', project_name);
     formData.append('project_stack', JSON.stringify(project_stack));
     formData.append('thumbnail', project_thumbnail);
     formData.append('project_content', JSON.stringify(project_content));
     formData.append('project_info', JSON.stringify(project_info));
-    // JSON.stringify({ text: descriptions[i].value, image: curFiles[i] })
     for (let el of formData.entries()) {
       console.log(el);
     }
@@ -88,11 +144,11 @@ function UploadWrapper() {
         },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         alert('성공');
         history.go(-1);
       })
-      .catch((err) => {
+      .catch(err => {
         alert('실패');
       });
   }
@@ -116,6 +172,10 @@ function UploadWrapper() {
           stackArray={stackArray}
           curFiles={curFiles}
           setCurFiles={setCurFiles}
+          firstDesc={firstDesc}
+          firstStack={firstStack}
+          isSecond={isSecond}
+          setIsSecond={setIsSecond}
         />
         <div
           style={{
@@ -148,4 +208,4 @@ function UploadWrapper() {
   );
 }
 
-export default UploadWrapper;
+export default UploadEditWrapper;
