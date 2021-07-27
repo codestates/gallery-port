@@ -23,10 +23,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
      axios.get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
       })
-      // .then((res)=>console.log(res.data.data))
       .then((res)=>{
-        // console.log('111',res)
-        // console.log('222',res.data.data.projects)
         const data1 = res.data.data.projects
         setProjectDataLength(data1)
         const data2 = res.data.data.user_email
@@ -40,22 +37,42 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
         const data6 = res.data.data.user_photo
         setUserPhoto(data6)
       })
- 
   }, []);
 
+  useEffect(() => {
+if (hasUserId === undefined){
+  projectDataLength.shift()
+}
+ }, [hasUserId]);
 
   let history = useHistory();
 
-  if (hasUserId !== undefined && !projectDataLength) {
+  if (hasUserId !== undefined && projectDataLength.length === 0) {
     const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: '/upload',
+      newproject:true,
+    };
+
+    projectDataLength.unshift(newproject);
+    setProfile(profile);
+  } else if (hasUserId !== undefined && !projectDataLength[0].newproject) {
+    const newproject = {
+      project_thumbnail: newProjectClick,
+      project_name: 'new project',
+      id: '/upload',
+      newproject:true,
     };
 
     projectDataLength.unshift(newproject);
     setProfile(profile);
   }
+
+   if(hasUserId !== undefined && userPhoto == undefined){
+    setUserPhoto('https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg')
+   }
+
 
   function handleGithubLlik(userGithub) {
     window.open(userGithub, '_blank');
@@ -104,7 +121,8 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-              {projectDataLength.map((project) => {
+             {
+              projectDataLength.map((project) => {
                 return (
                   <ProjectList
                     key={project.thumbnail}
