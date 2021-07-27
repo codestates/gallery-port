@@ -6,8 +6,8 @@ import { scrollTo } from '../../utils/etc';
 import { useHistory } from 'react-router-dom';
 import '../SignUp/SignUpWrapper.css';
 
-// const END_POINT = 'https://localhost:80';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({

@@ -6,7 +6,8 @@ import { scrollTo } from '../../utils/etc';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId }) {
   const [isSecond, setIsSecond] = useState(false);
