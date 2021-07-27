@@ -3,14 +3,14 @@ import axios from 'axios';
 import Modal from './Modal';
 import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
+import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
 // const END_POINT = 'https://localhost:80';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function UploadEditWrapper({ hasUserId }) {
-  const [isSecond, setIsSecond] = useState(false);
+function UploadEditWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
     project_start: '',
     project_end: '',
@@ -45,8 +45,7 @@ function UploadEditWrapper({ hasUserId }) {
   useEffect(() => {
     const getProjectData = () => {
       axios
-        .get(`${END_POINT}/project/${hasUserId}`, {
-          // projectid app.js에서 가져오기
+        .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
         .then(res => {
@@ -57,6 +56,11 @@ function UploadEditWrapper({ hasUserId }) {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
+
+          const fileArr = urlArr.map(el => {
+            return convertURLtoFile(el);
+          });
+
           const isChecked = stackArray.map(el => {
             if (
               res.data.data.projectdata.project_stack.includes(el.toLowerCase())
@@ -66,11 +70,13 @@ function UploadEditWrapper({ hasUserId }) {
               return false;
             }
           });
+          setCurFiles(fileArr);
+          setProject_thumbnail(
+            convertURLtoFile(res.data.data.projectdata.project_thumbnail)
+          );
           setFirstStack(isChecked);
           setFirstDesc(descArr);
-          setCurFiles(urlArr);
           setProject_name(res.data.data.projectdata.project_name);
-          setProject_thumbnail(res.data.data.projectdata.project_thumbnail);
           setProject_info({
             project_start: res.data.data.projectdata.project_start,
             project_end: res.data.data.projectdata.project_end,
@@ -96,7 +102,7 @@ function UploadEditWrapper({ hasUserId }) {
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
     setDescription(descElemArray);
-  }, [curFiles]);
+  }, [curFiles, project_info, project_stack]);
 
   function project_stackHandler(checked, itemName) {
     if (checked && !project_stack.includes(stackArray[itemName])) {
@@ -115,7 +121,7 @@ function UploadEditWrapper({ hasUserId }) {
 
   let history = useHistory();
 
-  function postHandler() {
+  function patchHandler() {
     const formData = new FormData();
     const project_content = [];
     for (let i = 0; i < descriptions.length; i++) {
@@ -132,8 +138,8 @@ function UploadEditWrapper({ hasUserId }) {
     for (let el of formData.entries()) {
       console.log(el);
     }
-    return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
-      .post(`${END_POINT}/project`, formData, {
+    return axios
+      .patch(`${END_POINT}/project`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -158,7 +164,7 @@ function UploadEditWrapper({ hasUserId }) {
         <ProjectUploadInfo
           project_name={project_name}
           setProject_name={setProject_name}
-          postHandler={postHandler}
+          patchHandler={patchHandler}
           project_thumbnail={project_thumbnail}
           setProject_thumbnail={setProject_thumbnail}
           project_info={project_info}
@@ -169,8 +175,6 @@ function UploadEditWrapper({ hasUserId }) {
           setCurFiles={setCurFiles}
           firstDesc={firstDesc}
           firstStack={firstStack}
-          isSecond={isSecond}
-          setIsSecond={setIsSecond}
         />
         <div
           style={{
@@ -194,7 +198,7 @@ function UploadEditWrapper({ hasUserId }) {
             setModalOn={setModalOn}
             descriptions={descriptions}
             curFiles={curFiles}
-            postHandler={postHandler}
+            patchHandler={patchHandler}
             project_info={project_info}
           />
         </div>
