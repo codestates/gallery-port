@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MyPageInfo from './MyPageInfo';
-import { checkEmail, checkPassword } from '../../utils/validation';
+import { checkEmail, checkPassword, checkHashedPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
 import { useHistory } from 'react-router-dom';
+import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
 
 // const END_POINT = 'https://localhost:80';
@@ -15,6 +16,7 @@ function MyPageWrapper({ hasUserId }) {
     user_introduction: '',
     user_github: '',
   });
+
   const [email_isValid, setEmail_isValid] = useState(false);
   const [pw_isValid, setPw_isValid] = useState(false);
   const [pw_confirm, setPw_confirm] = useState(false);
@@ -22,7 +24,9 @@ function MyPageWrapper({ hasUserId }) {
   const [user_email, setUser_email] = useState(''); //필수
   const [user_password, setUser_password] = useState(''); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
-  const [user_image, setUser_image] = useState(''); //필수
+  const [user_image, setUser_image] = useState(''); //필수 
+  const [hashedPassword, setHashedPassword] = useState('');  // 하은 변경
+
 
   useEffect(() => {
     const getUserData = () => {
@@ -33,6 +37,7 @@ function MyPageWrapper({ hasUserId }) {
         .then(res => {
           setUser_email(res.data.data.user_email);
           setUser_password(res.data.data.user_password);
+          setHashedPassword(res.data.data.user_password);
           setUser_image(res.data.data.user_photo);
           setUser_info({
             user_name: res.data.data.user_name,
@@ -53,18 +58,32 @@ function MyPageWrapper({ hasUserId }) {
     } else {
       setEmail_isValid(false);
     }
-
-    if (checkPassword(user_password)) {
-      setPw_isValid(true);
-    } else {
-      setPw_isValid(false);
-    }
-    if (user_password === password_confirm) {
-      setPw_confirm(true);
-    } else {
-      setPw_confirm(false);
-    }
+    debouncePasswordValidation();
   }, [user_email, user_password, password_confirm]);
+
+  const debouncePasswordValidation = debounce(() => {
+    console.log("called debounce");
+    if (user_password !== hashedPassword) { // 유저가 비밀번호를 변경할 경우
+      if (checkPassword(user_password)) {
+        setPw_isValid(true);
+      } else {
+        setPw_isValid(false);
+      }
+      if (user_password === password_confirm) {
+        setPw_confirm(true);
+      } else {
+        setPw_confirm(false);
+      }
+    } else {
+      if checkHashedPassword(password_confirm, hashedPassword) {
+        setPw_isValid(true);
+        setPw_confirm(true);
+      } else {
+        setPw_isValid(false);
+        setPw_confirm(false);
+      }
+    }
+  }, 800);
 
   let history = useHistory();
 
