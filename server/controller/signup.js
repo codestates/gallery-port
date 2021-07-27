@@ -1,11 +1,6 @@
 const fs = require('fs')
 const bcrypt = require('bcryptjs');
 const { User } = require('../models/index')
-const { generateAccessToken, 
-        generateRefreshToken, 
-        sendAccessToken, 
-        sendRefreshToken,
-        getDataValues } = require('./tokens/tokenFunctions')
 require('dotenv').config();
 
 module.exports = {
@@ -23,8 +18,8 @@ module.exports = {
         try {
             
             // 비밀번호 해시 
-            const hashedPassword = await bcrypt.hashSync(req.body.user_password, 10);
-            let data = await User.create({user_email, user_password: hashedPassword, ...user_info})
+            const user_password = await bcrypt.hashSync(req.body.user_password, 10);
+            let data = await User.create({user_email, user_password, ...user_info})
 
             if (req.file) {
                 const oldPath = __dirname + `/../${req.file.path}`;

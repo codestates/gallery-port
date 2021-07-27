@@ -43,6 +43,7 @@ function MyPageInfo({
       'email',
       email_isValid,
       false,
+      null
     ],
     [
       '비밀번호',
@@ -53,6 +54,7 @@ function MyPageInfo({
       'password',
       pw_isValid,
       true,
+      'defaultpassword'
     ],
     [
       '비밀번호 확인',
@@ -63,6 +65,7 @@ function MyPageInfo({
       'password',
       pw_confirm,
       true,
+      null
     ],
   ];
   function onChangeHandler(e, property) {
@@ -85,6 +88,7 @@ function MyPageInfo({
             type={el[5]}
             isValid={el[6]}
             isMutable={el[7]}
+            defaultValue={el[8]}
           />
         );
       })}
