@@ -200,6 +200,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             curFiles={curFiles}
             patchHandler={patchHandler}
             project_info={project_info}
+            project_name={project_name}
           />
         </div>
       </div>

@@ -3,7 +3,7 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import ProjectWrapper from '../components/Project/ProjectWrapper';
 
-function Project({ logoutHandler, hasUserId, setStackProjectData }) {
+function Project({ logoutHandler, hasUserId, setStackProjectData, projectId }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Header
@@ -11,7 +11,7 @@ function Project({ logoutHandler, hasUserId, setStackProjectData }) {
         hasUserId={hasUserId}
         setStackProjectData={setStackProjectData}
       />
-      <ProjectWrapper />
+      <ProjectWrapper projectId={projectId} />
       <Footer />
     </div>
   );
