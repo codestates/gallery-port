@@ -48,9 +48,10 @@ function App() {
 
   const loginHandler = userId => {
     setHasUserId(userId);
-  };
+  }; 
 
   const logoutHandler = () => {
+    setHasUserId(undefined)
     window.localStorage.removeItem('userId');
   };
 

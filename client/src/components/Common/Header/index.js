@@ -55,6 +55,10 @@ function Header(props) {
   });
 
   function handleLogout() {
+    axios
+      .post(`${END_POINT}/signout`, {}, {
+        withCredentials: true,
+      })
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
     // window.location.reload();
