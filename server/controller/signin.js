@@ -12,7 +12,7 @@ module.exports = {
 
     signin: async (req, res) => {
         const { user_email, user_password } = req.body;
-
+ 
         const data = await User.findOne({
             where: {
                 user_email
