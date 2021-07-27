@@ -57,16 +57,17 @@ function Header(props) {
   function handleLogout() {
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
-    window.location.reload();
+    // window.location.reload();
+    // history.go(0);
     setIsLogin(false);
 
     return axios
       .post(`${END_POINT}/signout`, {
         withCredentials: true,
       })
-      .catch((err) => {
-        alert('실패');
-      });
+      // .catch((err) => {
+      //   alert('실패');
+      // });
   }
 
   function goProfilepage() {
