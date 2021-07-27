@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './LandingProjects.css';
-// import mockProjects from './mockProjects';
 import ProjectList from './ProjectList';
-// import axios from 'axios';
+import axios from 'axios';
 
-// const END_POINT = `${process.env.REACT_APP_API_URL}`;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
-function LandingProjects({ stackProjectData, setProjectId }) {
-  const [projects, setProjects] = useState(null);
-
+function LandingProjects({
+  stackProjectData,
+  setProjectId,
+  setStackProjectData,
+}) {
   useEffect(() => {
-    setProjects(stackProjectData);
+    const getAllData = () => {
+      return axios
+        .get(`${END_POINT}`, { withCredentials: true })
+        .then((res) => {
+          const projects = res.data.data.projects;
+          setStackProjectData(projects);
+        });
+    };
+
+    getAllData();
   }, []);
 
   return (
@@ -24,11 +35,11 @@ function LandingProjects({ stackProjectData, setProjectId }) {
     >
       <div className="landingProjectsInner">
         <div className="projectList">
-          {!projects ? (
+          {stackProjectData[0] === undefined ? (
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-              {projects.map((project) => {
+              {stackProjectData.map((project) => {
                 return (
                   <ProjectList
                     key={project.id}

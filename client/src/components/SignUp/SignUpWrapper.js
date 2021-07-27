@@ -5,7 +5,8 @@ import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
 import './SignUpWrapper.css';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignUpWrapper() {
   const [user_info, setUser_info] = useState({
@@ -59,10 +60,10 @@ function SignUpWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

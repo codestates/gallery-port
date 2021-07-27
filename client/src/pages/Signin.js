@@ -3,10 +3,15 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import SignInWrapper from '../components/SignIn/SignInWrapper';
 
-function Signin({ loginHandler, setHasUserId, hasUserId }) {
+function Signin({
+  loginHandler,
+  setHasUserId,
+  hasUserId,
+  setStackProjectData,
+}) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header />
+      <Header setStackProjectData={setStackProjectData} />
       <SignInWrapper
         loginHandler={loginHandler}
         setHasUserId={setHasUserId}

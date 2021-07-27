@@ -5,29 +5,31 @@ import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  // const [stack, setStack] = useState('javascript');
 
   let history = useHistory();
 
-  // ! axios 연결됐을 때 사용
-  const postStackHandler = async (string) => {
-    const stackData = await axios.get(`${END_POINT}`, {
-      params: { stack: string },
-      withCredentials: true,
-    });
-
-    console.log(stackData.data.data.projects);
-    props.setStackProjectData(stackData.data.data.projects);
+  const postStackHandler = (string) => {
+    return axios
+      .get(`${END_POINT}`, {
+        params: { stack: string },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const projects = res.data.data.projects;
+        props.setStackProjectData(projects);
+        history.push('/');
+      })
+      .catch((err) => alert('실패'));
   };
 
   useEffect(() => {
-    console.log('0000header', props.hasUserId);
     if (props.hasUserId !== undefined) {
       setIsLogin(true);
     }
@@ -58,7 +60,6 @@ function Header(props) {
     window.location.reload();
     setIsLogin(false);
 
-    // ! axios signout post
     return axios
       .post(`${END_POINT}/signout`, {
         withCredentials: true,
@@ -86,7 +87,11 @@ function Header(props) {
         <div className="header">
           <div className="headerInner">
             <Link to="/" className="landing_link">
-              <img src={logo} alt="logo"></img>
+              <img
+                src={logo}
+                alt="logo"
+                onClick={() => postStackHandler()}
+              ></img>
             </Link>
             <nav>
               <ul>
