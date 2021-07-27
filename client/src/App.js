@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
@@ -11,20 +12,33 @@ import Upload from './pages/Upload';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
+
 function App() {
   const [hasUserId, setHasUserId] = useState(undefined);
   const [projectId, setProjectId] = useState('');
+  const [stackProjectData, setStackProjectData] = useState('');
 
   useEffect(() => {
     if (hasUserId !== '') {
-      console.log('1111', hasUserId);
-      console.log('들어왔습니다.');
-      console.log('888', hasUserId);
-      // loginHandler(hasUserId);
+      console.log('app.js확인중 - hasUserId :', hasUserId);
+      console.log('app.js확인중 - projectId : ', projectId);
     }
   });
 
-  console.log('999', hasUserId);
+  useEffect(() => {
+    const getAllData = () => {
+      return axios
+        .get(`${END_POINT}`, { withCredentials: true })
+        .then((res) => {
+          const projects = res.data.data.projects;
+          setStackProjectData(projects);
+        });
+    };
+
+    getAllData();
+  }, []);
 
   const loginHandler = (userId) => {
     setHasUserId(userId);
@@ -43,6 +57,8 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setProjectId={setProjectId}
+              setStackProjectData={setStackProjectData}
+              stackProjectData={stackProjectData}
             />
           </Route>
           <Route path="/signin">
@@ -50,28 +66,54 @@ function App() {
               loginHandler={loginHandler}
               setHasUserId={setHasUserId}
               hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
             />
           </Route>
-          <Route path="/signup">
+          <Route path="/signup" setStackProjectData={setStackProjectData}>
             <Signup />
           </Route>
           <Route path="/mypage">
-            <Mypage logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Mypage
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+            />
           </Route>
           <Route path="/profile">
-            <Profile logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Profile
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+              setProjectId={setProjectId}
+            />
           </Route>
           <Route path="/project">
-            <Project logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Project
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+            />
           </Route>
           <Route path="/upload">
-            <Upload logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Upload
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+            />
           </Route>
           <Route path="/loading">
-            <Loading logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <Loading
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+            />
           </Route>
           <Route path="/error">
-            <ErrorPage logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <ErrorPage
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+            />
           </Route>
         </Switch>
       </div>

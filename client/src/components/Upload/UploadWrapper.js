@@ -5,7 +5,8 @@ import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
 import './UploadWrapper.css';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadWrapper() {
   const [project_info, setProject_info] = useState({
@@ -51,7 +52,7 @@ function UploadWrapper() {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -64,7 +65,7 @@ function UploadWrapper() {
     for (let i = 0; i < descriptions.length; i++) {
       project_content.push(descriptions[i].value);
     }
-    for (let el of curFiles){
+    for (let el of curFiles) {
       formData.append('image', el);
     }
     // formData.append('image', JSON.stringify(curFiles));
@@ -84,10 +85,10 @@ function UploadWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import LandingGallery from '../components/Landing/LandingGallery';
 import LandingProjects from '../components/Landing/LandingProjects';
 
-function Landing({ logoutHandler, hasUserId, setProjectId }) {
-  const [stackProjectData, setStackProjectData] = useState(null);
-
-  // console.log('000', isLogin);
-  useEffect(() => {
-    console.log('0000landing', hasUserId);
-  }, []);
-
+function Landing({
+  logoutHandler,
+  hasUserId,
+  setProjectId,
+  setStackProjectData,
+  stackProjectData,
+}) {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <LandingGallery />
@@ -25,6 +23,7 @@ function Landing({ logoutHandler, hasUserId, setProjectId }) {
       <LandingProjects
         stackProjectData={stackProjectData}
         setProjectId={setProjectId}
+        setStackProjectData={setStackProjectData}
       />
       <Footer Landing={true} />
     </div>

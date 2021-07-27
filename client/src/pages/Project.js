@@ -2,10 +2,14 @@ import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 
-function Project({ logoutHandler, hasUserId }) {
+function Project({ logoutHandler, hasUserId, setStackProjectData }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header logoutHandler={logoutHandler} hasUserId={hasUserId} />
+      <Header
+        logoutHandler={logoutHandler}
+        hasUserId={hasUserId}
+        setStackProjectData={setStackProjectData}
+      />
       <div
         style={{
           width: '100vw',

@@ -1,23 +1,3 @@
-// import axios from 'axios';
-
-// function data() {
-//   axios
-//     .get('http://3.36.96.62/')
-//     .then((res) => {
-//       console.log('res.landing', res.landing);
-//       return res.landing;
-//       // const images = [];
-//       // for (let i = 0; i < res.data.length; i++) {
-//       //   images.push(URL.createObjectURL(res.data[i].project_thumbnail));
-//       // }
-//       // console.log('images', images);
-//       // return images;
-//     })
-//     .catch((err) => alert(err));
-// }
-
-// export default data;
-
 import img1 from './images/1.jpg';
 import img2 from './images/2.jpg';
 import img3 from './images/3.jpg';

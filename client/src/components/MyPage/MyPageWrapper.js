@@ -5,7 +5,8 @@ import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
 import '../SignUp/SignUpWrapper.css';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({
@@ -30,7 +31,7 @@ function MyPageWrapper({ hasUserId }) {
           //29번째 줄 지우고 28번재 줄 코드로 실행할 것
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           setUser_email(res.data.data.user_email);
           setUser_password(res.data.data.user_password); //패스워드는 빼는게 좋지 않을까? setUser_password('');
           setUser_image(res.data.data.user_photo);
@@ -40,7 +41,7 @@ function MyPageWrapper({ hasUserId }) {
             user_github: res.data.data.user_github,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
@@ -87,10 +88,10 @@ function MyPageWrapper({ hasUserId }) {
           },
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           alert('성공');
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         })
     );
