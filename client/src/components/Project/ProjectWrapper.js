@@ -23,7 +23,7 @@ function ProejctWrapper() {
   const [descriptions, setDescription] = useState(); //필수
 
   function project_delete_handler() {
-    let id = window.location.href.split('/')[5];
+    let id = window.location.href.split('/')[4];
     console.log(id);
     axios.delete('https://gallery-port-server.com/project/' + id).then(res => {
       console.log(res);
