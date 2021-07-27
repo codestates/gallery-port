@@ -16,8 +16,6 @@ function ImageUploaderMany({
   condition_desc1,
   condition_desc2,
   firstDesc, //이부분에 수정하였음
-  isSecond,
-  setIsSecond,
 }) {
   const inputManyRef = useRef(null);
   return (
@@ -30,7 +28,6 @@ function ImageUploaderMany({
           stateName.length === 0
             ? inputFilesHandler(inputManyRef, stateFunc)
             : addFilesHandler(inputManyRef, stateName, stateFunc);
-          setIsSecond(true); //이부분에 수정하였음
         }}
         multiple
       />
@@ -67,9 +64,7 @@ function ImageUploaderMany({
                     id={idx}
                     className="img_preview"
                     style={{
-                      backgroundImage: isSecond //이부분에 수정하였음
-                        ? `url('${URL.createObjectURL(el)}')`
-                        : `url(${el})`,
+                      backgroundImage: `url('${URL.createObjectURL(el)}')`,
                       backgroundSize: 'cover',
                       position: 'relative',
                     }}

@@ -508,16 +508,14 @@ div.temper_image_viewer {
 
 .project_info_render_wrapper {
   position: static;
-  width: 547px;
+  width: 40vw;
   height: 48px;
   left: 0px;
-  top: 400px;
 
   background: #ffffff;
 
-  flex: none;
-  order: 8;
-  flex-grow: 0;
+  display: flex;
+  align-items: center;
   margin: 0px 0px;
   border-bottom: 1px solid #e0e2e7;
 }
@@ -561,18 +559,13 @@ div.temper_image_viewer {
 
 .modal_button_wrapper {
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: flex-end; */
   justify-content: center;
   align-items: center;
   padding: 0px;
 
-  position: absolute;
-  /* position: relative; */
-  width: 236px;
+  position: relative;
+  width: 40vw;
   height: 40px;
-  /* right: 163px; */
-  /* top: calc(50% - 40px / 2 + 383px); */
 }
 
 .modal_button_cancel {
@@ -621,4 +614,19 @@ div.temper_image_viewer {
 
   color: #ffffff;
   cursor: pointer;
+}
+
+.carousel_wrapper {
+  width: 40vw;
+  height: auto;
+}
+
+.project_info_wrapper {
+  width: 40vw;
+  height: auto;
+}
+
+.button_wrapper {
+  width: 40vw;
+  height: auto;
 }
