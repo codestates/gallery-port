@@ -30,12 +30,10 @@ function App() {
 
   useEffect(() => {
     const getAllData = () => {
-      return axios
-        .get(`${END_POINT}`, { withCredentials: true })
-        .then((res) => {
-          const projects = res.data.data.projects;
-          setStackProjectData(projects);
-        });
+      return axios.get(`${END_POINT}`, { withCredentials: true }).then(res => {
+        const projects = res.data.data.projects;
+        setStackProjectData(projects);
+      });
     };
 
     getAllData();
@@ -96,7 +94,11 @@ function App() {
             />
           </Route>
           <Route path="/uploadedit">
-            <UploadEdit logoutHandler={logoutHandler} hasUserId={hasUserId} />
+            <UploadEdit
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              projectId={projectId}
+            />
           </Route>
           <Route path="/upload">
             <Upload

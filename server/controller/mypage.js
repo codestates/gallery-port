@@ -9,14 +9,14 @@ module.exports = {
 
             const tokenData = verifyAccessToken(req);
 
-            const data = await User.findOne({where: {
-                id: req.params.id}
-            });
-
-
-            if (tokenData.id !== req.params.id) {
+            if (tokenData.id !== Number(req.params.id)) {
                 return res.status(401).json({ "message": "Unauthorized user" })
             }
+
+            const data = await User.findOne({where: {
+                id: req.params.id}
+            });  
+
             if (!data) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
@@ -32,22 +32,23 @@ module.exports = {
         try{
             
             const tokenData = verifyAccessToken(req);
+        
+            if (tokenData.id !== Number(req.params.id)) {
+                return res.status(401).json({ "message": "Unauthorized user" })
+            }
 
             const data = await User.findOne({where: 
                 {id: req.params.id}
             });
 
-            if (tokenData.id !== req.params.id) {
-                return res.status(401).json({ "message": "Unauthorized user" })
-            }
             if (!data) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
 
-            const {user_email, user_password} = req.body; 
+            const {user_password} = req.body; 
 
             const user_info = JSON.parse(req.body.user_info)
-            const updateData = {user_email, user_password, ...user_info}
+            const updateData = { user_password, ...user_info}
 
             for (let key of Object.keys(updateData)) {
                 data[key] = await updateData[key];
