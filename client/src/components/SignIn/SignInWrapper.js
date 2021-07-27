@@ -25,12 +25,13 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
         withCredentials: true,
       })
       .then(res => res.data.id)
-      .then(data => {
-        setHasUserId(data);
-        return data;
-      })
+      // .then(data => {
+      //   setHasUserId(data);
+      //   return data;
+      // })
       .then(userId => {
-        loginHandler(userId);
+        // loginHandler(userId);
+        window.localStorage.setItem('userId', userId);
         window.history.go(-1);
       })
       .catch(err => {

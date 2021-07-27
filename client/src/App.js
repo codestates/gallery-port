@@ -39,12 +39,17 @@ function App() {
     getAllData();
   }, []);
 
+  useEffect(() => {
+    const storageSavedUserId = window.localStorage.getItem('userId') || undefined;
+    setHasUserId(storageSavedUserId);
+  });
+
   const loginHandler = userId => {
     setHasUserId(userId);
   };
 
   const logoutHandler = () => {
-    setHasUserId(undefined);
+    window.localStorage.removeItem('userId');
   };
 
   return (
