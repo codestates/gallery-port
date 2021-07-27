@@ -1,4 +1,5 @@
-.uploadWrapper {
+.uploadWrapper,
+.projectWrapper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -629,4 +630,26 @@ div.temper_image_viewer {
 .button_wrapper {
   width: 40vw;
   height: auto;
+}
+/* ///////////////Project Page////////////////// */
+
+.projectWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  border: 1px red solid;
+}
+
+.projectPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px blue solid;
+  position: relative;
+  width: 1120px;
+  height: calc(100vh - 188px);
 }
