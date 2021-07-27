@@ -22,7 +22,19 @@ function ProejctWrapper() {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
 
-  function project_delete_handler() {}
+  function project_delete_handler() {
+    let id = window.location.href.split('/')[2];
+    console.log(id);
+    axios.delete('https://gallery-port-server.com/project/' + id).then(res => {
+      console.log(res);
+      if (res.message === "Invalid user" || res.message === "Unauthorized user") {
+        alert("삭제");
+        window.location.href = '/';
+      } else {
+        alert(res.message);
+      }
+    });
+  }
   return (
     <div className="projectWrapper">
       <div className="projectPageContainer">
