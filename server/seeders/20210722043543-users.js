@@ -6,7 +6,7 @@ module.exports = {
       {
         "id": 5,
         "user_email": "test@test.com",
-        "user_password": "test1234",
+        "user_password": "$2a$10$YDiDTrNp.9OIKmGuiOoUReVEEQMTAhLMTX5loa0kRb23/1RVim5mi", //test1234
         "user_name": "test",
         "user_github": "https://github.com/test",
         "user_introduction": "test 입니다.",
@@ -15,7 +15,7 @@ module.exports = {
       {
         "id": 1,
         "user_email": "jonga6431@gmail.com",
-        "user_password": "park1234",
+        "user_password": "$2a$10$mRTsTHf4flVK8c.14KE/B./LPTjpbW06ZUP2ljgGXGfZKlpxrbrRi", // park1234
         "user_name": "jong-ah",
         "user_github": "https://github.com/jong-ah",
         "user_introduction": "jong-ah 입니다.",
@@ -24,7 +24,7 @@ module.exports = {
       {
         "id": 2,
         "user_email": "haeun.yah@gmail.com",
-        "user_password": "qwer1234",
+        "user_password": "$2a$10$GjVgDNo8dje79MdzOSXx4uKhKhnKOVLYJnuKsE3f1SX22Jicl4IPm", // qwer1234
         "user_name": "vodkamitlime",
         "user_github": "https://github.com/vodkamitlime",
         "user_introduction": "vodkamitlime 입니다.",
@@ -33,7 +33,7 @@ module.exports = {
       {
         "id": 3,
         "user_email": "idhyo0o@gmail.com",
-        "user_password": "qwer1234",
+        "user_password": "$2a$10$FIzKCAre/e8yHHUaPD2pveo8gVzZ/YeMAPFpVHszj3IWHA4J1pO8.", // qwer1234
         "user_name": "hyoogu",
         "user_github": "https://github.com/hyoogu",
         "user_introduction": "hyoogu 입니다.",
@@ -42,7 +42,7 @@ module.exports = {
       {
         "id": 4,
         "user_email": "bmanerdaniel@gmail.com",
-        "user_password": "qwer1234",
+        "user_password": "$2a$10$OPVKYkYbY/uppsoLsdR0LOxujm4aM8wrGXGsEhgv3t9.LrNk6nvhm", // qwer1234
         "user_name": "bmaner",
         "user_github": "https://github.com/bmaner",
         "user_introduction": "bmaner 입니다.",
