@@ -144,7 +144,7 @@ function MyPageWrapper({ hasUserId }) {
             className="previewBtn"
             onClick={() =>
               user_email &&
-              user_password &&
+              ( user_password || hashedPassword ) &&
               password_confirm &&
               email_isValid &&
               pw_isValid &&
