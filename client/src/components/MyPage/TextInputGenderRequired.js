@@ -8,6 +8,7 @@ function TextInputGenderRequired({
   placeholder,
   type,
   isValid,
+  isMutable,
 }) {
   //inputname은 이메일 같은거, detailString은 state에 문자열한거, stateName은 state, stateFunc은 set함수
   return (
@@ -22,7 +23,7 @@ function TextInputGenderRequired({
           placeholder={placeholder}
           className="input_small"
           value={stateName}
-          onChange={e => stateFunc(e.target.value)}
+          onChange={e => stateFunc(isMutable ? e.target.value : stateName)}
         />
         {isValid !== false ? null : detailString === 'user_email' ? (
           <p className="isValidIndicator">

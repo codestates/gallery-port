@@ -523,68 +523,6 @@ div.modalView {
   position: relative;
 }
 
-.modal_button_wrapper {
-  display: flex;
-  /* flex-direction: row; */
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0px;
-
-  position: relative;
-  width: 236px;
-  height: 40px;
-  /* right: 163px; */
-  top: calc(50% - 40px / 2 + 383px);
-}
-
-.modal_button_cancel {
-  position: static;
-  width: 110px;
-  height: 40px;
-
-  background: #ffffff;
-  border: 1px solid #3d5afe;
-  box-sizing: border-box;
-  border-radius: 4px;
-
-  /* Inside Auto Layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: -0.01em;
-
-  color: #3d5afe;
-  cursor: pointer;
-}
-
-.modal_button_upload {
-  position: static;
-  width: 110px;
-  height: 40px;
-
-  background: #3d5afe;
-  border-radius: 4px;
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin: 0px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: -0.01em;
-
-  /* FFFFFF */
-
-  color: #ffffff;
-  cursor: pointer;
-}
-
 /* //////////////// ProjectInfoRender ////////////////// */
 
 div.temper_image_viewer {
