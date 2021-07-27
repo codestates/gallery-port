@@ -23,9 +23,9 @@ function ProejctWrapper() {
   const [descriptions, setDescription] = useState(); //필수
 
   function project_delete_handler() {
-    let id = window.location.href.split('/')[4];
-    console.log(id);
-    axios.delete('https://gallery-port-server.com/project/' + id).then(res => {
+    let projectid = window.location.href.split('/')[4];
+    console.log(projectid);
+    axios.delete(`https://gallery-port-server.com/project/${projectid}`).then(res => {
       console.log(res);
       if (res.message === "Invalid user" || res.message === "Unauthorized user") {
         alert(res.message);
