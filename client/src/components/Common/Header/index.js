@@ -65,10 +65,10 @@ function Header(props) {
     // history.go(0);
     setIsLogin(false);
 
-    // return axios
-    //   .post(`${END_POINT}/signout`, {
-    //     withCredentials: true,
-    //   })
+    return axios
+      .post(`${END_POINT}/signout`, {}, {
+        withCredentials: true,
+      })
       // .catch((err) => {
       //   alert('실패');
       // });

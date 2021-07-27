@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../Upload/UploadWrapper.css';
 
+const END_POINT = process.env.REACT_APP_API_URL;
+
 function ProejctWrapper() {
   const [project_info, setProject_info] = useState({
     project_start: '',
@@ -22,7 +24,19 @@ function ProejctWrapper() {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
 
-  function project_delete_handler() {}
+  function project_delete_handler() {
+    let projectid = window.location.href.split('/')[4];
+    axios.delete(`${END_POINT}/project/${projectid}`, {
+      withCredentials: true,
+    }).then(res => {
+      if (res.message === "Invalid user" || res.message === "Unauthorized user") {
+        alert(res.message);
+      } else {
+        alert("삭제");
+        // history.go(-1);
+      }
+    });
+  }
   return (
     <div className="projectWrapper">
       <div className="projectPageContainer">
