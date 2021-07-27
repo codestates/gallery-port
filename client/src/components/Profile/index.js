@@ -11,55 +11,45 @@ const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
+  const [projectDataLength, setProjectDataLength] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userGithub, setUserGithub] = useState('');
+  const [userIntroduction, setUserIntroduction] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userPhoto, setUserPhoto] = useState('');
 
-  // useEffect(() => {
-  //   const getProfileData = async () => {
-  //     const profileDate = await axios.get(`${END_POINT}/profile/${hasUserId}`, {
-  //       withCredentials: true,
-  //     });
-
-  //     setProfile(profileDate.data.data);
-  //   };
-  //   getProfileData();
-  // }, []);
 
   useEffect(() => {
-    const getProfileData = async () => {
-      const profileDate = await axios.get(`${END_POINT}/profile/${hasUserId}`, {
+     axios.get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
-      });
-      console.log('받아오나?', profileDate.data.data);
-      if (profileDate.data.data.user_photo === null) {
-        profileDate.data.data.user_photo =
-          'https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg';
-      }
-
-      setProfile(profileDate.data.data);
-    };
-    getProfileData();
+      }).then((res)=>setProjectDataLength(res.data.data.projects))
+      .then((res)=>setUserEmail(res.data.data.user_email))
+      .then((res)=>setUserGithub(res.data.data.user_github))
+      .then((res)=>setUserIntroduction(res.data.data.user_introduction))
+      .then((res)=>setUserName(res.data.data.user_name))
+      .then((res)=>setUserPhoto(res.data.data.user_photo))
   }, []);
+
 
   let history = useHistory();
 
-  console.log('profile확인', profile);
-
-  if (hasUserId !== undefined && !profile.projects.length) {
+  if (hasUserId !== undefined && !projectDataLength) {
     const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: '/upload',
     };
 
-    profile.projects.unshift(newproject);
+    projectDataLength.unshift(newproject);
     setProfile(profile);
   }
 
-  function handleGithubLlik(user_github) {
-    window.open(user_github, '_blank');
+  function handleGithubLlik(userGithub) {
+    window.open(userGithub, '_blank');
   }
 
   function handleMypage(e) {
-    return history.push('/mypage');
+    return history.push(`/mypage/${hasUserId}`);
   }
 
   return (
@@ -67,8 +57,8 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       <div className="profileUserInfo">
         <div className="photoWraaper">
           <img
-            src={profile.user_photo}
-            alt={profile.user_name}
+            src={userPhoto}
+            alt={userName}
             className="profileUserPhoto"
           ></img>
           {hasUserId !== undefined ? (
@@ -82,13 +72,13 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
             <div></div>
           )}
         </div>
-        <div className="profileUserContent name">{profile.user_name}</div>
+        <div className="profileUserContent name">{userName}</div>
         <div className="profileUserContent introduction">
-          {profile.user_introduction}
+          {userIntroduction}
         </div>
-        <div className="profileUserContent email">{profile.user_email}</div>
-        {profile.user_github ? (
-          <button onClick={() => handleGithubLlik(profile.user_github)}>
+        <div className="profileUserContent email">{userEmail}</div>
+        {userGithub ? (
+          <button onClick={() => handleGithubLlik(userGithub)}>
             깃허브
           </button>
         ) : (
@@ -97,11 +87,11 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       </div>
       <div className="profileUserProjects">
         <div className="projectList">
-          {!profile.projects.length ? (
+          {!projectDataLength ? (
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-              {profile.projects.map((project) => {
+              {projectDataLength.map((project) => {
                 return (
                   <ProjectList
                     key={project.thumbnail}
