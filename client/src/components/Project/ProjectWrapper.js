@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../Upload/UploadWrapper.css';
 
+const END_POINT = process.env.REACT_APP_API_URL;
+
 function ProejctWrapper() {
   const [project_info, setProject_info] = useState({
     project_start: '',
@@ -24,9 +26,9 @@ function ProejctWrapper() {
 
   function project_delete_handler() {
     let projectid = window.location.href.split('/')[4];
-    console.log(projectid);
-    axios.delete(`https://gallery-port-server.com/project/${projectid}`).then(res => {
-      console.log(res);
+    axios.delete(`${END_POINT}/project/${projectid}`, {
+      withCredentials: true,
+    }).then(res => {
       if (res.message === "Invalid user" || res.message === "Unauthorized user") {
         alert(res.message);
       } else {
