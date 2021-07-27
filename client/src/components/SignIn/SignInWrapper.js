@@ -7,7 +7,7 @@ import './SignInWrapper.css';
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) { 
+function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   const [signInInfo, setSignInInfo] = useState({
     user_email: '',
     user_password: '',
@@ -25,8 +25,9 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
         withCredentials: true,
       })
       .then(res => {
-        console.log(res)
-        return res.data.id})
+        console.log(res);
+        return res.data.id;
+      })
       .then(data => {
         setHasUserId(data);
         return data;
@@ -37,7 +38,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
         window.history.go(-1);
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
         alert('실패');
       });
   }

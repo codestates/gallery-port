@@ -13,12 +13,10 @@ function LandingProjects({
 }) {
   useEffect(() => {
     const getAllData = () => {
-      return axios
-        .get(`${END_POINT}`, { withCredentials: true })
-        .then((res) => {
-          const projects = res.data.data.projects;
-          setStackProjectData(projects);
-        });
+      return axios.get(`${END_POINT}`, { withCredentials: true }).then(res => {
+        const projects = res.data.data.projects;
+        setStackProjectData(projects);
+      });
     };
 
     getAllData();
@@ -39,7 +37,7 @@ function LandingProjects({
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-              {stackProjectData.map((project) => {
+              {stackProjectData.map(project => {
                 return (
                   <ProjectList
                     key={project.id}

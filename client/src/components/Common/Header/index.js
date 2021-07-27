@@ -15,18 +15,18 @@ function Header(props) {
 
   let history = useHistory();
 
-  const postStackHandler = (string) => {
+  const postStackHandler = string => {
     return axios
       .get(`${END_POINT}`, {
         params: { stack: string },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch((err) => alert('실패'));
+      .catch(err => alert('실패'));
   };
 
   useEffect(() => {
@@ -55,23 +55,29 @@ function Header(props) {
   });
 
   function handleLogout() {
-    axios
-      .post(`${END_POINT}/signout`, {}, {
+    axios.post(
+      `${END_POINT}/signout`,
+      {},
+      {
         withCredentials: true,
-      })
+      }
+    );
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
     // window.location.reload();
     // history.go(0);
     setIsLogin(false);
 
-    return axios
-      .post(`${END_POINT}/signout`, {}, {
+    return axios.post(
+      `${END_POINT}/signout`,
+      {},
+      {
         withCredentials: true,
-      })
-      // .catch((err) => {
-      //   alert('실패');
-      // });
+      }
+    );
+    // .catch((err) => {
+    //   alert('실패');
+    // });
   }
 
   function goProfilepage() {

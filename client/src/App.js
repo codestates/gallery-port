@@ -30,28 +30,27 @@ function App() {
 
   useEffect(() => {
     const getAllData = () => {
-      return axios
-        .get(`${END_POINT}`, { withCredentials: true })
-        .then((res) => {
-          const projects = res.data.data.projects;
-          setStackProjectData(projects);
-        });
+      return axios.get(`${END_POINT}`, { withCredentials: true }).then(res => {
+        const projects = res.data.data.projects;
+        setStackProjectData(projects);
+      });
     };
 
     getAllData();
   }, []);
 
   useEffect(() => {
-    const storageSavedUserId = window.localStorage.getItem('userId') || undefined;
+    const storageSavedUserId =
+      window.localStorage.getItem('userId') || undefined;
     setHasUserId(storageSavedUserId);
   });
 
   const loginHandler = userId => {
     setHasUserId(userId);
-  }; 
+  };
 
   const logoutHandler = () => {
-    setHasUserId(undefined)
+    setHasUserId(undefined);
     window.localStorage.removeItem('userId');
   };
 
@@ -99,10 +98,15 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              projectId={projectId}
             />
           </Route>
           <Route path="/uploadedit">
-            <UploadEdit logoutHandler={logoutHandler} hasUserId={hasUserId} projectId={projectId}/>
+            <UploadEdit
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              projectId={projectId}
+            />
           </Route>
           <Route path="/upload">
             <Upload
