@@ -55,16 +55,20 @@ function Header(props) {
   });
 
   function handleLogout() {
+    axios
+      .post(`${END_POINT}/signout`, {}, {
+        withCredentials: true,
+      })
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
     // window.location.reload();
     // history.go(0);
     setIsLogin(false);
 
-    return axios
-      .post(`${END_POINT}/signout`, {
-        withCredentials: true,
-      })
+    // return axios
+    //   .post(`${END_POINT}/signout`, {
+    //     withCredentials: true,
+    //   })
       // .catch((err) => {
       //   alert('실패');
       // });
