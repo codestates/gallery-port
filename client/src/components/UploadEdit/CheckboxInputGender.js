@@ -11,7 +11,7 @@ function CheckboxInputGender({
       <input
         id={stackName}
         type="checkbox"
-        defaultChecked={isChecked} //defaultChecked로 선택시켜야한다.
+        defaultChecked={isChecked === undefined ? false : isChecked}
         name={idx}
         onChange={e => project_stackHandler(e.target.checked, e.target.name)}
         className="project_stack"

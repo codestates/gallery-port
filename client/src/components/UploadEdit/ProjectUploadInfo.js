@@ -119,11 +119,11 @@ function ProjectUploadInfo({
             marginBottom: '24px',
           }}
         >
-          {firstStack.map((el, idx) => {
+          {stackArray.map((el, idx) => {
             return (
               <CheckboxInputGender
-                stackName={el[0]}
-                isChecked={el[1]}
+                stackName={el}
+                isChecked={firstStack[idx]}
                 idx={idx}
                 key={`CheckboxInput${idx}`}
                 project_stackHandler={project_stackHandler}

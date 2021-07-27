@@ -41,54 +41,48 @@ function UploadEditWrapper({ hasUserId }) {
     'etc',
   ];
 
-  const stackArrayLower = [
-    'javascript',
-    'sql',
-    'python',
-    'java',
-    'c#',
-    'php',
-    'etc',
-  ];
   useEffect(() => {
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${hasUserId}`, {
-          // hasUserId 말고 projectId를 찾아야함 하은님한테 물어보기
+          // projectid app.js에서 가져오기
           withCredentials: true,
         })
         .then(res => {
           const urlArr = [];
           const descArr = [];
 
-          res.data.projectdata.project_content.forEach(el => {
+          res.data.data.projectdata.project_content.forEach(el => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
-          setFirstStack(
-            stackArrayLower.map((el, idx) => {
-              if (res.data.projectdata.project_stack.includes(el)) {
-                return [stackArray[idx], true];
-              } else {
-                return [stackArray[idx], false];
-              }
-            })
-          );
+          const isChecked = stackArray.map(el => {
+            if (
+              res.data.data.projectdata.project_stack.includes(el.toLowerCase())
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          setFirstStack(isChecked);
           setFirstDesc(descArr);
           setCurFiles(urlArr);
-          setProject_name(res.data.projectdata.project_name);
-          setProject_thumbnail(res.data.projectdata.project_thumbnail);
+          setProject_name(res.data.data.projectdata.project_name);
+          setProject_thumbnail(res.data.data.projectdata.project_thumbnail);
           setProject_info({
-            project_start: res.data.projectdata.project_start,
-            project_end: res.data.projectdata.project_end,
-            project_team: res.data.projectdata.project_team,
-            project_introduction: res.data.projectdata.project_introduction,
-            project_feature: res.data.projectdata.project_feature,
-            project_github: res.data.projectdata.project_github,
-            project_front_stack: res.data.projectdata.project_front_stack,
-            project_back_stack: res.data.projectdata.project_back_stack,
-            project_deploy_stack: res.data.projectdata.project_deploy_stack,
-            project_url: res.data.projectdata.project_url,
+            project_start: res.data.data.projectdata.project_start,
+            project_end: res.data.data.projectdata.project_end,
+            project_team: res.data.data.projectdata.project_team,
+            project_introduction:
+              res.data.data.projectdata.project_introduction,
+            project_feature: res.data.data.projectdata.project_feature,
+            project_github: res.data.data.projectdata.project_github,
+            project_front_stack: res.data.data.projectdata.project_front_stack,
+            project_back_stack: res.data.data.projectdata.project_back_stack,
+            project_deploy_stack:
+              res.data.data.projectdata.project_deploy_stack,
+            project_url: res.data.data.projectdata.project_url,
           });
         })
         .catch(err => {
