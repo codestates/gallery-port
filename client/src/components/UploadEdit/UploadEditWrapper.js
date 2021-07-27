@@ -10,8 +10,6 @@ import { useHistory } from 'react-router-dom';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId, projectId }) {
-  const [isSecondOne, setIsSecondOne] = useState(false);
-  const [isSecondMany, setIsSecondMany] = useState(false);
   const [project_info, setProject_info] = useState({
     project_start: '',
     project_end: '',
