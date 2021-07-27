@@ -4,6 +4,7 @@ import SignUpInfo from './SignUpInfo';
 import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
 import './SignUpWrapper.css';
+import { useHistory } from 'react-router-dom';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -21,6 +22,8 @@ function SignUpWrapper() {
   const [user_password, setUser_password] = useState(''); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
+
+  let history = useHistory();
 
   useEffect(() => {
     if (checkEmail(user_email)) {
@@ -61,6 +64,7 @@ function SignUpWrapper() {
       })
       .then(res => {
         alert('성공');
+        history.go(-1);
       })
       .catch(err => {
         alert('실패');

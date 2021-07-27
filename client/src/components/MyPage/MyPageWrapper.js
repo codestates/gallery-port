@@ -3,6 +3,7 @@ import axios from 'axios';
 import MyPageInfo from './MyPageInfo';
 import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
+import { useHistory } from 'react-router-dom';
 import '../SignUp/SignUpWrapper.css';
 
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -23,16 +24,14 @@ function MyPageWrapper({ hasUserId }) {
   const [user_image, setUser_image] = useState(''); //필수
 
   useEffect(() => {
-    const getUserData = async () => {
-      await axios
-        // .get(`${END_POINT}/mypage/${userId}`, {
+    const getUserData = () => {
+      axios
         .get(`${END_POINT}/mypage/${hasUserId}`, {
-          //29번째 줄 지우고 28번재 줄 코드로 실행할 것
           withCredentials: true,
         })
         .then(res => {
           setUser_email(res.data.data.user_email);
-          setUser_password(res.data.data.user_password); //패스워드는 빼는게 좋지 않을까? setUser_password('');
+          setUser_password(res.data.data.user_password);
           setUser_image(res.data.data.user_photo);
           setUser_info({
             user_name: res.data.data.user_name,
@@ -66,6 +65,8 @@ function MyPageWrapper({ hasUserId }) {
     }
   }, [user_email, user_password, password_confirm]);
 
+  let history = useHistory();
+
   function patchHandler() {
     const formData = new FormData();
 
@@ -77,23 +78,20 @@ function MyPageWrapper({ hasUserId }) {
     for (let el of formData.entries()) {
       console.log(el);
     }
-    return (
-      axios
-        // .patch(`${END_POINT}/mypage/${userId}`, formData, {
-        .patch(`${END_POINT}/mypage/${hasUserId}`, formData, {
-          //87번째 줄 지우고 86번재 줄 코드로 실행할 것
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          withCredentials: true,
-        })
-        .then(res => {
-          alert('성공');
-        })
-        .catch(err => {
-          alert('실패');
-        })
-    );
+    return axios
+      .patch(`${END_POINT}/mypage/${hasUserId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      })
+      .then(res => {
+        alert('성공');
+        history.go(-1);
+      })
+      .catch(err => {
+        alert('실패');
+      });
   }
 
   return (

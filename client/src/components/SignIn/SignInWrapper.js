@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
-import mockSigup from './mockSignup';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -27,12 +26,10 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       })
       .then(res => res.data.id)
       .then(data => {
-        console.log(data);
         setHasUserId(data);
         return data;
       })
       .then(userId => {
-        console.log(userId);
         loginHandler(userId);
         window.history.go(-1);
       })
@@ -40,21 +37,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
         alert('실패');
       });
   }
-
-  // // ! test용
-  // function postHandler() {
-  //   console.log(signInInfo);
-  //   for (let i = 0; i < mockSigup.length; i++) {
-  //     if (
-  //       mockSigup[i].user_email === signInInfo.email &&
-  //       mockSigup[i].user_password === signInInfo.password
-  //     ) {
-  //       console.log({ message: 'ok', id: mockSigup[i].id });
-  //       loginHandler(mockSigup[i].id);
-  //     }
-  //   }
-  //   window.history.go(-1);
-  // }
 
   const requiredTextInputData = [
     ['email', '이메일 입력', 'user_email'],
