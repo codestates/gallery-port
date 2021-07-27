@@ -28,10 +28,10 @@ function ProejctWrapper() {
     axios.delete('https://gallery-port-server.com/project/' + id).then(res => {
       console.log(res);
       if (res.message === "Invalid user" || res.message === "Unauthorized user") {
-        alert("삭제");
-        window.location.href = '/';
-      } else {
         alert(res.message);
+      } else {
+        alert("삭제");
+        history.go(-1);
       }
     });
   }
