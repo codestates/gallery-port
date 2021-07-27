@@ -22,7 +22,7 @@ function Footer(props) {
         <div className="okteam">
           회사명 : 200ok | 서비스 소개 :
           <a
-            href="https://github.com/codestates/gallery-por"
+            href="https://github.com/codestates/gallery-port"
             target="_blank"
             rel="noopener noreferrer"
             style={{ cursor: 'pointer' }}
