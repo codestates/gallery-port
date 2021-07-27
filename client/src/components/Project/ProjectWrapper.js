@@ -31,7 +31,7 @@ function ProejctWrapper() {
         alert(res.message);
       } else {
         alert("삭제");
-        history.go(-1);
+        // history.go(-1);
       }
     });
   }
