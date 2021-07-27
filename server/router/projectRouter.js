@@ -1,6 +1,6 @@
 const {
   getProjectData,
-  fixProjectData,
+  updateProjectData,
   createProjectData,
   deleteProjectData,
 } = require('../controller/project');
@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/:projectid', getProjectData);
 router.post('/', checkToken, uploadProjectImage, createProjectData);
-router.patch('/:projectid', checkToken, uploadProjectImage, fixProjectData);
+router.patch('/:projectid', checkToken, uploadProjectImage, updateProjectData);
 router.delete('/:projectid', checkToken, deleteProjectData);
 
 module.exports = router;

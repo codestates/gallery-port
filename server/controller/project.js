@@ -43,7 +43,7 @@ module.exports = {
             if (stackData) {
                 for (let value of stackData) {
                     let stackName = await Stack.findOne({ where: { id: value.stack_id }});
-                    project_stacks.push(stackName.stack_name);
+                    project_stack.push(stackName.stack_name);
                 }
             }   
 
@@ -103,10 +103,9 @@ module.exports = {
                 }
                 
                 // image 배열 순차적으로 이름 변경 후 Content 테이블에 image, content 저장
-                console.log(req.files)
                 const projectImages = req.files.image;
                 const projectContents = JSON.parse(req.body.project_content);
-                for (let i=0; i < projectImages.length; i++) {
+                for (let i = 0; i < projectImages.length; i++) {
                     let curContent = projectContents[i];
                     let newImageFile = projectImages[i].filename.split('_');
                     newImageFile.splice(1,1, data.id);
@@ -118,17 +117,14 @@ module.exports = {
                         content_text: curContent 
                     })
                 }
-                // 유저 프로필로 redirect 
-                
-                return res.sendStatus(200)
+                return res.sendStatus(201);
 
                 } catch (err) {
-                    console.log(err)
-                    return res.status(500).send(err)
+                    return res.status(500).send(err);
                 }
             },
             
-        fixProjectData: async (req, res) => {
+        updateProjectData: async (req, res) => {
             
             const projectId = req.params.projectid;
             const { project_name } = req.body
@@ -139,8 +135,8 @@ module.exports = {
             const projectUser = await ProjectByUser.findAll({ where : {
                 user_id: tokenData.id
             }})
-            const projectListofUser = await projectUser.map(el => el.project_id)
-            if(!projectListofUser.includes(Number(projectId))){
+            const projectListOfUser = projectUser.map(el => el.project_id)
+            if(!projectListOfUser.includes(Number(projectId))){
                 return res.status(401).json({"message": "Unauthorized user"})
             }
 
@@ -154,7 +150,7 @@ module.exports = {
                 for (let key in project_info) {
                     data[key] = project_info[key];
                 }
-                await data.save();
+                // await data.save();
 
                 // StackForProject 에서 stack 정보 업데이트
                 const stackData = JSON.parse(req.body.project_stack);
@@ -218,8 +214,8 @@ module.exports = {
         const projectUser = await ProjectByUser.findAll({ where : {
             user_id: tokenData.id
         }})
-        const projectListofUser = await projectUser.map(el => el.project_id)
-        if(!projectListofUser.includes(Number(projectId))){
+        const projectListOfUser = projectUser.map(el => el.project_id)
+        if(!projectListOfUser.includes(Number(projectId))){
             return res.status(401).json({"message": "Unauthorized user"})
         }
 

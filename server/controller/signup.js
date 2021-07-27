@@ -37,12 +37,6 @@ module.exports = {
                 await data.save();
             }
             
-            const tokenData = getDataValues(data);
-            const accessToken = generateAccessToken(tokenData);
-            const refreshToken = generateRefreshToken(tokenData);
-            sendAccessToken(res, accessToken);
-            sendRefreshToken(res, refreshToken);
-
             return res.sendStatus(201);
         } catch (err) {
             if(err.errors[0].message === "users.user_email must be unique") {
