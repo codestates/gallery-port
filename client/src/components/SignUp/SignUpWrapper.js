@@ -6,7 +6,7 @@ import { scrollTo } from '../../utils/etc';
 import './SignUpWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-// const END_POINT = 'https://localhost:80';
+// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignUpWrapper() {
@@ -63,11 +63,11 @@ function SignUpWrapper() {
         },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         alert('성공');
         history.go(-1);
       })
-      .catch((err) => {
+      .catch(err => {
         alert('실패');
       });
   }

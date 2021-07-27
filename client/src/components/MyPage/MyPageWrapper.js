@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
 
-// const END_POINT = 'https://localhost:80';
+// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {

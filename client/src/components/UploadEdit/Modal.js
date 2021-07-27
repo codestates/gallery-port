@@ -6,7 +6,7 @@ function Modal({
   setModalOn,
   descriptions,
   curFiles,
-  postHandler,
+  patchHandler,
   project_info,
 }) {
   return (
@@ -20,7 +20,7 @@ function Modal({
               project_info={project_info}
               modalOn={modalOn}
               setModalOn={setModalOn}
-              postHandler={postHandler}
+              patchHandler={patchHandler}
             />
           </div>
         </div>

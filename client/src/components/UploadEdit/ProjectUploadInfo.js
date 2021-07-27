@@ -17,8 +17,6 @@ function ProjectUploadInfo({
   curFiles,
   setCurFiles,
   firstDesc,
-  isSecond,
-  setIsSecond,
   firstStack,
 }) {
   const textInputData = [
@@ -90,8 +88,6 @@ function ProjectUploadInfo({
         stateFunc={setProject_thumbnail}
         condition_subject={'등록조건'}
         condition_desc={'170x280(px), 25KB 이하, jpg, jpeg, png만 가능'}
-        isSecond={isSecond}
-        setIsSecond={setIsSecond}
       />
       <ImageUploaderMany
         project_info_detail={'프로젝트 사진'}
@@ -104,8 +100,6 @@ function ProjectUploadInfo({
           '1120x450(px),  150KB 이하, jpg, jpeg, png, gif만 가능'
         }
         firstDesc={firstDesc}
-        isSecond={isSecond}
-        setIsSecond={setIsSecond}
       />
       <div className="project_stack" style={{ display: 'flex' }}>
         <div className="subject_wrapper">

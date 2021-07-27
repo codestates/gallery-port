@@ -42,6 +42,7 @@ function MyPageInfo({
       '이메일',
       'email',
       email_isValid,
+      false,
     ],
     [
       '비밀번호',
@@ -51,6 +52,7 @@ function MyPageInfo({
       '8자 이상 입력해주세요',
       'password',
       pw_isValid,
+      true,
     ],
     [
       '비밀번호 확인',
@@ -60,6 +62,7 @@ function MyPageInfo({
       '비밀번호 확인',
       'password',
       pw_confirm,
+      true,
     ],
   ];
   function onChangeHandler(e, property) {
@@ -81,6 +84,7 @@ function MyPageInfo({
             placeholder={el[4]}
             type={el[5]}
             isValid={el[6]}
+            isMutable={el[7]}
           />
         );
       })}
