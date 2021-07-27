@@ -1,4 +1,3 @@
-const { token } = require('morgan');
 const { User } = require('../models/index')
 const { verifyAccessToken } = require('./tokens/tokenFunctions')
 require('dotenv').config()
@@ -14,7 +13,11 @@ module.exports = {
                 id: req.params.id}
             });
 
-            if (!data || tokenData.id !== req.params.id) {
+
+            if (tokenData.id !== req.params.id) {
+                return res.status(401).json({ "message": "Unauthorized user" })
+            }
+            if (!data) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
 
@@ -25,7 +28,7 @@ module.exports = {
         }
     },
 
-    fixUserData: async (req, res) => {
+    updateUserData: async (req, res) => {
         try{
             
             const tokenData = verifyAccessToken(req);
@@ -34,9 +37,13 @@ module.exports = {
                 {id: req.params.id}
             });
 
-            if (!data || tokenData.id !== req.params.id) {
+            if (tokenData.id !== req.params.id) {
+                return res.status(401).json({ "message": "Unauthorized user" })
+            }
+            if (!data) {
                 return res.status(404).json({ "message": "Invalid user" })
             }
+
             const {user_email, user_password} = req.body; 
 
             const user_info = JSON.parse(req.body.user_info)
