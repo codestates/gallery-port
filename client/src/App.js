@@ -13,7 +13,7 @@ import UploadEdit from './pages/UploadEdit';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
-// const END_POINT = 'https://localhost:80';
+// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function App() {

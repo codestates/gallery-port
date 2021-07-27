@@ -6,12 +6,12 @@ import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = 'https://localhost:80';
+// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
-  const [projectDataLength, setProjectDataLength] = useState('');
+  const [projectDataLength, setProjectDataLength] = useState([]);
   const [userEmail, setUserEmail] = useState('');
   const [userGithub, setUserGithub] = useState('');
   const [userIntroduction, setUserIntroduction] = useState('');
@@ -22,12 +22,25 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   useEffect(() => {
      axios.get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
-      }).then((res)=>setProjectDataLength(res.data.data.projects))
-      .then((res)=>setUserEmail(res.data.data.user_email))
-      .then((res)=>setUserGithub(res.data.data.user_github))
-      .then((res)=>setUserIntroduction(res.data.data.user_introduction))
-      .then((res)=>setUserName(res.data.data.user_name))
-      .then((res)=>setUserPhoto(res.data.data.user_photo))
+      })
+      // .then((res)=>console.log(res.data.data))
+      .then((res)=>{
+        // console.log('111',res)
+        // console.log('222',res.data.data.projects)
+        const data1 = res.data.data.projects
+        setProjectDataLength(data1)
+        const data2 = res.data.data.user_email
+        setUserEmail(data2)
+        const data3 = res.data.data.user_github
+        setUserGithub(data3)
+        const data4 = res.data.data.user_introduction
+        setUserIntroduction(data4)
+        const data5 = res.data.data.user_name
+        setUserName(data5)
+        const data6 = res.data.data.user_photo
+        setUserPhoto(data6)
+      })
+ 
   }, []);
 
 
