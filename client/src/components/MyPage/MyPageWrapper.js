@@ -26,7 +26,7 @@ function MyPageWrapper({ hasUserId }) {
   const [user_password, setUser_password] = useState(null); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수 
-  const [hashedPassword, setHashedPassword] = useState('');  // 하은 변경
+  const [hashedPassword, setHashedPassword] = useState('');
 
 
   useEffect(() => {

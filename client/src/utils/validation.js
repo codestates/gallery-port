@@ -1,4 +1,3 @@
-// 하은 변경
 const bcrypt = require('bcryptjs');
 
 export function checkHashedPassword(password, originalPassword) {
