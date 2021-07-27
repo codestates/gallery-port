@@ -32,7 +32,8 @@ module.exports = {
             where: {
                 id: projectsId
             },
-            attributes: ['id', 'project_thumbnail', 'project_name']
+            attributes: ['id', 'project_thumbnail', 'project_name'],
+            order: [['id', 'DESC']]
         }).catch(err => {
             res.stats(500).send(err);
         });
