@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './LandingProjects.css';
 import ProjectList from './ProjectList';
-import axios from 'axios';
+
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -9,21 +9,8 @@ const END_POINT = process.env.REACT_APP_API_URL;
 function LandingProjects({
   stackProjectData,
   setProjectId,
-  setStackProjectData,
+  hasUserId,
 }) {
-  useEffect(() => {
-    const getAllData = () => {
-      return axios
-        .get(`${END_POINT}`, { withCredentials: true })
-        .then((res) => {
-          const projects = res.data.data.projects;
-          setStackProjectData(projects);
-        });
-    };
-
-    getAllData();
-  }, []);
-
   return (
     <div
       className="landingProjects"
@@ -45,6 +32,7 @@ function LandingProjects({
                     key={project.id}
                     project={project}
                     setProjectId={setProjectId}
+                    hasUserId={hasUserId}
                   />
                 );
               })}

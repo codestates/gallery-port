@@ -9,9 +9,10 @@ import axios from 'axios';
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function ProfileWrapper({ hasUserId, setProjectId }) {
+function ProfileWrapper({ hasUserId, setProjectId}) {
   const [profile, setProfile] = useState('');
   const [projectDataLength, setProjectDataLength] = useState([]);
+  const [newNotProjectData, setNewNotProjectData] = useState([]);
   const [userEmail, setUserEmail] = useState('');
   const [userGithub, setUserGithub] = useState('');
   const [userIntroduction, setUserIntroduction] = useState('');
@@ -26,6 +27,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       .then((res)=>{
         const data1 = res.data.data.projects
         setProjectDataLength(data1)
+        setNewNotProjectData(data1)
         const data2 = res.data.data.user_email
         setUserEmail(data2)
         const data3 = res.data.data.user_github
@@ -39,19 +41,13 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       })
   }, []);
 
-  useEffect(() => {
-if (hasUserId === undefined){
-  projectDataLength.shift()
-}
- }, [hasUserId]);
-
   let history = useHistory();
 
   if (hasUserId !== undefined && projectDataLength.length === 0) {
     const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
-      id: '/upload',
+      id: 'upload',
       newproject:true,
     };
 
@@ -61,7 +57,7 @@ if (hasUserId === undefined){
     const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
-      id: '/upload',
+      id: 'upload',
       newproject:true,
     };
 
@@ -121,13 +117,23 @@ if (hasUserId === undefined){
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-             {
+             {hasUserId !== undefined ?
               projectDataLength.map((project) => {
                 return (
                   <ProjectList
                     key={project.thumbnail}
                     project={project}
                     setProjectId={setProjectId}
+                    hasUserId={hasUserId}
+                  />
+                );
+              }): newNotProjectData.map((project) => {
+                return (
+                  <ProjectList
+                    key={project.thumbnail}
+                    project={project}
+                    setProjectId={setProjectId}
+                    hasUserId={hasUserId}
                   />
                 );
               })}

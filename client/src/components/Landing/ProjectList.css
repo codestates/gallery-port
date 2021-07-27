@@ -10,6 +10,14 @@
   margin-bottom: 50px;
 }
 
+.list:first-child{
+  color:#3D5AFE;
+}
+
+.upload{
+  display: none;
+}
+
 .listimg {
   width: 170px;
   height: 280px;

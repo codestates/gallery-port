@@ -10,7 +10,10 @@ function Landing({
   setProjectId,
   setStackProjectData,
   stackProjectData,
+  stackString,
+  setStackString,
 }) {
+
   return (
     <div style={{ overflowX: 'hidden' }}>
       <LandingGallery />
@@ -19,11 +22,14 @@ function Landing({
         logoutHandler={logoutHandler}
         hasUserId={hasUserId}
         setStackProjectData={setStackProjectData}
+        setStackString={setStackString}
       />
       <LandingProjects
         stackProjectData={stackProjectData}
         setProjectId={setProjectId}
         setStackProjectData={setStackProjectData}
+        hasUserId={hasUserId}
+        stackString={stackString}
       />
       <Footer Landing={true} />
     </div>

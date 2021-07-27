@@ -30,7 +30,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       //   return data;
       // })
       .then(userId => {
-        // loginHandler(userId);
+        loginHandler(userId);
         window.localStorage.setItem('userId', userId);
         window.history.go(-1);
       })
