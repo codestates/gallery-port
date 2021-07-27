@@ -62,7 +62,7 @@ function Header(props) {
     setIsLogin(false);
 
     return axios
-      .post(`${END_POINT}/signout`, {
+      .post(`${END_POINT}/signout`, {}, {
         withCredentials: true,
       })
       // .catch((err) => {
