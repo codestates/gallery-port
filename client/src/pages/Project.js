@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
+import ProjectWrapper from '../components/Project/ProjectWrapper';
 
 function Project({ logoutHandler, hasUserId, setStackProjectData }) {
   return (
@@ -10,15 +11,7 @@ function Project({ logoutHandler, hasUserId, setStackProjectData }) {
         hasUserId={hasUserId}
         setStackProjectData={setStackProjectData}
       />
-      <div
-        style={{
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'yellow',
-        }}
-      >
-        Project
-      </div>
+      <ProjectWrapper />
       <Footer />
     </div>
   );
