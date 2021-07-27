@@ -64,7 +64,7 @@ function ImageUploaderMany({
                     id={idx}
                     className="img_preview"
                     style={{
-                      backgroundImage: `url('${URL.createObjectURL(el)}')`,
+                      backgroundImage: `url('${el}')`,
                       backgroundSize: 'cover',
                       position: 'relative',
                     }}

@@ -6,8 +6,8 @@ import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
@@ -18,32 +18,32 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
 
-
   useEffect(() => {
-     axios.get(`${END_POINT}/profile/${hasUserId}`, {
+    axios
+      .get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
       })
-      .then((res)=>{
-        const data1 = res.data.data.projects
-        setProjectDataLength(data1)
-        const data2 = res.data.data.user_email
-        setUserEmail(data2)
-        const data3 = res.data.data.user_github
-        setUserGithub(data3)
-        const data4 = res.data.data.user_introduction
-        setUserIntroduction(data4)
-        const data5 = res.data.data.user_name
-        setUserName(data5)
-        const data6 = res.data.data.user_photo
-        setUserPhoto(data6)
-      })
+      .then(res => {
+        const data1 = res.data.data.projects;
+        setProjectDataLength(data1);
+        const data2 = res.data.data.user_email;
+        setUserEmail(data2);
+        const data3 = res.data.data.user_github;
+        setUserGithub(data3);
+        const data4 = res.data.data.user_introduction;
+        setUserIntroduction(data4);
+        const data5 = res.data.data.user_name;
+        setUserName(data5);
+        const data6 = res.data.data.user_photo;
+        setUserPhoto(data6);
+      });
   }, []);
 
   useEffect(() => {
-if (hasUserId === undefined){
-  projectDataLength.shift()
-}
- }, [hasUserId]);
+    if (hasUserId === undefined) {
+      projectDataLength.shift();
+    }
+  }, [hasUserId]);
 
   let history = useHistory();
 
@@ -52,7 +52,7 @@ if (hasUserId === undefined){
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: '/upload',
-      newproject:true,
+      newproject: true,
     };
 
     projectDataLength.unshift(newproject);
@@ -62,17 +62,18 @@ if (hasUserId === undefined){
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: '/upload',
-      newproject:true,
+      newproject: true,
     };
 
     projectDataLength.unshift(newproject);
     setProfile(profile);
   }
 
-   if(hasUserId !== undefined && userPhoto == undefined){
-    setUserPhoto('https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg')
-   }
-
+  if (hasUserId !== undefined && userPhoto == undefined) {
+    setUserPhoto(
+      'https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg'
+    );
+  }
 
   function handleGithubLlik(userGithub) {
     window.open(userGithub, '_blank');
@@ -108,9 +109,7 @@ if (hasUserId === undefined){
         </div>
         <div className="profileUserContent email">{userEmail}</div>
         {userGithub ? (
-          <button onClick={() => handleGithubLlik(userGithub)}>
-            깃허브
-          </button>
+          <button onClick={() => handleGithubLlik(userGithub)}>깃허브</button>
         ) : (
           <div></div>
         )}
@@ -121,8 +120,7 @@ if (hasUserId === undefined){
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-             {
-              projectDataLength.map((project) => {
+              {projectDataLength.map(project => {
                 return (
                   <ProjectList
                     key={project.thumbnail}

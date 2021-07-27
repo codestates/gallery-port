@@ -11,7 +11,7 @@ function Item(props) {
         style={{ width: '1120px', height: '450px', top: '24px' }}
       />
       <p className="project_page_carousel_desc">
-        {props.descriptions[props.idx].value}
+        {props.descriptions !== [] ? props.descriptions[props.idx] : null}
       </p>
     </Paper>
   );
@@ -29,7 +29,7 @@ function ProjectInfoRender({ curFiles, descriptions, project_info }) {
                   <Item
                     key={idx}
                     curFile={curFile}
-                    descriptions={descriptions}
+                    descriptions={descriptions ? descriptions : []}
                     idx={idx}
                   />
                 );

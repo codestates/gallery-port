@@ -836,7 +836,6 @@ a {
   width: 1120px;
   height: 522px;
   top: 204px;
-  border: 1px rgba(0, 0, 0, 0.3) solid;
 }
 .project_page_carousel_desc {
   position: static;
@@ -869,7 +868,6 @@ a {
   width: 1120px;
   height: 576px;
   top: 726px;
-  border: 1px rgba(0, 0, 0, 0.3) solid;
 }
 .project_page_project_info_render_wrapper {
   position: static;

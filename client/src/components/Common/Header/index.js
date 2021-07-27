@@ -5,8 +5,8 @@ import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
@@ -15,18 +15,18 @@ function Header(props) {
 
   let history = useHistory();
 
-  const postStackHandler = (string) => {
+  const postStackHandler = string => {
     return axios
       .get(`${END_POINT}`, {
         params: { stack: string },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch((err) => alert('실패'));
+      .catch(err => alert('실패'));
   };
 
   useEffect(() => {
@@ -55,19 +55,29 @@ function Header(props) {
   });
 
   function handleLogout() {
+    axios.post(
+      `${END_POINT}/signout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
     // window.location.reload();
     // history.go(0);
     setIsLogin(false);
 
-    return axios
-      .post(`${END_POINT}/signout`, {
+    return axios.post(
+      `${END_POINT}/signout`,
+      {},
+      {
         withCredentials: true,
-      })
-      // .catch((err) => {
-      //   alert('실패');
-      // });
+      }
+    );
+    // .catch((err) => {
+    //   alert('실패');
+    // });
   }
 
   function goProfilepage() {

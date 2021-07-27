@@ -23,9 +23,10 @@ export function addFileHandler(selectThumbnail, setProject_thumbnail) {
 }
 
 export const convertURLtoFile = async url => {
-  const data = await url.blob();
+  const response = await fetch(url);
+  const data = response.blob();
   const jpg = url.split('.').pop();
   const filename = url.split('/').pop();
   const metadata = { type: `image/${jpg}` };
-  return new File([data], filename, metadata);
+  return URL.createObjectURL(new File([data], filename, metadata));
 };
