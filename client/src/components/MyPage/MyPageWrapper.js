@@ -6,6 +6,7 @@ import { scrollTo } from '../../utils/etc';
 import { useHistory } from 'react-router-dom';
 import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
+import { hash } from 'bcryptjs';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -22,7 +23,7 @@ function MyPageWrapper({ hasUserId }) {
   const [pw_confirm, setPw_confirm] = useState(false);
   const [isSecond, setIsSecond] = useState(false); //이미지 업로드 함수를 변경하기위한 state
   const [user_email, setUser_email] = useState(''); //필수
-  const [user_password, setUser_password] = useState(''); //필수
+  const [user_password, setUser_password] = useState(null); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수 
   const [hashedPassword, setHashedPassword] = useState('');  // 하은 변경
@@ -36,7 +37,6 @@ function MyPageWrapper({ hasUserId }) {
         })
         .then(res => {
           setUser_email(res.data.data.user_email);
-          setUser_password(res.data.data.user_password);
           setHashedPassword(res.data.data.user_password);
           setUser_image(res.data.data.user_photo);
           setUser_info({
@@ -62,8 +62,7 @@ function MyPageWrapper({ hasUserId }) {
   }, [user_email, user_password, password_confirm]);
 
   const debouncePasswordValidation = debounce(() => {
-    console.log("called debounce");
-    if (user_password !== hashedPassword) { // 유저가 비밀번호를 변경할 경우
+    if (user_password) { // 유저가 비밀번호를 변경할 경우
       if (checkPassword(user_password)) {
         setPw_isValid(true);
       } else {
@@ -75,11 +74,11 @@ function MyPageWrapper({ hasUserId }) {
         setPw_confirm(false);
       }
     } else {
-      if checkHashedPassword(password_confirm, hashedPassword) {
+      if (checkHashedPassword(password_confirm, hashedPassword)) {
         setPw_isValid(true);
         setPw_confirm(true);
       } else {
-        setPw_isValid(false);
+        setPw_isValid(true);
         setPw_confirm(false);
       }
     }

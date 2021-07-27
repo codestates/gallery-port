@@ -1,12 +1,13 @@
 // 하은 변경
 const bcrypt = require('bcryptjs');
 
-export async function checkHashedPassword(password, originalPassword) {
-  return await bcrypt.compareSync(password, originalPassword);
+export function checkHashedPassword(password, originalPassword) {
+  const result = bcrypt.compareSync(password, originalPassword);
+  return result;
 }
 
 export function checkPassword(password) {
-  if (!/^[a-zA-Z0-9]{8,20}$/.test(password)) {
+  if (!/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/.test(password)) {
     // alert('비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.');
     return false;
   }

@@ -1,4 +1,5 @@
 const { User } = require('../models/index')
+const bcrypt = require('bcryptjs');
 const { verifyAccessToken } = require('./tokens/tokenFunctions')
 require('dotenv').config()
 
@@ -45,7 +46,7 @@ module.exports = {
                 return res.status(404).json({ "message": "Invalid user" })
             }
 
-            const {user_password} = req.body; 
+            const user_password = await bcrypt.hashSync(req.body.user_password, 10);
 
             const user_info = JSON.parse(req.body.user_info)
             const updateData = { user_password, ...user_info}
