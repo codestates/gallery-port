@@ -1,4 +1,5 @@
 const fs = require('fs')
+const bcrypt = require('bcryptjs');
 const { User } = require('../models/index')
 const { generateAccessToken, 
         generateRefreshToken, 
@@ -11,7 +12,7 @@ module.exports = {
 
     createNewUser : async (req, res) => {   
 
-        const {user_email, user_password} = req.body;
+        const {user_email} = req.body;
         const user_info = JSON.parse(req.body.user_info)
 
         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -20,8 +21,11 @@ module.exports = {
         }
 
         try {
-            let data = await User.create({user_email, user_password, ...user_info})
             
+            // 비밀번호 해시 
+            const hashedPassword = await bcrypt.hashSync(req.body.user_password, 10);
+            let data = await User.create({user_email, user_password: hashedPassword, ...user_info})
+
             if (req.file) {
                 const oldPath = __dirname + `/../${req.file.path}`;
                 const newFile = `profile_${data.id}.` + req.file.mimetype.split('/')[1];
