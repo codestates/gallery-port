@@ -6,8 +6,8 @@ import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const END_POINT = 'https://localhost:80';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://localhost:80';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
