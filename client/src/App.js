@@ -9,6 +9,7 @@ import Mypage from './pages/Mypage';
 import Profile from './pages/Profile';
 import Project from './pages/Project';
 import Upload from './pages/Upload';
+import UploadEdit from './pages/UploadEdit';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
@@ -40,7 +41,7 @@ function App() {
     getAllData();
   }, []);
 
-  const loginHandler = (userId) => {
+  const loginHandler = userId => {
     setHasUserId(userId);
   };
 
@@ -93,6 +94,9 @@ function App() {
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
             />
+          </Route>
+          <Route path="/uploadedit">
+            <UploadEdit logoutHandler={logoutHandler} hasUserId={hasUserId} />
           </Route>
           <Route path="/upload">
             <Upload
