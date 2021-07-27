@@ -10,6 +10,7 @@ const {
 
 module.exports = {
   signin: async (req, res) => {
+    console.log(req.body)
     const { user_email, user_password } = req.body;
 
     const data = await User.findOne({
@@ -23,10 +24,8 @@ module.exports = {
     }
 
     // 해시한 비밀번호 비교
-    const isValidPassword = await bcrypt.compare(
-      user_password,
-      data.user_password
-    );
+    const isValidPassword = bcrypt.compareSync(user_password, data.user_password);
+
     if (!isValidPassword) {
       return res.status(401).send({ message: 'Invalid password' });
     }
