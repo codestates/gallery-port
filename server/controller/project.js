@@ -33,7 +33,7 @@ module.exports = {
                 }
             }
             
-            // StackForProject 테이블에서 project 의 stack 정보 받아서 projectData 에 추가
+            // StackForProject 테이블에서 project 의 stack 정보 받아서 projectData 에 추가.
             const stackData = await StackForProject.findAll({ where: 
                 {
                     project_id: projectId  
