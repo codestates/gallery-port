@@ -2,35 +2,28 @@ import React from 'react';
 import './ProjectList.css';
 import { useHistory } from 'react-router-dom';
 
-function ProjectList(project) {
+function ProjectList({ project, setProjectId }) {
   let history = useHistory();
 
   function handleClick(e) {
-    return history.push('/project');
+    if (project.id === '/upload') {
+      return history.push('/upload');
+    }
+
+    const projects = project.id;
+    setProjectId(projects);
+    return history.push(`/project/${project.id}`);
   }
 
-  function handleUpload(e) {
-    return history.push('/upload');
-  }
-
-  return project.project.project_new ? (
-    <div className="list" onClick={() => handleUpload()}>
-      <div onClick={handleClick} style={{ cursor: 'pointer' }}>
-        <img
-          src={project.project.project_thumbnail}
-          alt={project.project.project_name}
-        ></img>
-        <p className="listName">{project.project.project_name}</p>
-      </div>
-    </div>
-  ) : (
+  return (
     <div className="list">
-      <div onClick={handleClick} style={{ cursor: 'pointer' }}>
+      <div onClick={() => handleClick()} style={{ cursor: 'pointer' }}>
         <img
-          src={project.project.project_thumbnail}
-          alt={project.project.project_name}
+          className="listimg"
+          src={project.project_thumbnail}
+          alt={project.project_name}
         ></img>
-        <p className="listName">{project.project.project_name}</p>
+        <p className="listName">{project.project_name}</p>
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   const [signInInfo, setSignInInfo] = useState({
@@ -18,7 +19,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
     setSignInInfo(copied);
   }
 
-  // ! axios 연결됐을 때 사용
   function postHandler() {
     return axios
       .post(`${END_POINT}/signin`, signInInfo, {

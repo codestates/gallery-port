@@ -3,10 +3,14 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import UploadWrapper from '../components/Upload/UploadWrapper';
 
-function Upload({ logoutHandler, hasUserId }) {
+function Upload({ logoutHandler, hasUserId, setStackProjectData }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header logoutHandler={logoutHandler} hasUserId={hasUserId} />
+      <Header
+        logoutHandler={logoutHandler}
+        hasUserId={hasUserId}
+        setStackProjectData={setStackProjectData}
+      />
       <UploadWrapper />
       <Footer />
     </div>

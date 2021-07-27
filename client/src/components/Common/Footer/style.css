@@ -5,6 +5,23 @@
   list-style-type: none;
 }
 
+/* a-style */
+
+.okteam a {
+  color: #8c8d96;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0 2px;
+}
+.okteam a:hover,
+.okteam a:active {
+  text-decoration: none;
+  color: #8c8d96;
+  background-color: #f7f8fa;
+  cursor: pointer;
+}
+
 .footerBox {
   width: 100vw;
   height: 188px;

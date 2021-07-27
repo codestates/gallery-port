@@ -10,6 +10,11 @@
   margin-bottom: 50px;
 }
 
+.listimg {
+  width: 170px;
+  height: 280px;
+}
+
 .listName {
   padding-top: 10px;
   font-family: 'NotoSansKR-B', sans-serif;

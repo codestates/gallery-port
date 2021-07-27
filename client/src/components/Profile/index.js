@@ -2,44 +2,55 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import setting from '../../images/setting.svg';
 import newProjectClick from '../../images/new_project.svg';
-import mockProfile from './mockProfile';
 import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://localhost:80';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
-function ProfileWrapper({ hasUserId }) {
-  const [profile, setProfile] = useState(mockProfile);
+function ProfileWrapper({ hasUserId, setProjectId }) {
+  const [profile, setProfile] = useState('');
 
-  // ! axios 연결됐을 때 사용
+  // useEffect(() => {
+  //   const getProfileData = async () => {
+  //     const profileDate = await axios.get(`${END_POINT}/profile/${hasUserId}`, {
+  //       withCredentials: true,
+  //     });
+
+  //     setProfile(profileDate.data.data);
+  //   };
+  //   getProfileData();
+  // }, []);
+
   useEffect(() => {
     const getProfileData = async () => {
-      await axios
-        .get(`${END_POINT}/profile/${hasUserId}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          setProfile(res.data.data);
-        })
-        .catch((err) => {
-          alert('실패');
-        });
+      const profileDate = await axios.get(`${END_POINT}/profile/${hasUserId}`, {
+        withCredentials: true,
+      });
+      console.log('받아오나?', profileDate.data.data);
+      if (profileDate.data.data.user_photo === null) {
+        profileDate.data.data.user_photo =
+          'https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg';
+      }
+
+      setProfile(profileDate.data.data);
     };
     getProfileData();
   }, []);
 
   let history = useHistory();
 
-  if (hasUserId !== undefined && !profile.projects[0].project_new === true) {
-    const abcsd = {
+  console.log('profile확인', profile);
+
+  if (hasUserId !== undefined && !profile.projects.length) {
+    const newproject = {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
-      project_new: true,
+      id: '/upload',
     };
 
-    profile.projects.unshift(abcsd);
+    profile.projects.unshift(newproject);
     setProfile(profile);
   }
 
@@ -92,7 +103,11 @@ function ProfileWrapper({ hasUserId }) {
             <div>
               {profile.projects.map((project) => {
                 return (
-                  <ProjectList key={project.thumbnail} project={project} />
+                  <ProjectList
+                    key={project.thumbnail}
+                    project={project}
+                    setProjectId={setProjectId}
+                  />
                 );
               })}
             </div>
