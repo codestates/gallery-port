@@ -12,10 +12,15 @@ function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [stringColor, setStringColor] = useState(false);
 
   let history = useHistory();
 
-  const postStackHandler = string => {
+  const postStackHandler = (string) => {
+    setStringColor('on')
+    const stackString = string
+    props.setStackString(stackString)
+
     return axios
       .get(`${END_POINT}`, {
         params: { stack: string },
@@ -29,11 +34,15 @@ function Header(props) {
       .catch(err => alert('실패'));
   };
 
+
+
   useEffect(() => {
     if (props.hasUserId !== undefined) {
       setIsLogin(true);
+    } else {
+      setIsLogin(false)
     }
-  }, []);
+  }, [isLogin]);
 
   function handleScroll() {
     if (ScrollY > window.innerHeight) {
@@ -55,29 +64,16 @@ function Header(props) {
   });
 
   function handleLogout() {
-    axios.post(
-      `${END_POINT}/signout`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    setIsLogin(false);
     alert('로그아웃 되었습니다!');
     props.logoutHandler();
-    // window.location.reload();
-    // history.go(0);
-    setIsLogin(false);
 
     return axios.post(
       `${END_POINT}/signout`,
       {},
       {
         withCredentials: true,
-      }
-    );
-    // .catch((err) => {
-    //   alert('실패');
-    // });
+      })
   }
 
   function goProfilepage() {
@@ -106,16 +102,16 @@ function Header(props) {
             </Link>
             <nav>
               <ul>
-                <li onClick={() => postStackHandler()}>ALL</li>
-                <li onClick={() => postStackHandler('javascript')}>
+                <li className="stack" onClick={() => postStackHandler('')}>ALL</li>
+                <li className="stack" onClick={() => postStackHandler('javascript')}>
                   JavaScript
                 </li>
-                <li onClick={() => postStackHandler('sql')}>SQL</li>
-                <li onClick={() => postStackHandler('python')}>Python</li>
-                <li onClick={() => postStackHandler('java')}>Java</li>
-                <li onClick={() => postStackHandler('c#')}>C#</li>
-                <li onClick={() => postStackHandler('php')}>PHP</li>
-                <li onClick={() => postStackHandler('etc')}>Etc</li>
+                <li className="stack" onClick={() => postStackHandler('sql')}>SQL</li>
+                <li className="stack" onClick={() => postStackHandler('python')}>Python</li>
+                <li className="stack" onClick={() => postStackHandler('java')}>Java</li>
+                <li className="stack" onClick={() => postStackHandler('c#')}>C#</li>
+                <li className="stack" onClick={() => postStackHandler('php')}>PHP</li>
+                <li className="stack" onClick={() => postStackHandler('etc')}>Etc</li>
               </ul>
             </nav>
             <div className="headerBtn">
@@ -131,7 +127,7 @@ function Header(props) {
                   프로필
                 </button>
               </Link>
-              {props.hasUserId !== undefined ? (
+              {props.hasUserId ? (
                 <button
                   className="headerSigninBtn"
                   onClick={() => handleLogout()}

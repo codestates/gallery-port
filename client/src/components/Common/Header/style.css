@@ -60,6 +60,18 @@
   cursor: pointer;
 }
 
+.headerInner nav li.active{
+  color:#3d5afe;
+}
+
+.headerInner nav li:hover{
+  color:#3d5afe;
+}
+
+.headerInner .on{
+  color:#3d5afe;
+}
+
 .headerBtn {
   display: inline-block;
   position: absolute;

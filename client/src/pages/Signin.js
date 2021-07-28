@@ -8,10 +8,11 @@ function Signin({
   setHasUserId,
   hasUserId,
   setStackProjectData,
+  setStackString,
 }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header setStackProjectData={setStackProjectData} />
+      <Header setStackProjectData={setStackProjectData} setStackString={setStackString}/>
       <SignInWrapper
         loginHandler={loginHandler}
         setHasUserId={setHasUserId}

@@ -20,6 +20,7 @@ function App() {
   const [hasUserId, setHasUserId] = useState(undefined);
   const [projectId, setProjectId] = useState('');
   const [stackProjectData, setStackProjectData] = useState('');
+  const [stackString,setStackString] = useState('')
 
   useEffect(() => {
     if (hasUserId !== '') {
@@ -29,15 +30,33 @@ function App() {
   });
 
   useEffect(() => {
-    const getAllData = () => {
-      return axios.get(`${END_POINT}`, { withCredentials: true }).then(res => {
-        const projects = res.data.data.projects;
-        setStackProjectData(projects);
-      });
-    };
-
-    getAllData();
+    if (stackString !== '') {
+      const getStackData = (stackString) => {
+        return  axios
+        .get(`${END_POINT}`, {
+          params: { stack: stackString },
+          withCredentials: true,
+        })
+        .then((res) => {
+          const projects = res.data.data.projects;
+          setStackProjectData(projects);
+        });
+      };
+      getStackData(stackString);
+    } else {
+      const getAllData = () => {
+        return axios
+          .get(`${END_POINT}`, { withCredentials: true })
+          .then((res) => {
+            const projects = res.data.data.projects;
+            setStackProjectData(projects);
+          });
+      };
+      getAllData();
+    }
+   
   }, []);
+
 
   useEffect(() => {
     const storageSavedUserId =
@@ -52,6 +71,7 @@ function App() {
   const logoutHandler = () => {
     setHasUserId(undefined);
     window.localStorage.removeItem('userId');
+    setHasUserId('')
   };
 
   return (
@@ -65,6 +85,8 @@ function App() {
               setProjectId={setProjectId}
               setStackProjectData={setStackProjectData}
               stackProjectData={stackProjectData}
+              setStackString={setStackString}
+              stackString={stackString}
             />
           </Route>
           <Route path="/signin">
@@ -73,9 +95,10 @@ function App() {
               setHasUserId={setHasUserId}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
             />
           </Route>
-          <Route path="/signup" setStackProjectData={setStackProjectData}>
+          <Route path="/signup" setStackProjectData={setStackProjectData} setStackString={setStackString}>
             <Signup />
           </Route>
           <Route path="/mypage">
@@ -83,6 +106,7 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
             />
           </Route>
           <Route path="/profile">
@@ -91,6 +115,7 @@ function App() {
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
               setProjectId={setProjectId}
+              setStackString={setStackString}
             />
           </Route>
           <Route path="/project">
@@ -98,21 +123,19 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
               projectId={projectId}
             />
           </Route>
           <Route path="/uploadedit">
-            <UploadEdit
-              logoutHandler={logoutHandler}
-              hasUserId={hasUserId}
-              projectId={projectId}
-            />
+            <UploadEdit logoutHandler={logoutHandler} hasUserId={hasUserId} projectId={projectId} setStackString={setStackString} />
           </Route>
           <Route path="/upload">
             <Upload
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
             />
           </Route>
           <Route path="/loading">
@@ -120,6 +143,7 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
             />
           </Route>
           <Route path="/error">
@@ -127,6 +151,7 @@ function App() {
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
             />
           </Route>
         </Switch>
