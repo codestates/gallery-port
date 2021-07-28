@@ -33,6 +33,8 @@ function MyPageWrapper({ hasUserId }) {
   const [hashedPassword, setHashedPassword] = useState('');
   let history = useHistory();
 
+  let tempId = hasUserId || window.localStorage.getItem('userId');
+
   useEffect(() => {
     if (!hasUserId) {
       history.push('/error');
@@ -40,12 +42,12 @@ function MyPageWrapper({ hasUserId }) {
 
     const getUserData = () => {
       axios
-        .get(`${END_POINT}/mypage/${hasUserId}`, {
+        .get(`${END_POINT}/mypage/${tempId}`, {
           withCredentials: true,
         })
         .then(res => {
-          const file = convertURLtoFile(res.data.data.user_photo);
-          setUser_image(file);
+          // const file = convertURLtoFile(res.data.data.user_photo);
+          setUser_image('');
           setUser_email(res.data.data.user_email);
           setHashedPassword(res.data.data.user_password);
           setUser_info({
@@ -106,7 +108,7 @@ function MyPageWrapper({ hasUserId }) {
       console.log(el);
     }
     return axios
-      .patch(`${END_POINT}/mypage/${hasUserId}`, formData, {
+      .patch(`${END_POINT}/mypage/${tempId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

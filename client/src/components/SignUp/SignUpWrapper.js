@@ -64,11 +64,11 @@ function SignUpWrapper() {
         withCredentials: true,
       })
       .then(res => {
-        alert('성공');
         history.go(-1);
+        alert('회원가입에 성공하였습니다.');
       })
       .catch(err => {
-        alert('실패');
+        alert('회원가입에 실패하였습니다.');
       });
   }
 

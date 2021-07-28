@@ -22,7 +22,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const tempUserId = hasUserId || window.localStorage.getItem('userId')
+    const tempUserId = hasUserId || window.localStorage.getItem('userId');
 
     if (!hasUserId) {
       history.push('/error');
