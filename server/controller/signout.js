@@ -1,9 +1,18 @@
 module.exports = {
 
     endSession: (req, res) => {
-        res.cookie('accessToken', '', {maxAge: 0})
-        res.cookie('refreshToken', '', {maxAge: 0})
-        return res.sendStatus(200)
+        res.clearCookie('accessToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        })
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        })
+        
+        return res.status(200).send('tough cookie')
     }
 
 }

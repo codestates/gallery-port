@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
@@ -14,8 +13,8 @@ import UploadEdit from './pages/UploadEdit';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function App() {
   const [hasUserId, setHasUserId] = useState(undefined);
@@ -60,7 +59,8 @@ function App() {
 
 
   useEffect(() => {
-    const storageSavedUserId = window.localStorage.getItem('userId') || undefined;
+    const storageSavedUserId =
+      window.localStorage.getItem('userId') || undefined;
     setHasUserId(storageSavedUserId);
   });
 
@@ -69,6 +69,7 @@ function App() {
   };
 
   const logoutHandler = () => {
+    setHasUserId(undefined);
     window.localStorage.removeItem('userId');
     setHasUserId('')
   };
@@ -123,6 +124,7 @@ function App() {
               hasUserId={hasUserId}
               setStackProjectData={setStackProjectData}
               setStackString={setStackString}
+              projectId={projectId}
             />
           </Route>
           <Route path="/uploadedit">

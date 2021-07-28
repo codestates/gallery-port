@@ -17,8 +17,6 @@ function MyPageInfo({
   email_isValid,
   pw_isValid,
   pw_confirm,
-  isSecond,
-  setIsSecond,
 }) {
   const textInputData = [
     ['유저 이름', 'user_name', '팀원', 72, 40, 'text'],
@@ -43,7 +41,7 @@ function MyPageInfo({
       'email',
       email_isValid,
       false,
-      null
+      null,
     ],
     [
       '비밀번호',
@@ -54,7 +52,7 @@ function MyPageInfo({
       'password',
       pw_isValid,
       true,
-      'defaultpassword'
+      'defaultpassword',
     ],
     [
       '비밀번호 확인',
@@ -65,7 +63,7 @@ function MyPageInfo({
       'password',
       pw_confirm,
       true,
-      null
+      null,
     ],
   ];
   function onChangeHandler(e, property) {
@@ -99,8 +97,6 @@ function MyPageInfo({
         stateFunc={setUser_image}
         condition_subject={'등록조건'}
         condition_desc={'170x280(px), 25KB 이하, jpg, jpeg, png만 가능'}
-        isSecond={isSecond}
-        setIsSecond={setIsSecond}
       />
       <div className="textInputContainer">
         {textInputData.map((el, idx) => {

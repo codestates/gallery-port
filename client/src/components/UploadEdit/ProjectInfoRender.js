@@ -8,18 +8,9 @@ function Item(props) {
     <Paper>
       <img
         src={URL.createObjectURL(props.curFile)}
-        style={{ width: '40vw', height: '35vh' }}
+        style={{ width: '547px', height: '237px', top: '24px' }}
       />
-      <p
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '20px',
-        }}
-      >
-        {props.descriptions[props.idx].value}
-      </p>
+      <p className="carousel_desc">{props.descriptions[props.idx].value}</p>
     </Paper>
   );
 }
@@ -31,10 +22,14 @@ function ProjectInfoRender({
   modalOn,
   setModalOn,
   patchHandler,
+  project_name,
 }) {
   const project_info_array = objectToArray(project_info);
   return (
     <div className="project_info_render_container">
+      <div className="modal_project_name_wrapper">
+        <div className="modal_project_name">{project_name}</div>
+      </div>
       <div className="carousel_wrapper">
         <Carousel animation="slide">
           {curFiles.map((curFile, idx) => {

@@ -10,8 +10,6 @@ function ImageUploaderOne({
   stateFunc,
   condition_subject,
   condition_desc,
-  isSecond,
-  setIsSecond,
 }) {
   const inputRef = useRef(null);
   return (
@@ -22,7 +20,6 @@ function ImageUploaderOne({
         style={{ display: 'none' }}
         onChange={e => {
           addFileHandler(inputRef, stateFunc);
-          setIsSecond(true);
         }}
       />
       <div className="subject_wrapper">
@@ -36,9 +33,7 @@ function ImageUploaderOne({
               className="img_preview"
               onClick={e => inputBtnClick(e, inputRef)}
               style={{
-                backgroundImage: isSecond
-                  ? `url('${URL.createObjectURL(stateName)}')`
-                  : `url(${stateName})`,
+                backgroundImage: `url('${URL.createObjectURL(stateName)}')`,
                 backgroundSize: 'cover',
               }}
             ></div>

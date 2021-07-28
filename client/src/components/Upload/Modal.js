@@ -8,6 +8,7 @@ function Modal({
   curFiles,
   postHandler,
   project_info,
+  project_name,
 }) {
   return (
     <>
@@ -21,6 +22,7 @@ function Modal({
               modalOn={modalOn}
               setModalOn={setModalOn}
               postHandler={postHandler}
+              project_name={project_name}
             />
           </div>
         </div>

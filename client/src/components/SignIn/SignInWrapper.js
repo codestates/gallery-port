@@ -4,9 +4,9 @@ import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
-// 
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
+
 function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   const [signInInfo, setSignInInfo] = useState({
     user_email: '',
@@ -24,17 +24,21 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
-      .then(res => res.data.id)
-      // .then(data => {
-      //   setHasUserId(data);
-      //   return data;
-      // })
+      .then(res => {
+        console.log(res);
+        return res.data.id;
+      })
+      .then(data => {
+        setHasUserId(data);
+        return data;
+      })
       .then(userId => {
         loginHandler(userId);
         window.localStorage.setItem('userId', userId);
         window.history.go(-1);
       })
       .catch(err => {
+        console.log(err);
         alert('실패');
       });
   }

@@ -7,8 +7,8 @@ import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -49,22 +49,23 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           withCredentials: true,
         })
         .then(res => {
+          console.log(res);
           const urlArr = [];
           const descArr = [];
 
-          res.data.data.projectdata.project_content.forEach(el => {
+          res.data.projectdata.project_content.forEach(el => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
 
-          const fileArr = urlArr.map(el => {
-            return convertURLtoFile(el);
-          });
+          const fileArr = [];
+
+          for (let el of urlArr) {
+            fileArr.push(convertURLtoFile(el));
+          }
 
           const isChecked = stackArray.map(el => {
-            if (
-              res.data.data.projectdata.project_stack.includes(el.toLowerCase())
-            ) {
+            if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
               return true;
             } else {
               return false;
@@ -72,24 +73,22 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           });
           setCurFiles(fileArr);
           setProject_thumbnail(
-            convertURLtoFile(res.data.data.projectdata.project_thumbnail)
+            convertURLtoFile(res.data.projectdata.project_thumbnail)
           );
           setFirstStack(isChecked);
           setFirstDesc(descArr);
-          setProject_name(res.data.data.projectdata.project_name);
+          setProject_name(res.data.projectdata.project_name);
           setProject_info({
-            project_start: res.data.data.projectdata.project_start,
-            project_end: res.data.data.projectdata.project_end,
-            project_team: res.data.data.projectdata.project_team,
-            project_introduction:
-              res.data.data.projectdata.project_introduction,
-            project_feature: res.data.data.projectdata.project_feature,
-            project_github: res.data.data.projectdata.project_github,
-            project_front_stack: res.data.data.projectdata.project_front_stack,
-            project_back_stack: res.data.data.projectdata.project_back_stack,
-            project_deploy_stack:
-              res.data.data.projectdata.project_deploy_stack,
-            project_url: res.data.data.projectdata.project_url,
+            project_start: res.data.projectdata.project_start,
+            project_end: res.data.projectdata.project_end,
+            project_team: res.data.projectdata.project_team,
+            project_introduction: res.data.projectdata.project_introduction,
+            project_feature: res.data.projectdata.project_feature,
+            project_github: res.data.projectdata.project_github,
+            project_front_stack: res.data.projectdata.project_front_stack,
+            project_back_stack: res.data.projectdata.project_back_stack,
+            project_deploy_stack: res.data.projectdata.project_deploy_stack,
+            project_url: res.data.projectdata.project_url,
           });
         })
         .catch(err => {
@@ -200,6 +199,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             curFiles={curFiles}
             patchHandler={patchHandler}
             project_info={project_info}
+            project_name={project_name}
           />
         </div>
       </div>

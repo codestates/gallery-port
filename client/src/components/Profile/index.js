@@ -6,8 +6,8 @@ import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId}) {
   const [profile, setProfile] = useState('');
@@ -19,9 +19,9 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
 
-
   useEffect(() => {
-     axios.get(`${END_POINT}/profile/${hasUserId}`, {
+    axios
+      .get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
       })
       .then((res)=>{
@@ -65,10 +65,11 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
     setProfile(profile);
   }
 
-   if(hasUserId !== undefined && userPhoto == undefined){
-    setUserPhoto('https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg')
-   }
-
+  if (hasUserId !== undefined && userPhoto == undefined) {
+    setUserPhoto(
+      'https://user-images.githubusercontent.com/81145387/126490223-f3914368-22d1-4985-90dc-75cdea66b5dd.jpg'
+    );
+  }
 
   function handleGithubLlik(userGithub) {
     window.open(userGithub, '_blank');
@@ -104,9 +105,7 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
         </div>
         <div className="profileUserContent email">{userEmail}</div>
         {userGithub ? (
-          <button onClick={() => handleGithubLlik(userGithub)}>
-            깃허브
-          </button>
+          <button onClick={() => handleGithubLlik(userGithub)}>깃허브</button>
         ) : (
           <div></div>
         )}

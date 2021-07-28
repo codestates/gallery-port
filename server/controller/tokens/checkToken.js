@@ -11,6 +11,7 @@ const {
 
 module.exports = {
 	checkToken: async (req, res, next) => {
+
 		const accessTokenData = verifyAccessToken(req);
 		const refreshTokenData = verifyRefreshToken(req);
 
