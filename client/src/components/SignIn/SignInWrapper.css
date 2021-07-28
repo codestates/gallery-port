@@ -156,6 +156,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'NotoSansKR-L', sans-serif;
 }
 .signupBtn {
   cursor: pointer;

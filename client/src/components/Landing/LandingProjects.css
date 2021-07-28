@@ -17,3 +17,7 @@
   margin: 0 auto;
   padding-left: 20px;
 }
+
+.projectList .noProject {
+  font-family: 'NotoSansKR-M', sans-serif;
+}

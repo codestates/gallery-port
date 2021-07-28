@@ -80,10 +80,16 @@
   display: inline-block;
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translate(0%, -50%);
+  top: 0;
+  margin-top: 20px;
+  /* transform: translate(0%, -50%); */
   font-family: 'NotoSansKR-B', sans-serif;
   font-size: 24px;
+  /* border: 1px solid red; */
+  width: 236px;
+  height: 40px;
+  /* width: 100vw; */
+  /* height: 100vh; */
 }
 
 .headerBtn button {
@@ -91,6 +97,7 @@
   height: 40px;
   border-radius: 4px;
   cursor: pointer;
+  /* border: 1px solid red; */
 }
 
 .headerProfileBtn {
@@ -101,6 +108,10 @@
   font-family: 'NotoSansKR-B', sans-serif;
   font-size: 16px;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: 1px solid red; */
 }
 
 .headerSigninBtn {
@@ -109,4 +120,7 @@
   font-family: 'NotoSansKR-B', sans-serif;
   font-size: 16px;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

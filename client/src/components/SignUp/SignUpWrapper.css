@@ -502,4 +502,5 @@ img.preview {
   order: 0;
   flex-grow: 0;
   margin: 8px 0px;
+  /* border: 1px solid red; */
 }

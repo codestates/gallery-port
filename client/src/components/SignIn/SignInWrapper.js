@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
+import AlertModal from '../../utils/alert-modal';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -12,6 +13,12 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
     user_email: '',
     user_password: '',
   });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [signinSucc, setSigninSucc] = useState(true);
+
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
 
   function onChangeHandler(e, property) {
     const copied = Object.assign({}, signInInfo);
@@ -24,24 +31,30 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         console.log(res);
         return res.data.id;
       })
-      .then(data => {
+      .then((data) => {
         setHasUserId(data);
         return data;
       })
-      .then(userId => {
+      .then((userId) => {
         loginHandler(userId);
         window.localStorage.setItem('userId', userId);
         window.history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
+        setModalOpen(true);
         console.log(err);
-        alert('실패');
+        setSigninSucc(false);
+        // alert('실패');
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const requiredTextInputData = [
     ['email', '이메일 입력', 'user_email', '30'],
@@ -64,6 +77,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
                 />
               );
             })}
+            {/* <div className="signinBtn" onClick={postHandler}> */}
             <div className="signinBtn" onClick={postHandler}>
               로그인
             </div>
@@ -76,6 +90,12 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
           </div>
         </div>
       </div>
+      <AlertModal
+        open={modalOpen}
+        close={closeModal}
+        alertString="로그인 실패하셨습니다."
+        alertBtn="확인"
+      />
     </div>
   );
 }

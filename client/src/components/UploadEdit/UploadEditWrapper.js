@@ -54,7 +54,8 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
+          // console.log(res);
           // const urlArr = [];
           // const descArr = [];
 
@@ -78,7 +79,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           //   fileArr.push(data);
           // }
 
-          const isChecked = stackArray.map(el => {
+          const isChecked = stackArray.map((el) => {
             if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
               return true;
             } else {
@@ -104,9 +105,10 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_url: res.data.projectdata.project_url,
           });
         })
-        .catch(err => {
-          alert('실패');
-        });
+        .then((_) => history.go(-1));
+      // .catch((err) => {
+      //   alert('실패');
+      // });
     };
     getProjectData();
   }, [hasUserId]);
@@ -124,7 +126,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -153,11 +155,11 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }
