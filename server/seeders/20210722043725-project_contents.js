@@ -5,12 +5,6 @@ module.exports = {
 
     await queryInterface.bulkInsert('project_contents', [
       {
-        "id": 22,
-        "content_text": "이미지에 관련된 설명입니다.",
-        "content_image": "https://user-images.githubusercontent.com/81145387/126496101-1bc89289-fc66-422b-9450-c1b7eb6352c9.jpg",
-        "project_id": 18
-      },
-      {
         "id": 1,
         "content_text": "이미지에 관련된 설명입니다.",
         "content_image": "https://user-images.githubusercontent.com/81145387/126496115-53b6fc44-7d03-47de-b52f-750efd5101d9.jpg",
@@ -135,6 +129,12 @@ module.exports = {
         "content_text": "이미지에 관련된 설명입니다.",
         "content_image": "https://user-images.githubusercontent.com/81145387/126496386-ff9d3618-f532-4c7e-8a35-31dc2c6e1861.jpg",
         "project_id": 17
+      },
+      {
+        "id": 22,
+        "content_text": "이미지에 관련된 설명입니다.",
+        "content_image": "https://user-images.githubusercontent.com/81145387/126496101-1bc89289-fc66-422b-9450-c1b7eb6352c9.jpg",
+        "project_id": 18
       }
     ])
 
