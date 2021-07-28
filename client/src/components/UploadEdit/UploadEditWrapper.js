@@ -7,8 +7,8 @@ import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -31,6 +31,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
   const [modalOn, setModalOn] = useState(false);
+  let history = useHistory();
 
   const stackArray = [
     'JavaScript',
@@ -43,6 +44,10 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   ];
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${projectId}`, {
@@ -96,7 +101,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         });
     };
     getProjectData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
@@ -117,8 +122,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       );
     }
   }
-
-  let history = useHistory();
 
   function patchHandler() {
     const formData = new FormData();

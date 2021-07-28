@@ -6,8 +6,8 @@ import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
 import '../Upload/UploadWrapper.css';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProjectWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -81,7 +81,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
-          window.location.href = "https://gallery-port.com/profile";
+          window.location.href = 'https://gallery-port.com/profile';
         }
       });
   }

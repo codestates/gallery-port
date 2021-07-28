@@ -13,8 +13,8 @@ import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
 import { hash } from 'bcryptjs';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({
@@ -31,8 +31,13 @@ function MyPageWrapper({ hasUserId }) {
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
   const [hashedPassword, setHashedPassword] = useState('');
+  let history = useHistory();
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getUserData = () => {
       axios
         .get(`${END_POINT}/mypage/${hasUserId}`, {
@@ -54,7 +59,7 @@ function MyPageWrapper({ hasUserId }) {
         });
     };
     getUserData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     if (checkEmail(user_email)) {
@@ -88,8 +93,6 @@ function MyPageWrapper({ hasUserId }) {
       }
     }
   }, 800);
-
-  let history = useHistory();
 
   function patchHandler() {
     const formData = new FormData();

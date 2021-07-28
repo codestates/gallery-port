@@ -5,9 +5,10 @@ import newProjectClick from '../../images/new_project.svg';
 import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../../pages/Loading';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
@@ -18,8 +19,13 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [userIntroduction, setUserIntroduction] = useState('');
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+    setIsLoading(true);
     axios
       .get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
@@ -38,6 +44,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
         setUserName(data5);
         const data6 = res.data.data.user_photo;
         setUserPhoto(data6);
+        setIsLoading(false);
       });
   }, []);
 
@@ -79,7 +86,14 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
     return history.push(`/mypage/${hasUserId}`);
   }
 
-  return (
+  return isLoading ? (
+    <Loading
+      // logoutHandler={logoutHandler}
+      hasUserId={hasUserId}
+      // setStackProjectData={setStackProjectData}
+      // setStackString={setStackString}
+    />
+  ) : (
     <div className="ProfileWrapper">
       <div className="profileUserInfo">
         <div className="photoWraaper">
