@@ -5,21 +5,6 @@ module.exports = {
 
     await queryInterface.bulkInsert('projects', [
       {
-        "id": 18,
-        "project_name": "mygoals",
-        "project_start": "2021-04-01",
-        "project_end": "2021-04-30",
-        "project_introduction": "mygoals 입니다.",
-        "project_feature": "사용자의 취향에 따른 작품 추천과 작품 제작자와 함께 소통할 수 있어요.",
-        "project_url": "https://www.codestates.com/",
-        "project_github": "https://github.com/codestates/gallery-port",
-        "project_front_stack": "React, Axios",
-        "project_back_stack": "Node.js, Express.js, mySQL",
-        "project_deploy_stack": "AWS, EC2, RDS, S3",
-        "project_team": "2명",
-        "project_thumbnail": "https://user-images.githubusercontent.com/81145387/126495247-87847e2b-fa5f-475c-86b2-560b2b917caa.jpg"
-      },
-      {
         "id": 1,
         "project_name": "FindGo",
         "project_start": "2021-04-01",
@@ -273,6 +258,21 @@ module.exports = {
         "project_deploy_stack": "AWS, EC2, RDS, S20",
         "project_team": "vodkamitlime, hyoogu",
         "project_thumbnail": "https://user-images.githubusercontent.com/81145387/126495445-f098ff4d-9700-4581-bf7b-ca72c96f25ed.jpg"
+      },
+      {
+        "id": 18,
+        "project_name": "mygoals",
+        "project_start": "2021-04-01",
+        "project_end": "2021-04-30",
+        "project_introduction": "mygoals 입니다.",
+        "project_feature": "사용자의 취향에 따른 작품 추천과 작품 제작자와 함께 소통할 수 있어요.",
+        "project_url": "https://www.codestates.com/",
+        "project_github": "https://github.com/codestates/gallery-port",
+        "project_front_stack": "React, Axios",
+        "project_back_stack": "Node.js, Express.js, mySQL",
+        "project_deploy_stack": "AWS, EC2, RDS, S3",
+        "project_team": "2명",
+        "project_thumbnail": "https://user-images.githubusercontent.com/81145387/126495247-87847e2b-fa5f-475c-86b2-560b2b917caa.jpg"
       }
     ])
   },

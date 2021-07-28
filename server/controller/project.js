@@ -59,7 +59,7 @@ module.exports = {
 
             return res.status(200).json({
                 "projectdata": {...projectData, project_content, project_stack}, 
-                "userdata": { user_photo: userData.user_photo, user_name: userData.user_name},
+                "userdata": { user_id: userData.id , user_photo: userData.user_photo, user_name: userData.user_name},
                 "message" : "Project successfully found"
             })
         } catch (err) {
@@ -125,6 +125,7 @@ module.exports = {
                 return res.sendStatus(201);
 
                 } catch (err) {
+                    console.log(err)
                     return res.status(500).send(err);
                 }
             },

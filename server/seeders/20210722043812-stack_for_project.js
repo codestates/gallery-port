@@ -4,11 +4,6 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('stack_for_projects', [
       {
-        "id": 18,
-        "stack_id": 1,
-        "project_id": 1
-      },
-      {
         "id": 1,
         "stack_id": 2,
         "project_id": 1
@@ -92,6 +87,11 @@ module.exports = {
         "id": 17,
         "stack_id": 1,
         "project_id": 17
+      },
+      {
+        "id": 18,
+        "stack_id": 1,
+        "project_id": 1
       }
     ])
   },
