@@ -6,7 +6,7 @@ function ProjectList({ project, setProjectId ,hasUserId}) {
   let history = useHistory();
 
   function handleClick(e) {
-    if (project.id === '/upload') {
+    if (project.id === 'upload') {
       return history.push('/upload');
     }
 
