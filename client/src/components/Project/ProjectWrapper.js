@@ -135,7 +135,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
               <div
                 className="project_button"
                 onClick={() => {
-                  project_delete_handler();
+                  projectDeleteHandler();
                 }}
               >
                 삭제

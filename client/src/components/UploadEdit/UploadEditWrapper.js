@@ -31,6 +31,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   const [curFiles, setCurFiles] = useState([]);
   const [descriptions, setDescription] = useState('');
   const [modalOn, setModalOn] = useState(false);
+  let history = useHistory();
 
   const stackArray = [
     'JavaScript',
@@ -43,6 +44,10 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   ];
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${projectId}`, {
@@ -104,7 +109,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         });
     };
     getProjectData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
@@ -125,8 +130,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       );
     }
   }
-
-  let history = useHistory();
 
   function patchHandler() {
     const formData = new FormData();
@@ -153,7 +156,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         withCredentials: true,
       })
       .then(res => {
-        console.log('res', res);
         alert('성공');
         history.go(-1);
       })

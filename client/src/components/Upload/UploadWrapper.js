@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function UploadWrapper() {
+function UploadWrapper({ hasUserId }) {
   const [project_info, setProject_info] = useState({
     project_start: '',
     project_end: '',
@@ -29,6 +29,7 @@ function UploadWrapper() {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
   const [modalOn, setModalOn] = useState(false);
+  let history = useHistory();
 
   const stackArray = [
     'JavaScript',
@@ -41,9 +42,13 @@ function UploadWrapper() {
   ];
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const descElemArray = document.querySelectorAll('.descriptionInput');
     setDescription(descElemArray);
-  }, [curFiles, project_info, project_stack]);
+  }, [curFiles, project_info, project_stack, hasUserId]);
 
   function project_stackHandler(checked, itemName) {
     if (checked && !project_stack.includes(stackArray[itemName])) {
@@ -53,14 +58,12 @@ function UploadWrapper() {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
     }
   }
-
-  let history = useHistory();
 
   function postHandler() {
     const formData = new FormData();
@@ -88,11 +91,11 @@ function UploadWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

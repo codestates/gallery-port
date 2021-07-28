@@ -63,11 +63,11 @@ function SignUpWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

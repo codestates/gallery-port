@@ -12,12 +12,11 @@ function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [stringColor, setStringColor] = useState(false);
+  const [stringColor, setStringColor] = useState();
 
   let history = useHistory();
 
   const postStackHandler = string => {
-    setStringColor('on');
     const stackString = string;
     props.setStackString(stackString);
 

@@ -5,7 +5,12 @@ import ProjectList from './ProjectList';
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function LandingProjects({ stackProjectData, setProjectId, hasUserId }) {
+function LandingProjects({
+  stackProjectData,
+  setProjectId,
+  hasUserId,
+  Landing,
+}) {
   return (
     <div
       className="landingProjects"
@@ -28,6 +33,7 @@ function LandingProjects({ stackProjectData, setProjectId, hasUserId }) {
                     project={project}
                     setProjectId={setProjectId}
                     hasUserId={hasUserId}
+                    Landing={Landing}
                   />
                 );
               })}

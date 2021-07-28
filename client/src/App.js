@@ -24,8 +24,9 @@ function App() {
 
   useEffect(() => {
     if (hasUserId !== '') {
-      console.log('app.js확인중 - hasUserId :', hasUserId);
-      console.log('app.js확인중 - projectId : ', projectId);
+      // console.log('app.js확인중 - hasUserId :', hasUserId);
+      // console.log('app.js확인중 - projectId : ', projectId);
+      // console.log('app.js확인중 - stackString : ', stackString);
     }
   });
 
@@ -87,6 +88,7 @@ function App() {
               stackString={stackString}
             />
           </Route>
+
           <Route path="/signin">
             <Signin
               loginHandler={loginHandler}
@@ -135,6 +137,7 @@ function App() {
               hasUserId={hasUserId}
               projectId={projectId}
               setStackString={setStackString}
+              setStackProjectData={setStackProjectData}
             />
           </Route>
           <Route path="/upload">
@@ -153,7 +156,17 @@ function App() {
               setStackString={setStackString}
             />
           </Route>
+
           <Route path="/error">
+            <ErrorPage
+              logoutHandler={logoutHandler}
+              hasUserId={hasUserId}
+              setStackProjectData={setStackProjectData}
+              setStackString={setStackString}
+            />
+          </Route>
+
+          <Route>
             <ErrorPage
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
