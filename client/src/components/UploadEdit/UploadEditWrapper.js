@@ -6,6 +6,7 @@ import { scrollTo } from '../../utils/etc';
 // import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
+import { first } from 'lodash';
 
 const END_POINT = 'https://gallery-port-server.com';
 // const END_POINT = process.env.REACT_APP_API_URL;
@@ -146,9 +147,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
     formData.append('thumbnail', project_thumbnail);
     formData.append('project_content', JSON.stringify(project_content));
     formData.append('project_info', JSON.stringify(project_info));
-    for (let el of formData.entries()) {
-      console.log(el);
-    }
+
     return axios
       .patch(`${END_POINT}/project/${projectId}`, formData, {
         headers: {

@@ -74,17 +74,13 @@ function UploadWrapper({ hasUserId }) {
     for (let el of curFiles) {
       formData.append('image', el);
     }
-    // formData.append('image', JSON.stringify(curFiles));
     formData.append('project_name', project_name);
     formData.append('project_stack', JSON.stringify(project_stack));
     formData.append('thumbnail', project_thumbnail);
     formData.append('project_content', JSON.stringify(project_content));
     formData.append('project_info', JSON.stringify(project_info));
-    // JSON.stringify({ text: descriptions[i].value, image: curFiles[i] })
-    for (let el of formData.entries()) {
-      console.log(el);
-    }
-    return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
+
+    return axios
       .post(`${END_POINT}/project`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

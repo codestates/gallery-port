@@ -100,13 +100,10 @@ function MyPageWrapper({ hasUserId }) {
     const formData = new FormData();
 
     formData.append('user_email', user_email);
-    formData.append('user_password', user_password);
+    formData.append('user_password', password_confirm);
     formData.append('image', user_image);
     formData.append('user_info', JSON.stringify(user_info));
 
-    for (let el of formData.entries()) {
-      console.log(el);
-    }
     return axios
       .patch(`${END_POINT}/mypage/${tempId}`, formData, {
         headers: {
