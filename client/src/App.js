@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     if (hasUserId !== '') {
-      // console.log('app.js확인중 - hasUserId :', hasUserId);
+      console.log('app.js확인중 - hasUserId :', hasUserId);
       // console.log('app.js확인중 - projectId : ', projectId);
       // console.log('app.js확인중 - stackString : ', stackString);
     }
@@ -74,7 +74,6 @@ function App() {
     setHasUserId(undefined);
     window.localStorage.removeItem('userId');
     history.push('/');
-
   };
 
   return (
@@ -162,15 +161,6 @@ function App() {
           </Route>
 
           <Route path="/error">
-            <ErrorPage
-              logoutHandler={logoutHandler}
-              hasUserId={hasUserId}
-              setStackProjectData={setStackProjectData}
-              setStackString={setStackString}
-            />
-          </Route>
-
-          <Route>
             <ErrorPage
               logoutHandler={logoutHandler}
               hasUserId={hasUserId}
