@@ -165,15 +165,6 @@ function App() {
               setStackString={setStackString}
             />
           </Route>
-
-          <Route>
-            <ErrorPage
-              logoutHandler={logoutHandler}
-              hasUserId={hasUserId}
-              setStackProjectData={setStackProjectData}
-              setStackString={setStackString}
-            />
-          </Route>
         </Switch>
       </div>
     </Router>
