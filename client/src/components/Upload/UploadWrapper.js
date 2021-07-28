@@ -5,6 +5,7 @@ import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
 import './UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
+import AlertModal from '../../utils/alert-modal';
 
 const END_POINT = 'https://gallery-port-server.com';
 // const END_POINT = process.env.REACT_APP_API_URL;
@@ -29,6 +30,8 @@ function UploadWrapper({ hasUserId }) {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
   const [modalOn, setModalOn] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [proSucc, setProSucc] = useState(false);
   let history = useHistory();
 
   const stackArray = [
@@ -66,6 +69,7 @@ function UploadWrapper({ hasUserId }) {
   }
 
   function postHandler() {
+    setModalOpen(true);
     const formData = new FormData();
     const project_content = [];
     for (let i = 0; i < descriptions.length; i++) {
@@ -88,13 +92,23 @@ function UploadWrapper({ hasUserId }) {
         withCredentials: true,
       })
       .then((res) => {
-        alert('성공');
-        history.go(-1);
+        // alert('성공');
+        // history.go(-1);
+        setProSucc(true);
       })
       .catch((err) => {
-        alert('실패');
+        // alert('실패');
+        setProSucc(false);
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+
+    if (proSucc === true) {
+      return history.go(-1);
+    }
+  };
 
   function previewHandler() {
     setModalOn(!modalOn);
@@ -144,6 +158,16 @@ function UploadWrapper({ hasUserId }) {
           />
         </div>
       </div>
+      <AlertModal
+        open={modalOpen}
+        close={closeModal}
+        alertString={
+          proSucc
+            ? '프로젝트 등록하였습니다.'
+            : '프로젝트 등록에 실패하였습니다.'
+        }
+        alertBtn="확인"
+      />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
 import { hash } from 'bcryptjs';
+import AlertModal from '../../utils/alert-modal';
 
 const END_POINT = 'https://gallery-port-server.com';
 // const END_POINT = process.env.REACT_APP_API_URL;
@@ -31,6 +32,9 @@ function MyPageWrapper({ hasUserId }) {
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
   const [hashedPassword, setHashedPassword] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [userSucc, setUserSucc] = useState(false);
+
   let history = useHistory();
 
   let tempId = hasUserId || window.localStorage.getItem('userId');
@@ -57,7 +61,7 @@ function MyPageWrapper({ hasUserId }) {
           });
         })
         .catch((err) => {
-          alert('실패');
+          alert('회원 정보를 받아오는데 실패하였습니다.');
         });
     };
     getUserData();
@@ -97,6 +101,7 @@ function MyPageWrapper({ hasUserId }) {
   }, 800);
 
   function patchHandler() {
+    setModalOpen(true);
     const formData = new FormData();
 
     formData.append('user_email', user_email);
@@ -112,13 +117,22 @@ function MyPageWrapper({ hasUserId }) {
         withCredentials: true,
       })
       .then((res) => {
-        alert('성공');
-        history.go(-1);
+        // alert('성공');
+        // history.go(-1);
+        setUserSucc(true);
       })
       .catch((err) => {
-        alert('실패');
+        // alert('실패');
+        setUserSucc(false);
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+    if (userSucc === true) {
+      history.go(-1);
+    }
+  };
 
   return (
     <div className="mypageWrapper">
@@ -162,6 +176,12 @@ function MyPageWrapper({ hasUserId }) {
           </div>
         </div>
       </div>
+      <AlertModal
+        open={modalOpen}
+        close={closeModal}
+        alertString={userSucc ? '수정하였습니다.' : '수정에 실패하였습니다.'}
+        alertBtn="확인"
+      />
     </div>
   );
 }

@@ -83,8 +83,10 @@ function SignUpWrapper() {
   }
 
   const closeModal = () => {
+    if (joinSucc === true) {
+      history.go(-1);
+    }
     setModalOpen(false);
-    history.go(-1);
   };
 
   return (

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectInfoRender from './ProjectInfoRender';
+import { useHistory } from 'react-router-dom';
+import AlertModal from '../../utils/alert-modal';
 
 function Modal({
   modalOn,
@@ -9,9 +11,32 @@ function Modal({
   patchHandler,
   project_info,
   project_name,
+  editSucc,
 }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  // const [editSucc, setEditSucc] = useState(false);
+  let history = useHistory();
+
+  const closeModal = () => {
+    setModalOpen(false);
+    if (editSucc === true) {
+      history.go(-1);
+    }
+  };
+
   return (
     <>
+      <AlertModal
+        style={{ zindex: '999' }}
+        open={modalOpen}
+        close={closeModal}
+        alertString={
+          editSucc
+            ? '프로젝트 수정하였습니다.'
+            : '프로젝트 수정에 실패하였습니다.'
+        }
+        alertBtn="확인"
+      />
       {modalOn && curFiles ? (
         <div className="modalBackdrop">
           <div className="modalView" style={{ overflow: 'hidden' }}>

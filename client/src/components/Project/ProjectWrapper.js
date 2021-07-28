@@ -4,6 +4,7 @@ import axios from 'axios';
 import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
 import '../Upload/UploadWrapper.css';
+import AlertModal from '../../utils/alert-modal';
 
 const END_POINT = 'https://gallery-port-server.com';
 // const END_POINT = process.env.REACT_APP_API_URL;
@@ -27,6 +28,8 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
   const [descriptions, setDescription] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [delSucc, setDelSucc] = useState(false);
 
   useEffect(() => {
     const getProjectData = () => {
@@ -63,7 +66,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           setUser_photo(res.data.userdata.user_photo);
         })
         .catch((err) => {
-          alert('실패');
+          alert('프로젝트 정보를 받아오는데 실패하였습니다.');
         });
     };
     getProjectData();
@@ -74,17 +77,29 @@ function ProjectWrapper({ hasUserId, projectId }) {
         withCredentials: true,
       })
       .then((res) => {
+        setModalOpen(true);
         if (
           res.message === 'Invalid user' ||
           res.message === 'Unauthorized user'
         ) {
-          alert(res.message);
+          setDelSucc(false);
+          // alert(res.message);
         } else {
-          window.history.go(-1);
-          alert('삭제');
+          // window.history.go(-1);
+          setDelSucc(true);
+          // alert('삭제');
         }
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+
+    if (delSucc === true) {
+      window.history.go(-1);
+    }
+  };
+
   return (
     <div className="projectWrapper">
       <div className="projectPageContainer">
@@ -147,6 +162,16 @@ function ProjectWrapper({ hasUserId, projectId }) {
           project_info={project_info}
         />
       </div>
+      <AlertModal
+        open={modalOpen}
+        close={closeModal}
+        alertString={
+          delSucc
+            ? '프로젝트 삭제하였습니다.'
+            : '프로젝트 삭제에 실패하였습니다.'
+        }
+        alertBtn="확인"
+      />
     </div>
   );
 }

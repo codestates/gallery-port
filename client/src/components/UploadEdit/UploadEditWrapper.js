@@ -7,6 +7,7 @@ import { scrollTo } from '../../utils/etc';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 import { first } from 'lodash';
+import AlertModal from '../../utils/alert-modal';
 
 const END_POINT = 'https://gallery-port-server.com';
 // const END_POINT = process.env.REACT_APP_API_URL;
@@ -32,6 +33,8 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   const [curFiles, setCurFiles] = useState([]);
   const [descriptions, setDescription] = useState('');
   const [modalOn, setModalOn] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editSucc, setEditSucc] = useState(false);
   let history = useHistory();
 
   const stackArray = [
@@ -134,6 +137,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   }
 
   function patchHandler() {
+    setModalOpen(true);
     const formData = new FormData();
     const project_content = [];
     for (let i = 0; i < descriptions.length; i++) {
@@ -156,13 +160,22 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         withCredentials: true,
       })
       .then((res) => {
-        alert('성공');
-        history.go(-1);
+        // alert('프로젝트 수정하였습니다.');
+        // history.go(-1);
+        setEditSucc(true);
       })
       .catch((err) => {
-        alert('실패');
+        // alert('프로젝트 수정에 실패하였습니다.');
+        setEditSucc(false);
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+    if (editSucc === true) {
+      history.go(-1);
+    }
+  };
 
   function previewHandler() {
     setModalOn(!modalOn);
@@ -203,6 +216,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           >
             프로젝트 미리보기
           </div>
+
           <Modal
             modalOn={modalOn}
             setModalOn={setModalOn}
@@ -211,6 +225,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             patchHandler={patchHandler}
             project_info={project_info}
             project_name={project_name}
+            editSucc={editSucc}
           />
         </div>
       </div>
