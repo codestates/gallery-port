@@ -32,13 +32,13 @@ function App() {
 
   useEffect(() => {
     if (stackString !== '') {
-      const getStackData = (stackString) => {
+      const getStackData = stackString => {
         return axios
           .get(`${END_POINT}`, {
             params: { stack: stackString },
             withCredentials: true,
           })
-          .then((res) => {
+          .then(res => {
             const projects = res.data.data.projects;
             setStackProjectData(projects);
           });
@@ -48,7 +48,7 @@ function App() {
       const getAllData = () => {
         return axios
           .get(`${END_POINT}`, { withCredentials: true })
-          .then((res) => {
+          .then(res => {
             const projects = res.data.data.projects;
             setStackProjectData(projects);
           });
@@ -63,7 +63,7 @@ function App() {
     setHasUserId(storageSavedUserId);
   });
 
-  const loginHandler = (userId) => {
+  const loginHandler = userId => {
     setHasUserId(userId);
   };
 

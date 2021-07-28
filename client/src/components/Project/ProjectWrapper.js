@@ -22,7 +22,8 @@ function ProjectWrapper({ hasUserId, projectId }) {
     project_deploy_stack: '',
     project_url: '',
   });
-  const [user_name, setUser_user_name] = useState('');
+  const [user_id, setUser_id] = useState('');
+  const [user_name, setUser_name] = useState('');
   const [user_photo, setUser_photo] = useState('');
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
@@ -35,11 +36,11 @@ function ProjectWrapper({ hasUserId, projectId }) {
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then((res) => {
+        .then(res => {
           const urlArr = [];
           const descArr = [];
 
-          res.data.projectdata.project_content.forEach((el) => {
+          res.data.projectdata.project_content.forEach(el => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
@@ -59,10 +60,11 @@ function ProjectWrapper({ hasUserId, projectId }) {
             project_deploy_stack: res.data.projectdata.project_deploy_stack,
             project_url: res.data.projectdata.project_url,
           });
-          setUser_user_name(res.data.userdata.user_name);
+          setUser_id(res.data.userdata.user_id);
+          setUser_name(res.data.userdata.user_name);
           setUser_photo(res.data.userdata.user_photo);
         })
-        .catch((err) => {
+        .catch(err => {
           alert('실패');
         });
     };
@@ -73,7 +75,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
       .delete(`${END_POINT}/project/${projectId}`, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         if (
           res.message === 'Invalid user' ||
           res.message === 'Unauthorized user'
@@ -125,19 +127,21 @@ function ProjectWrapper({ hasUserId, projectId }) {
               </div>
             </div>
           </div>
-          <div className="project_button_wrapper">
-            <Link to="/uploadedit" className="landing_link">
-              <div className="project_button">수정</div>
-            </Link>
-            <div
-              className="project_button"
-              onClick={() => {
-                projectDeleteHandler();
-              }}
-            >
-              삭제
+          {user_id === hasUserId && user_id ? (
+            <div className="project_button_wrapper">
+              <Link to="/uploadedit" className="landing_link">
+                <div className="project_button">수정</div>
+              </Link>
+              <div
+                className="project_button"
+                onClick={() => {
+                  projectDeleteHandler();
+                }}
+              >
+                삭제
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
         <ProjectInfoRender
           curFiles={curFiles}

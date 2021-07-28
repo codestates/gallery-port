@@ -26,7 +26,7 @@ function LandingProjects({
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-              {stackProjectData.map((project) => {
+              {stackProjectData.map(project => {
                 return (
                   <ProjectList
                     key={project.id}

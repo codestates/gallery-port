@@ -16,7 +16,7 @@ function Header(props) {
 
   let history = useHistory();
 
-  const postStackHandler = (string) => {
+  const postStackHandler = string => {
     const stackString = string;
     props.setStackString(stackString);
 
@@ -25,12 +25,12 @@ function Header(props) {
         params: { stack: string },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch((err) => alert('실패'));
+      .catch(err => alert('실패'));
   };
 
   useEffect(() => {

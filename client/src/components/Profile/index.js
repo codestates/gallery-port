@@ -30,7 +30,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       .get(`${END_POINT}/profile/${hasUserId}`, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const data1 = res.data.data.projects;
         setProjectDataLength(data1);
         setNewNotProjectData(data1);
@@ -131,7 +131,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
           ) : (
             <div>
               {hasUserId !== undefined
-                ? projectDataLength.map((project) => {
+                ? projectDataLength.map(project => {
                     return (
                       <ProjectList
                         key={project.thumbnail}
@@ -141,7 +141,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
                       />
                     );
                   })
-                : newNotProjectData.map((project) => {
+                : newNotProjectData.map(project => {
                     return (
                       <ProjectList
                         key={project.thumbnail}

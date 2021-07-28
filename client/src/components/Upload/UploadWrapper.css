@@ -855,7 +855,7 @@ a {
 
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   letter-spacing: -0.01em;
 }
 .project_page_info_wrapper {
