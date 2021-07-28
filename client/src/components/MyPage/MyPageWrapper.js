@@ -44,8 +44,8 @@ function MyPageWrapper({ hasUserId }) {
           withCredentials: true,
         })
         .then(res => {
-          const file = convertURLtoFile(res.data.data.user_photo);
-          setUser_image(file);
+          // const file = convertURLtoFile(res.data.data.user_photo);
+          setUser_image('');
           setUser_email(res.data.data.user_email);
           setHashedPassword(res.data.data.user_password);
           setUser_info({

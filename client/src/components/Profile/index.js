@@ -21,7 +21,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [userPhoto, setUserPhoto] = useState('');
 
   useEffect(() => {
-    const tempUserId = hasUserId || window.localStorage.getItem('userId')
+    const tempUserId = hasUserId || window.localStorage.getItem('userId');
 
     const [isLoading, setIsLoading] = useState(false);
     if (!hasUserId) {
