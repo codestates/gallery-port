@@ -15,7 +15,7 @@ function ImageUploaderMany({
   condition_subject,
   condition_desc1,
   condition_desc2,
-  firstDesc, //이부분에 수정하였음
+  // firstDesc,
 }) {
   const inputManyRef = useRef(null);
   return (
@@ -64,7 +64,7 @@ function ImageUploaderMany({
                     id={idx}
                     className="img_preview"
                     style={{
-                      backgroundImage: `url('${el}')`,
+                      backgroundImage: `url('${URL.createObjectURL(el)}')`,
                       backgroundSize: 'cover',
                       position: 'relative',
                     }}
@@ -98,7 +98,7 @@ function ImageUploaderMany({
                   </div>
                   <input
                     className="descriptionInput"
-                    defaultValue={firstDesc[idx]} //이부분에 수정하였음 e.target.value로 defaultValue로 지정한 값을 불러올 수 있다.
+                    // defaultValue={firstDesc[idx]} //이부분에 수정하였음 e.target.value로 defaultValue로 지정한 값을 불러올 수 있다.
                     type="text"
                     placeholder="50자 이내로 입력해주세요."
                   />

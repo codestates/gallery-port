@@ -12,14 +12,13 @@ function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [stringColor, setStringColor] = useState(false);
+  const [stringColor, setStringColor] = useState();
 
   let history = useHistory();
 
-  const postStackHandler = (string) => {
-    setStringColor('on')
-    const stackString = string
-    props.setStackString(stackString)
+  const postStackHandler = string => {
+    const stackString = string;
+    props.setStackString(stackString);
 
     return axios
       .get(`${END_POINT}`, {
@@ -34,13 +33,11 @@ function Header(props) {
       .catch(err => alert('실패'));
   };
 
-
-
   useEffect(() => {
     if (props.hasUserId !== undefined) {
       setIsLogin(true);
     } else {
-      setIsLogin(false)
+      setIsLogin(false);
     }
   }, [isLogin]);
 
@@ -73,7 +70,8 @@ function Header(props) {
       {},
       {
         withCredentials: true,
-      })
+      }
+    );
   }
 
   function goProfilepage() {
@@ -102,16 +100,36 @@ function Header(props) {
             </Link>
             <nav>
               <ul>
-                <li className="stack" onClick={() => postStackHandler('')}>ALL</li>
-                <li className="stack" onClick={() => postStackHandler('javascript')}>
+                <li className="stack" onClick={() => postStackHandler('')}>
+                  ALL
+                </li>
+                <li
+                  className="stack"
+                  onClick={() => postStackHandler('javascript')}
+                >
                   JavaScript
                 </li>
-                <li className="stack" onClick={() => postStackHandler('sql')}>SQL</li>
-                <li className="stack" onClick={() => postStackHandler('python')}>Python</li>
-                <li className="stack" onClick={() => postStackHandler('java')}>Java</li>
-                <li className="stack" onClick={() => postStackHandler('c#')}>C#</li>
-                <li className="stack" onClick={() => postStackHandler('php')}>PHP</li>
-                <li className="stack" onClick={() => postStackHandler('etc')}>Etc</li>
+                <li className="stack" onClick={() => postStackHandler('sql')}>
+                  SQL
+                </li>
+                <li
+                  className="stack"
+                  onClick={() => postStackHandler('python')}
+                >
+                  Python
+                </li>
+                <li className="stack" onClick={() => postStackHandler('java')}>
+                  Java
+                </li>
+                <li className="stack" onClick={() => postStackHandler('c#')}>
+                  C#
+                </li>
+                <li className="stack" onClick={() => postStackHandler('php')}>
+                  PHP
+                </li>
+                <li className="stack" onClick={() => postStackHandler('etc')}>
+                  Etc
+                </li>
               </ul>
             </nav>
             <div className="headerBtn">
