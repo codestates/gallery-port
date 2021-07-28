@@ -44,8 +44,8 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   }
 
   const requiredTextInputData = [
-    ['email', '이메일 입력', 'user_email'],
-    ['password', '비밀번호 입력', 'user_password'],
+    ['email', '이메일 입력', 'user_email', '30'],
+    ['password', '비밀번호 입력', 'user_password', '20'],
   ];
   return (
     <div className="signinWrapper">
@@ -59,6 +59,7 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
                   type={el[0]}
                   placeholder={el[1]}
                   property={el[2]}
+                  maxLength={el[3]}
                   onChangeHandler={onChangeHandler}
                 />
               );

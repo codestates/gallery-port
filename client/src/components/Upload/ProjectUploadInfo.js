@@ -18,7 +18,7 @@ function ProjectUploadInfo({
   setCurFiles,
 }) {
   const textInputData = [
-    ['프로젝트 팀', 'project_team', '팀원', 72, 40, 'text'],
+    ['프로젝트 팀', 'project_team', '팀원', 72, 40, 'text', '0'],
     [
       '프로젝트 소개',
       'project_introduction',
@@ -26,6 +26,7 @@ function ProjectUploadInfo({
       112,
       80,
       'text',
+      '36px',
     ],
     [
       '프로젝트 기능',
@@ -34,9 +35,10 @@ function ProjectUploadInfo({
       112,
       80,
       'text',
+      '36px',
     ],
-    ['프로젝트 사이트', 'project_url', 'url', 72, 40, 'url'],
-    ['프로젝트 깃허브', 'project_github', 'url', 72, 40, 'url'],
+    ['프로젝트 사이트', 'project_url', 'url', 72, 40, 'url', '0'],
+    ['프로젝트 깃허브', 'project_github', 'url', 72, 40, 'url', '0'],
     [
       '프론트엔드 스택',
       'project_front_stack',
@@ -44,6 +46,7 @@ function ProjectUploadInfo({
       112,
       80,
       'text',
+      '36px',
     ],
     [
       '백엔드 스택',
@@ -52,6 +55,7 @@ function ProjectUploadInfo({
       112,
       80,
       'text',
+      '36px',
     ],
     [
       '배포 스택',
@@ -60,6 +64,7 @@ function ProjectUploadInfo({
       112,
       80,
       'text',
+      '36px',
     ],
   ];
 
@@ -156,6 +161,7 @@ function ProjectUploadInfo({
               project_info={project_info}
               onChangeHandler={onChangeHandler}
               type={el[5]}
+              paddingBottom={el[6]}
             />
           );
         })}
