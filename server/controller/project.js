@@ -1,6 +1,7 @@
 const { ProjectByUser, Project, Content, StackForProject, Stack, User } = require('../models/index')
 const { verifyAccessToken } = require('./tokens/tokenFunctions')
 const fs = require('fs');
+const project = require('../models/project');
 require('dotenv').config();
 
 module.exports = {
@@ -54,8 +55,13 @@ module.exports = {
             const ProjectUserId = projectUserData.user_id;
             const userData = await User.findOne({ where: { id: ProjectUserId }});
 
-            projectData.project_start = projectData.project_start.toLocaleDateString('ko-KR')
-            projectData.project_end = projectData.project_end.toLocaleDateString('ko-KR')
+            // date to yyyy-mm-dd
+            if (projectData.project_start) {
+                projectData.project_start = projectData.project_start.toLocaleDateString('fr-CA');
+            }
+            if (projectData.project_end) {
+                projectData.project_end = projectData.project_end.toLocaleDateString('fr-CA');
+            }
 
             return res.status(200).json({
                 "projectdata": {...projectData, project_content, project_stack}, 
@@ -76,6 +82,13 @@ module.exports = {
             const project_info = JSON.parse(req.body.project_info);
 
             try {
+
+                if (!project_info.project_start) {
+                    delete project_info.project_start
+                }
+                if (!project_info.project_end) {
+                    delete project_info.project_end
+                }
                 let data = await Project.create({project_name, project_content, ...project_info, project_thumbnail: 'temp'})
                 
                 // thumbnail 사진 path 변경 후 테이블에 저장
@@ -152,6 +165,13 @@ module.exports = {
                 if (!data) {
                     return res.status(404).json({"message": "Invalid project"})
                 }
+                if (!data.project_start) {
+                    delete data.project_start
+                }
+                if (!data.project_end) {
+                    delete data.project_end
+                }
+
                 data.project_name = project_name;
                 for (let key in project_info) {
                     data[key] = project_info[key];
