@@ -9,6 +9,7 @@ function TextInputGender({
   user_info,
   onChangeHandler,
   type,
+  paddingBottom,
 }) {
   return (
     <div className="user_info" style={{ height: `${height1}px` }}>
@@ -20,7 +21,7 @@ function TextInputGender({
         className="user_info_input"
         value={user_info[detailString]}
         onChange={e => onChangeHandler(e, detailString)}
-        style={{ height: `${height2}px` }}
+        style={{ height: `${height2}px`, paddingBottom: paddingBottom }}
       />
     </div>
   );
