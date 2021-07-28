@@ -3,13 +3,14 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import ErrorText from '../components/Error';
 
-function Error({ logoutHandler, hasUserId, setStackProjectData }) {
+function Error({ logoutHandler, hasUserId, setStackProjectData,setStackString }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Header
         logoutHandler={logoutHandler}
         hasUserId={hasUserId}
         setStackProjectData={setStackProjectData}
+        setStackString={setStackString}
       />
       <div
         style={{

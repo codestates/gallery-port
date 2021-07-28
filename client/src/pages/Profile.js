@@ -8,6 +8,7 @@ function Profile({
   hasUserId,
   setStackProjectData,
   setProjectId,
+  setStackString,
 }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
@@ -15,6 +16,7 @@ function Profile({
         logoutHandler={logoutHandler}
         hasUserId={hasUserId}
         setStackProjectData={setStackProjectData}
+        setStackString={setStackString}
       />
       <ProfileWrapper hasUserId={hasUserId} setProjectId={setProjectId} />
       <Footer />

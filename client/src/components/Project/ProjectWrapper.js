@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
@@ -26,6 +27,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
   const [descriptions, setDescription] = useState();
+   let history = useHistory();
 
   useEffect(() => {
     const getProjectData = () => {
