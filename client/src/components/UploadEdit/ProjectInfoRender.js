@@ -71,7 +71,7 @@ function ProjectInfoRender({
             취소
           </div>
           <div className="modal_button_upload" onClick={patchHandler}>
-            수정
+            등록
           </div>
         </div>
       </div>
