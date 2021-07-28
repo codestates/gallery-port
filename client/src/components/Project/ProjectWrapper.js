@@ -27,7 +27,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
   const [descriptions, setDescription] = useState();
-   let history = useHistory();
+  let history = useHistory();
 
   useEffect(() => {
     const getProjectData = () => {
@@ -68,10 +68,9 @@ function ProjectWrapper({ hasUserId, projectId }) {
     };
     getProjectData();
   }, []);
-  function project_delete_handler() {
-    let projectid = window.location.href.split('/')[4];
+  function projectDeleteHandler() {
     axios
-      .delete(`${END_POINT}/project/${projectid}`, {
+      .delete(`${END_POINT}/project/${projectId}`, {
         withCredentials: true,
       })
       .then(res => {
@@ -82,6 +81,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
+          window.location.href = "https://gallery-port.com/profile";
         }
       });
   }
@@ -132,7 +132,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
             <div
               className="project_button"
               onClick={() => {
-                project_delete_handler();
+                projectDeleteHandler();
               }}
             >
               삭제
