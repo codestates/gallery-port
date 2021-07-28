@@ -129,7 +129,7 @@ function ProjectUploadInfo({
         <div className="date_input_wrapper">
           <input
             type="date"
-            value={project_info.project_start}
+            defaultValue={project_info.project_start}
             onChange={e => onChangeHandler(e, 'project_start')}
             className="date_input"
             style={{ marginRight: '6px' }}
@@ -137,7 +137,7 @@ function ProjectUploadInfo({
           ~
           <input
             type="date"
-            value={project_info.project_end}
+            defaultValue={project_info.project_end}
             onChange={e => onChangeHandler(e, 'project_end')}
             className="date_input"
             style={{ marginLeft: '6px' }}
