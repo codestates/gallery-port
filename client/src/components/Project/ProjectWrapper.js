@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
 import '../Upload/UploadWrapper.css';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProjectWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -28,7 +27,6 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
   const [descriptions, setDescription] = useState();
-  let history = useHistory();
 
   useEffect(() => {
     const getProjectData = () => {
@@ -127,21 +125,21 @@ function ProjectWrapper({ hasUserId, projectId }) {
               </div>
             </div>
           </div>
-          {user_id === hasUserId && user_id ? (
-            <div className="project_button_wrapper">
-              <Link to="/uploadedit" className="landing_link">
-                <div className="project_button">수정</div>
-              </Link>
-              <div
-                className="project_button"
-                onClick={() => {
-                  projectDeleteHandler();
-                }}
-              >
-                삭제
-              </div>
+          {/* {user_id === hasUserId && user_id ? ( */}
+          <div className="project_button_wrapper">
+            <Link to="/uploadedit" className="landing_link">
+              <div className="project_button">수정</div>
+            </Link>
+            <div
+              className="project_button"
+              onClick={() => {
+                projectDeleteHandler();
+              }}
+            >
+              삭제
             </div>
-          ) : null}
+          </div>
+          {/* ) : null} */}
         </div>
         <ProjectInfoRender
           curFiles={curFiles}
