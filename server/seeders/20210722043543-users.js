@@ -23,7 +23,7 @@ module.exports = {
         user_github: 'https://github.com/jong-ah',
         user_introduction: 'jong-ah 입니다.',
         user_photo:
-          'https://user-images.githubusercontent.com/81145387/126490779-433db8bd-d7bd-478d-8b5e-f43399c00b6e.jpg',
+          'https://user-images.githubusercontent.com/81145387/126490801-c293bfda-4adb-43a0-8779-34769199ba5e.jpg',
       },
       {
         id: 2,
@@ -34,7 +34,7 @@ module.exports = {
         user_github: 'https://github.com/vodkamitlime',
         user_introduction: 'vodkamitlime 입니다.',
         user_photo:
-          'https://user-images.githubusercontent.com/81145387/126490792-98d03eb0-3376-44f3-b246-003292bec256.jpg',
+          'https://user-images.githubusercontent.com/81145387/126490779-433db8bd-d7bd-478d-8b5e-f43399c00b6e.jpg'
       },
       {
         id: 3,
@@ -44,8 +44,7 @@ module.exports = {
         user_name: 'hyoogu',
         user_github: 'https://github.com/hyoogu',
         user_introduction: 'hyoogu 입니다.',
-        user_photo:
-          'https://user-images.githubusercontent.com/81145387/126490798-2285caa6-2c48-4976-9076-c0b7efc5cef7.jpg',
+        user_photo:'https://user-images.githubusercontent.com/81145387/126490792-98d03eb0-3376-44f3-b246-003292bec256.jpg'
       },
       {
         id: 4,
@@ -55,8 +54,7 @@ module.exports = {
         user_name: 'bmaner',
         user_github: 'https://github.com/bmaner',
         user_introduction: 'bmaner 입니다.',
-        user_photo:
-          'https://user-images.githubusercontent.com/81145387/126490801-c293bfda-4adb-43a0-8779-34769199ba5e.jpg',
+        user_photo:'https://user-images.githubusercontent.com/81145387/126490798-2285caa6-2c48-4976-9076-c0b7efc5cef7.jpg',
       },
     ]);
   },
