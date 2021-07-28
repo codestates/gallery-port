@@ -70,10 +70,9 @@ function ProjectWrapper({ hasUserId, projectId }) {
     };
     getProjectData();
   }, []);
-  function project_delete_handler() {
-    let projectid = window.location.href.split('/')[4];
+  function projectDeleteHandler() {
     axios
-      .delete(`${END_POINT}/project/${projectid}`, {
+      .delete(`${END_POINT}/project/${projectId}`, {
         withCredentials: true,
       })
       .then(res => {
@@ -84,6 +83,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
+          window.location.href = 'https://gallery-port.com/profile';
         }
       });
   }
