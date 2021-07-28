@@ -13,7 +13,6 @@ function Landing({
   stackString,
   setStackString,
 }) {
-
   return (
     <div style={{ overflowX: 'hidden' }}>
       <LandingGallery />
@@ -30,6 +29,7 @@ function Landing({
         setStackProjectData={setStackProjectData}
         hasUserId={hasUserId}
         stackString={stackString}
+        Landing={true}
       />
       <Footer Landing={true} />
     </div>
