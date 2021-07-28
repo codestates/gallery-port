@@ -20,7 +20,7 @@ div.signupPageContainer {
   height: 100%;
   top: 80px;
   color: #191a20;
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -38,7 +38,7 @@ div.subject_wrapper {
   top: 0%;
   bottom: 81.82%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -81,7 +81,7 @@ div.project_name ::placeholder {
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -166,7 +166,7 @@ div.input_file_wrapper {
   top: 0%;
   bottom: 0%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -190,7 +190,7 @@ div.input_file_wrapper {
   top: 0%;
   bottom: 0%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -225,7 +225,7 @@ div.input_file_wrapper {
   left: 16px;
   top: 8px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -422,7 +422,7 @@ img.preview {
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -516,7 +516,7 @@ div.modalBackdrop {
   height: 24px;
   left: 12px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -535,7 +535,7 @@ div.modalBackdrop {
   height: 24px;
   left: 164px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -632,7 +632,7 @@ div.modalBackdrop {
   left: 0px;
   top: 269px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -748,7 +748,7 @@ div.modalBackdrop {
   top: 0%;
   bottom: 53.85%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -770,7 +770,7 @@ div.modalBackdrop {
   top: 53.85%;
   bottom: 0%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -810,7 +810,7 @@ a {
   background: #e0e2e7;
   border-radius: 4px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -846,7 +846,7 @@ a {
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -892,7 +892,7 @@ a {
   height: 24px;
   left: 12px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -910,7 +910,7 @@ a {
   height: 24px;
   left: 164px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

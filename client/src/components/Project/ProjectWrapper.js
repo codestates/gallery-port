@@ -82,7 +82,6 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
-          // history.go(-1);
         }
       });
   }

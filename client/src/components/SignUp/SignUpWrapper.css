@@ -22,7 +22,7 @@ div.mypagePageContainer {
   height: 100%;
   top: 80px;
   color: #191a20;
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -40,7 +40,7 @@ div.subject_wrapper {
   top: 0%;
   bottom: 81.82%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -111,7 +111,7 @@ div.subject_wrapper {
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -201,7 +201,7 @@ div.input_file_wrapper {
   top: 0%;
   bottom: 0%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -225,7 +225,7 @@ div.input_file_wrapper {
   top: 0%;
   bottom: 0%;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -260,7 +260,7 @@ div.input_file_wrapper {
   left: 16px;
   top: 8px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -460,7 +460,7 @@ img.preview {
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

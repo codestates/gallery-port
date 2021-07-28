@@ -79,7 +79,7 @@
 
   /* 16px/400 */
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -109,7 +109,7 @@
   flex-grow: 0;
   margin: 8px 0px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -172,7 +172,7 @@
   flex-grow: 0;
   margin: 16px 0px;
 
-  font-family: Noto Sans KR;
+  font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
