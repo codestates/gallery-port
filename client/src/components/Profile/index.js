@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../pages/Loading';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
@@ -33,7 +33,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       .get(`${END_POINT}/profile/${tempUserId}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         const data1 = res.data.data.projects;
         setProjectDataLength(data1);
         setNewNotProjectData(data1);
@@ -134,7 +134,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
           ) : (
             <div>
               {hasUserId !== undefined
-                ? projectDataLength.map(project => {
+                ? projectDataLength.map((project) => {
                     return (
                       <ProjectList
                         key={project.thumbnail}
@@ -144,7 +144,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
                       />
                     );
                   })
-                : newNotProjectData.map(project => {
+                : newNotProjectData.map((project) => {
                     return (
                       <ProjectList
                         key={project.thumbnail}

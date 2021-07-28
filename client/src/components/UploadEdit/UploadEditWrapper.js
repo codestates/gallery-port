@@ -7,8 +7,8 @@ import { scrollTo } from '../../utils/etc';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -53,7 +53,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           // console.log(res);
           // const urlArr = [];
           // const descArr = [];
@@ -78,7 +78,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           //   fileArr.push(data);
           // }
 
-          const isChecked = stackArray.map(el => {
+          const isChecked = stackArray.map((el) => {
             if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
               return true;
             } else {
@@ -104,7 +104,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_url: res.data.projectdata.project_url,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
@@ -124,7 +124,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -155,11 +155,11 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }
