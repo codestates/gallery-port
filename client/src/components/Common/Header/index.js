@@ -4,6 +4,7 @@ import './style.css';
 import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import AlertModal from '../../../utils/alert-modal';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -12,11 +13,30 @@ function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [stringColor, setStringColor] = useState();
+  const [stringColor, setStringColor] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  //   setIsLogin(false);
+  //   props.logoutHandler();
+
+  //   return axios.post(
+  //     `${END_POINT}/signout`,
+  //     {},
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  // };
 
   let history = useHistory();
 
-  const postStackHandler = string => {
+  const postStackHandler = (string) => {
+    setStringColor('on');
     const stackString = string;
     props.setStackString(stackString);
 
@@ -25,12 +45,12 @@ function Header(props) {
         params: { stack: string },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch(err => alert('실패'));
+      .catch((err) => alert('stack 정보를 받아오는데 실패하였습니다.'));
   };
 
   useEffect(() => {
@@ -61,8 +81,8 @@ function Header(props) {
   });
 
   function handleLogout() {
+    setModalOpen(false);
     setIsLogin(false);
-    alert('로그아웃 되었습니다!');
     props.logoutHandler();
 
     return axios.post(
@@ -146,12 +166,24 @@ function Header(props) {
                 </button>
               </Link>
               {props.hasUserId ? (
-                <button
-                  className="headerSigninBtn"
-                  onClick={() => handleLogout()}
-                >
-                  로그아웃
-                </button>
+                // <button
+                // className="headerSigninBtn"
+                //   onClick={() => handleLogout()}
+                // >
+
+                //   로그아웃
+                // </button>
+                <div>
+                  <button onClick={openModal} className="headerSigninBtn">
+                    로그아웃
+                  </button>
+                  <AlertModal
+                    open={modalOpen}
+                    close={handleLogout}
+                    alertString="로그아웃 되었습니다."
+                    alertBtn="확인"
+                  />
+                </div>
               ) : (
                 <Link to="/signin" className="signin_link">
                   <button className="headerSigninBtn">로그인</button>

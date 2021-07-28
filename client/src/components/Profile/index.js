@@ -33,7 +33,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       .get(`${END_POINT}/profile/${tempUserId}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         const data1 = res.data.data.projects;
         setProjectDataLength(data1);
         setNewNotProjectData(data1);
@@ -130,11 +130,11 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       <div className="profileUserProjects">
         <div className="projectList">
           {!projectDataLength ? (
-            <div>등록된 프로젝트가 없습니다.</div>
+            <div className="noProject">등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
               {hasUserId !== undefined
-                ? projectDataLength.map(project => {
+                ? projectDataLength.map((project) => {
                     return (
                       <ProjectList
                         key={project.thumbnail}
@@ -144,7 +144,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
                       />
                     );
                   })
-                : newNotProjectData.map(project => {
+                : newNotProjectData.map((project) => {
                     return (
                       <ProjectList
                         key={project.thumbnail}

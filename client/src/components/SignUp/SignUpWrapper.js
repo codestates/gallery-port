@@ -5,6 +5,7 @@ import { checkEmail, checkPassword } from '../../utils/validation';
 import { scrollTo } from '../../utils/etc';
 import './SignUpWrapper.css';
 import { useHistory } from 'react-router-dom';
+import AlertModal from '../../utils/alert-modal';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -23,6 +24,12 @@ function SignUpWrapper() {
   const [user_password, setUser_password] = useState(''); //필수
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
+  const [modalOpen, setModalOpen] = useState(false);
+  const [joinSucc, setJoinSucc] = useState(false);
+
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
 
   let history = useHistory();
 
@@ -46,6 +53,7 @@ function SignUpWrapper() {
   }, [user_email, user_password, password_confirm]);
 
   function postHandler() {
+    setModalOpen(true);
     const formData = new FormData();
 
     formData.append('user_email', user_email);
@@ -63,14 +71,21 @@ function SignUpWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
-        history.go(-1);
-        alert('회원가입에 성공하였습니다.');
+      .then((res) => {
+        // history.go(-1);
+        setJoinSucc(true);
+        // alert('회원가입에 성공하였습니다.');
       })
-      .catch(err => {
-        alert('회원가입에 실패하였습니다.');
+      .catch((err) => {
+        setJoinSucc(false);
+        // alert('회원가입에 실패하였습니다.');
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+    history.go(-1);
+  };
 
   return (
     <div className="signupWrapper">
@@ -91,11 +106,13 @@ function SignUpWrapper() {
           pw_confirm={pw_confirm}
         />
         <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+          style={
+            {
+              // display: 'flex',
+              // flexDirection: 'column',
+              // alignItems: 'center',
+            }
+          }
         >
           <div
             className="previewBtn"
@@ -114,6 +131,14 @@ function SignUpWrapper() {
           </div>
         </div>
       </div>
+      <AlertModal
+        open={modalOpen}
+        close={closeModal}
+        alertString={
+          joinSucc ? '회원가입에 성공하였습니다.' : '회원가입에 실패하였습니다.'
+        }
+        alertBtn="확인"
+      />
     </div>
   );
 }

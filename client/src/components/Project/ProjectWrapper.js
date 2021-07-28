@@ -34,11 +34,11 @@ function ProjectWrapper({ hasUserId, projectId }) {
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           const urlArr = [];
           const descArr = [];
 
-          res.data.projectdata.project_content.forEach(el => {
+          res.data.projectdata.project_content.forEach((el) => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
@@ -62,7 +62,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           setUser_name(res.data.userdata.user_name);
           setUser_photo(res.data.userdata.user_photo);
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
@@ -73,7 +73,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
       .delete(`${END_POINT}/project/${projectId}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         if (
           res.message === 'Invalid user' ||
           res.message === 'Unauthorized user'
