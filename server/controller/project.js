@@ -48,10 +48,11 @@ module.exports = {
             }   
 
             // user 정보 함께 반환할 수 있도록 조회
-            const tokenData = verifyAccessToken(req);
-            const userData = await User.findOne({where: {
-                id: tokenData.id
+            const projectUserData = await ProjectByUser.findOne({ where: {
+                project_id: projectId
             }});
+            const ProjectUserId = projectUserData.user_id;
+            const userData = await User.findOne({ where: { id: ProjectUserId }});
 
             return res.status(200).json({
                 "projectdata": {...projectData, project_content, project_stack}, 
@@ -59,6 +60,7 @@ module.exports = {
                 "message" : "Project successfully found"
             })
         } catch (err) {
+            console.log(err)
             return res.status(500).send(err)
         }
             
