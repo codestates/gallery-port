@@ -68,8 +68,8 @@ function ProjectWrapper({ hasUserId, projectId }) {
     };
     getProjectData();
   }, []);
-  function projectDeleteHandler() {
-    axios
+  async function projectDeleteHandler() {
+    await axios
       .delete(`${END_POINT}/project/${projectId}`, {
         withCredentials: true,
       })
@@ -80,6 +80,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
         ) {
           alert(res.message);
         } else {
+          window.history.go(-1);
           alert('삭제');
         }
       });
@@ -129,9 +130,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
             <Link to="/uploadedit" className="landing_link">
               <div className="project_button">수정</div>
             </Link>
-            <Link to="/profile" className="landing_link" onClick={() => { projectDeleteHandler(); }}>
-              <div className="project_button">삭제</div>
-            </Link>
+            <div className="project_button" onClick={() => { projectDeleteHandler(); }}>삭제</div>
           </div>
           {/* ) : null} */}
         </div>
