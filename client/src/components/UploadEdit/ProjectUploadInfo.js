@@ -67,7 +67,7 @@ function ProjectUploadInfo({
 
   function onChangeHandler(e, property) {
     const copied = Object.assign({}, project_info);
-    copied[property] = e.target.value; //copied.property로는 변수일경우 할당을 못함....ㅠㅠㅠㅠ
+    copied[property] = e.target.value;
     setProject_info(copied);
   }
 
@@ -102,10 +102,7 @@ function ProjectUploadInfo({
         // firstDesc={firstDesc}
       />
       <div className="project_stack" style={{ display: 'flex' }}>
-        <div className="subject_wrapper">
-          프로젝트 주요스택
-          {/* <span className="required">(필수)</span> */}
-        </div>
+        <div className="subject_wrapper">프로젝트 주요스택</div>
         <div
           className="checkboxInputContainer"
           style={{

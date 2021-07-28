@@ -104,9 +104,6 @@ function MyPageWrapper({ hasUserId }) {
     formData.append('image', user_image);
     formData.append('user_info', JSON.stringify(user_info));
 
-    for (let el of formData.entries()) {
-      console.log(el);
-    }
     return axios
       .patch(`${END_POINT}/mypage/${tempId}`, formData, {
         headers: {

@@ -81,7 +81,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
-          const tempUserId = hasUserId || window.localStorage.getItem('userId')
+          const tempUserId = hasUserId || window.localStorage.getItem('userId');
           window.location.href = `https://gallery-port.com/profile/${tempUserId}`;
         }
       });
