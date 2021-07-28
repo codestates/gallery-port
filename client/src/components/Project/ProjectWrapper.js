@@ -6,8 +6,8 @@ import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
 import '../Upload/UploadWrapper.css';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProjectWrapper({ hasUserId, projectId }) {
   const [project_info, setProject_info] = useState({
@@ -27,7 +27,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [project_name, setProject_name] = useState('');
   const [curFiles, setCurFiles] = useState('');
   const [descriptions, setDescription] = useState();
-   let history = useHistory();
+  let history = useHistory();
 
   useEffect(() => {
     const getProjectData = () => {
@@ -35,11 +35,11 @@ function ProjectWrapper({ hasUserId, projectId }) {
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           const urlArr = [];
           const descArr = [];
 
-          res.data.projectdata.project_content.forEach(el => {
+          res.data.projectdata.project_content.forEach((el) => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
@@ -62,7 +62,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           setUser_user_name(res.data.userdata.user_name);
           setUser_photo(res.data.userdata.user_photo);
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
@@ -74,7 +74,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
       .delete(`${END_POINT}/project/${projectid}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         if (
           res.message === 'Invalid user' ||
           res.message === 'Unauthorized user'

@@ -13,8 +13,8 @@ import { debounce } from 'lodash';
 import '../SignUp/SignUpWrapper.css';
 import { hash } from 'bcryptjs';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({
@@ -38,7 +38,7 @@ function MyPageWrapper({ hasUserId }) {
         .get(`${END_POINT}/mypage/${hasUserId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           const file = convertURLtoFile(res.data.data.user_photo);
           setUser_image(file);
           setUser_email(res.data.data.user_email);
@@ -49,7 +49,7 @@ function MyPageWrapper({ hasUserId }) {
             user_github: res.data.data.user_github,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
@@ -109,11 +109,11 @@ function MyPageWrapper({ hasUserId }) {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

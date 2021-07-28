@@ -2,11 +2,11 @@ import React from 'react';
 import './ProjectList.css';
 import { useHistory } from 'react-router-dom';
 
-function ProjectList({ project, setProjectId ,hasUserId}) {
+function ProjectList({ project, setProjectId, hasUserId }) {
   let history = useHistory();
 
   function handleClick(e) {
-    if (project.id === '/upload') {
+    if (project.id === 'upload') {
       return history.push('/upload');
     }
 
@@ -15,8 +15,8 @@ function ProjectList({ project, setProjectId ,hasUserId}) {
     return history.push(`/project/${project.id}`);
   }
 
-  return  (
-    <div className={hasUserId !== undefined ? "list": `list ${project.id}`}>
+  return (
+    <div className={hasUserId !== undefined ? 'list' : `list ${project.id}`}>
       <div onClick={() => handleClick()} style={{ cursor: 'pointer' }}>
         <img
           className="listimg"

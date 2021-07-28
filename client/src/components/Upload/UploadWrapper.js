@@ -6,8 +6,8 @@ import { scrollTo } from '../../utils/etc';
 import './UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadWrapper() {
   const [project_info, setProject_info] = useState({
@@ -53,7 +53,7 @@ function UploadWrapper() {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -88,11 +88,11 @@ function UploadWrapper() {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }
