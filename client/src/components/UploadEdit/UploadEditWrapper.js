@@ -31,6 +31,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   const [curFiles, setCurFiles] = useState(''); //필수
   const [descriptions, setDescription] = useState(); //필수
   const [modalOn, setModalOn] = useState(false);
+  let history = useHistory();
 
   const stackArray = [
     'JavaScript',
@@ -43,17 +44,21 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   ];
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           const urlArr = [];
           const descArr = [];
 
-          res.data.projectdata.project_content.forEach(el => {
+          res.data.projectdata.project_content.forEach((el) => {
             urlArr.push(el.image);
             descArr.push(el.text);
           });
@@ -64,7 +69,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             fileArr.push(convertURLtoFile(el));
           }
 
-          const isChecked = stackArray.map(el => {
+          const isChecked = stackArray.map((el) => {
             if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
               return true;
             } else {
@@ -91,12 +96,12 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_url: res.data.projectdata.project_url,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
     getProjectData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
@@ -111,14 +116,12 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter(el => {
+        project_stack.filter((el) => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
     }
   }
-
-  let history = useHistory();
 
   function patchHandler() {
     const formData = new FormData();
@@ -144,11 +147,11 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }
