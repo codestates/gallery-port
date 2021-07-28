@@ -81,8 +81,6 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
-          const tempUserId = hasUserId || window.localStorage.getItem('userId');
-          window.location.href = `https://gallery-port.com/profile/${tempUserId}`;
         }
       });
   }
@@ -131,14 +129,9 @@ function ProjectWrapper({ hasUserId, projectId }) {
             <Link to="/uploadedit" className="landing_link">
               <div className="project_button">수정</div>
             </Link>
-            <div
-              className="project_button"
-              onClick={() => {
-                projectDeleteHandler();
-              }}
-            >
-              삭제
-            </div>
+            <Link to="/profile" className="landing_link" onClick={() => { projectDeleteHandler(); }}>
+              <div className="project_button">삭제</div>
+            </Link>
           </div>
           {/* ) : null} */}
         </div>
