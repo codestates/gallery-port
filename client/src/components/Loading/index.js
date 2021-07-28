@@ -1,7 +1,14 @@
 import React from 'react';
 import './style.css';
+// import { useHistory } from 'react-router-dom';
 
 function LoadingText() {
+  // let history = useHistory();
+
+  // setTimeout(function () {
+  //   history.push('/');
+  // }, 5000);
+
   return (
     <div className="loadingText">
       <div className="loadingTitle stop-dragging">

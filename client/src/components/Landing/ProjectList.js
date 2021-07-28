@@ -2,7 +2,7 @@ import React from 'react';
 import './ProjectList.css';
 import { useHistory } from 'react-router-dom';
 
-function ProjectList({ project, setProjectId, hasUserId }) {
+function ProjectList({ project, setProjectId, hasUserId, Landing }) {
   let history = useHistory();
 
   function handleClick(e) {
@@ -16,7 +16,10 @@ function ProjectList({ project, setProjectId, hasUserId }) {
   }
 
   return (
-    <div className={hasUserId !== undefined ? 'list' : `list ${project.id}`}>
+    <div
+      className={hasUserId !== undefined ? 'list' : `list ${project.id}`}
+      style={Landing ? { color: '#000000' } : {}}
+    >
       <div onClick={() => handleClick()} style={{ cursor: 'pointer' }}>
         <img
           className="listimg"

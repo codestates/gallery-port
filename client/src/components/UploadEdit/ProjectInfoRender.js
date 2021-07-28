@@ -9,6 +9,7 @@ function Item(props) {
       <img
         src={URL.createObjectURL(props.curFile)}
         style={{ width: '547px', height: '237px', top: '24px' }}
+        alt="description"
       />
       <p className="carousel_desc">{props.descriptions[props.idx].value}</p>
     </Paper>
@@ -71,7 +72,7 @@ function ProjectInfoRender({
             취소
           </div>
           <div className="modal_button_upload" onClick={patchHandler}>
-            수정
+            등록
           </div>
         </div>
       </div>

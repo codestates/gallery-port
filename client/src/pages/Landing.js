@@ -28,8 +28,7 @@ function Landing({
         setProjectId={setProjectId}
         setStackProjectData={setStackProjectData}
         hasUserId={hasUserId}
-        stackString={stackString}
-        Landing={true}
+        Landing={Landing}
       />
       <Footer Landing={true} />
     </div>

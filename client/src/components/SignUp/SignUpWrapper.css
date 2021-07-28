@@ -313,7 +313,7 @@ div.imageUploaderContainer {
   width: 100vw;
   /* height: 100vh; */
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 }
 div.contextCon {

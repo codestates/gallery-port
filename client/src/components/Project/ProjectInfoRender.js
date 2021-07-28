@@ -9,6 +9,7 @@ function Item(props) {
       <img
         src={props.curFile}
         style={{ width: '1120px', height: '450px', top: '24px' }}
+        alt="description"
       />
       <p className="project_page_carousel_desc">
         {props.descriptions !== [] ? props.descriptions[props.idx] : null}

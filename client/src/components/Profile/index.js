@@ -5,9 +5,10 @@ import newProjectClick from '../../images/new_project.svg';
 import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../../pages/Loading';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
@@ -18,13 +19,21 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [userIntroduction, setUserIntroduction] = useState('');
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const tempUserId = hasUserId || window.localStorage.getItem('userId');
+
+    if (!hasUserId) {
+      history.push('/error');
+    }
+    setIsLoading(true);
+
     axios
-      .get(`${END_POINT}/profile/${hasUserId}`, {
+      .get(`${END_POINT}/profile/${tempUserId}`, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const data1 = res.data.data.projects;
         setProjectDataLength(data1);
         setNewNotProjectData(data1);
@@ -38,6 +47,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
         setUserName(data5);
         const data6 = res.data.data.user_photo;
         setUserPhoto(data6);
+        setIsLoading(false);
       });
   }, []);
 
@@ -79,7 +89,14 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
     return history.push(`/mypage/${hasUserId}`);
   }
 
-  return (
+  return isLoading ? (
+    <Loading
+      // logoutHandler={logoutHandler}
+      hasUserId={hasUserId}
+      // setStackProjectData={setStackProjectData}
+      // setStackString={setStackString}
+    />
+  ) : (
     <div className="ProfileWrapper">
       <div className="profileUserInfo">
         <div className="photoWraaper">
@@ -117,7 +134,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
           ) : (
             <div>
               {hasUserId !== undefined
-                ? projectDataLength.map((project) => {
+                ? projectDataLength.map(project => {
                     return (
                       <ProjectList
                         key={project.thumbnail}
@@ -127,7 +144,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
                       />
                     );
                   })
-                : newNotProjectData.map((project) => {
+                : newNotProjectData.map(project => {
                     return (
                       <ProjectList
                         key={project.thumbnail}

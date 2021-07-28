@@ -12,9 +12,10 @@ import Upload from './pages/Upload';
 import UploadEdit from './pages/UploadEdit';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
+import { useHistory } from 'react-router-dom';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function App() {
   const [hasUserId, setHasUserId] = useState(undefined);
@@ -22,22 +23,25 @@ function App() {
   const [stackProjectData, setStackProjectData] = useState('');
   const [stackString, setStackString] = useState('');
 
+  let history = useHistory();
+
   useEffect(() => {
     if (hasUserId !== '') {
       console.log('app.js확인중 - hasUserId :', hasUserId);
-      console.log('app.js확인중 - projectId : ', projectId);
+      // console.log('app.js확인중 - projectId : ', projectId);
+      // console.log('app.js확인중 - stackString : ', stackString);
     }
   });
 
   useEffect(() => {
     if (stackString !== '') {
-      const getStackData = (stackString) => {
+      const getStackData = stackString => {
         return axios
           .get(`${END_POINT}`, {
             params: { stack: stackString },
             withCredentials: true,
           })
-          .then((res) => {
+          .then(res => {
             const projects = res.data.data.projects;
             setStackProjectData(projects);
           });
@@ -47,7 +51,7 @@ function App() {
       const getAllData = () => {
         return axios
           .get(`${END_POINT}`, { withCredentials: true })
-          .then((res) => {
+          .then(res => {
             const projects = res.data.data.projects;
             setStackProjectData(projects);
           });
@@ -62,14 +66,14 @@ function App() {
     setHasUserId(storageSavedUserId);
   });
 
-  const loginHandler = (userId) => {
+  const loginHandler = userId => {
     setHasUserId(userId);
   };
 
   const logoutHandler = () => {
     setHasUserId(undefined);
     window.localStorage.removeItem('userId');
-    setHasUserId('');
+    history.push('/');
   };
 
   return (
@@ -87,6 +91,7 @@ function App() {
               stackString={stackString}
             />
           </Route>
+
           <Route path="/signin">
             <Signin
               loginHandler={loginHandler}
@@ -135,6 +140,7 @@ function App() {
               hasUserId={hasUserId}
               projectId={projectId}
               setStackString={setStackString}
+              setStackProjectData={setStackProjectData}
             />
           </Route>
           <Route path="/upload">
@@ -153,6 +159,7 @@ function App() {
               setStackString={setStackString}
             />
           </Route>
+
           <Route path="/error">
             <ErrorPage
               logoutHandler={logoutHandler}

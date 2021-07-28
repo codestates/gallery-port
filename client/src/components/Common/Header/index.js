@@ -5,19 +5,18 @@ import logo from '../../../images/logo_b.svg';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [stringColor, setStringColor] = useState(false);
+  const [stringColor, setStringColor] = useState();
 
   let history = useHistory();
 
-  const postStackHandler = (string) => {
-    setStringColor('on');
+  const postStackHandler = string => {
     const stackString = string;
     props.setStackString(stackString);
 
@@ -26,12 +25,12 @@ function Header(props) {
         params: { stack: string },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch((err) => alert('실패'));
+      .catch(err => alert('실패'));
   };
 
   useEffect(() => {

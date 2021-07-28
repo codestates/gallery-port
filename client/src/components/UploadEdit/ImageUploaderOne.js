@@ -31,7 +31,7 @@ function ImageUploaderOne({
               className="img_preview"
               onClick={e => inputBtnClick(e, inputRef)}
               style={{
-                backgroundImage: `url('${stateName}')`,
+                backgroundImage: `url('${URL.createObjectURL(stateName)}')`,
                 backgroundSize: 'cover',
               }}
             ></div>

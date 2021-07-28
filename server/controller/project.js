@@ -230,15 +230,16 @@ module.exports = {
             if (!checkUser) {
                 return res.status(404).json({"message": "Invalid user"})
             }
-            await Project.destroy({ where: { id: projectId }});
             await ProjectByUser.destroy({ where: { project_id: projectId }});
             await StackForProject.destroy({ where: { project_id: projectId }});
+            await Project.destroy({ where: { id: projectId }});
             await Content.destroy({ where: { project_id: projectId }});
 
-            fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
+            // fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
 
             return res.sendStatus(200)
         } catch (err) {
+            console.log(err);
             return res.status(500).send(err)
         }
         
