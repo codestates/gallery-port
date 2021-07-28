@@ -58,7 +58,7 @@ function UploadWrapper({ hasUserId }) {
       ]);
     } else {
       setProject_stack(
-        project_stack.filter((el) => {
+        project_stack.filter(el => {
           return el !== stackArray[itemName].toLocaleLowerCase();
         })
       );
@@ -91,11 +91,11 @@ function UploadWrapper({ hasUserId }) {
         },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         alert('성공');
         history.go(-1);
       })
-      .catch((err) => {
+      .catch(err => {
         alert('실패');
       });
   }

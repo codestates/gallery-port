@@ -9,6 +9,7 @@ function Item(props) {
       <img
         src={URL.createObjectURL(props.curFile)}
         style={{ width: '547px', height: '237px', top: '24px' }}
+        alt="description"
       />
       <p className="carousel_desc">{props.descriptions[props.idx].value}</p>
     </Paper>

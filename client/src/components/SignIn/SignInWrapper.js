@@ -24,20 +24,20 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
       .post(`${END_POINT}/signin`, signInInfo, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         console.log(res);
         return res.data.id;
       })
-      .then((data) => {
+      .then(data => {
         setHasUserId(data);
         return data;
       })
-      .then((userId) => {
+      .then(userId => {
         loginHandler(userId);
         window.localStorage.setItem('userId', userId);
         window.history.go(-1);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         alert('실패');
       });

@@ -43,7 +43,7 @@ function MyPageWrapper({ hasUserId }) {
         .get(`${END_POINT}/mypage/${hasUserId}`, {
           withCredentials: true,
         })
-        .then((res) => {
+        .then(res => {
           const file = convertURLtoFile(res.data.data.user_photo);
           setUser_image(file);
           setUser_email(res.data.data.user_email);
@@ -54,7 +54,7 @@ function MyPageWrapper({ hasUserId }) {
             user_github: res.data.data.user_github,
           });
         })
-        .catch((err) => {
+        .catch(err => {
           alert('실패');
         });
     };
@@ -112,11 +112,11 @@ function MyPageWrapper({ hasUserId }) {
         },
         withCredentials: true,
       })
-      .then((res) => {
+      .then(res => {
         alert('성공');
         history.go(-1);
       })
-      .catch((err) => {
+      .catch(err => {
         alert('실패');
       });
   }
