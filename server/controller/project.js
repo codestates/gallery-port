@@ -54,6 +54,9 @@ module.exports = {
             const ProjectUserId = projectUserData.user_id;
             const userData = await User.findOne({ where: { id: ProjectUserId }});
 
+            projectData.project_start = projectData.project_start.toLocaleDateString('ko-KR')
+            projectData.project_end = projectData.project_end.toLocaleDateString('ko-KR')
+
             return res.status(200).json({
                 "projectdata": {...projectData, project_content, project_stack}, 
                 "userdata": { user_photo: userData.user_photo, user_name: userData.user_name},
