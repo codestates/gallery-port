@@ -18,10 +18,13 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
   const [userIntroduction, setUserIntroduction] = useState('');
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
-
+    
+    
+  
   useEffect(() => {
+    const tempUserId = hasUserId || window.localStorage.getItem('userId')
     axios
-      .get(`${END_POINT}/profile/${hasUserId}`, {
+      .get(`${END_POINT}/profile/${tempUserId}`, {
         withCredentials: true,
       })
       .then((res)=>{
