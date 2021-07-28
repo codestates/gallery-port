@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './alert-modal.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
-function AlertModal({ alertString, alertBtn }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const openModalHandler = () => {
-    setIsOpen(!isOpen);
-  };
+function AlertModal(props) {
+  const { open, close, alertString, alertBtn } = props;
 
-  console.log('받는값', alertString, alertBtn);
   return (
-    <>
+    <div className={open ? 'openModal modal' : 'modal'}>
       <div className="ModalContainer">
-        <button className="ModalBtn" onClick={openModalHandler}>
-          {isOpen === false ? 'Open Modal' : 'Opened!'}
-        </button>
-        {isOpen === true ? (
+        {open === true ? (
           <div className="ModalBackdrop">
             <div className="ModalView">
               <div className="desc">
                 {alertString}
-                <button className="closeBtn" onClick={openModalHandler}>
+                <button className="closeBtn" onClick={close}>
                   {alertBtn}
                 </button>
               </div>
@@ -28,7 +21,7 @@ function AlertModal({ alertString, alertBtn }) {
           </div>
         ) : null}
       </div>
-    </>
+    </div>
   );
 }
 

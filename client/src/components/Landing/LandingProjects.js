@@ -23,7 +23,7 @@ function LandingProjects({
       <div className="landingProjectsInner">
         <div className="projectList">
           {stackProjectData[0] === undefined ? (
-            <div>등록된 프로젝트가 없습니다.</div>
+            <div className="noProject">등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
               {stackProjectData.map((project) => {

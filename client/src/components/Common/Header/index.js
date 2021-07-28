@@ -14,8 +14,24 @@ function Header(props) {
   const [ScrollActive, setScrollActive] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [stringColor, setStringColor] = useState(false);
-  const [alertString] = useState('로그아웃 되었습니다.');
-  const [alertBtn] = useState('확인');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  //   setIsLogin(false);
+  //   props.logoutHandler();
+
+  //   return axios.post(
+  //     `${END_POINT}/signout`,
+  //     {},
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  // };
 
   let history = useHistory();
 
@@ -34,7 +50,7 @@ function Header(props) {
         props.setStackProjectData(projects);
         history.push('/');
       })
-      .catch((err) => alert('실패'));
+      .catch((err) => alert('stack 정보를 받아오는데 실패하였습니다.'));
   };
 
   useEffect(() => {
@@ -65,9 +81,8 @@ function Header(props) {
   });
 
   function handleLogout() {
+    setModalOpen(false);
     setIsLogin(false);
-    <AlertModal alertString={alertString} alertBtn={alertBtn} />;
-    alert('로그아웃 되었습니다!');
     props.logoutHandler();
 
     return axios.post(
@@ -151,12 +166,24 @@ function Header(props) {
                 </button>
               </Link>
               {props.hasUserId ? (
-                <button
-                  className="headerSigninBtn"
-                  onClick={() => handleLogout()}
-                >
-                  로그아웃
-                </button>
+                // <button
+                // className="headerSigninBtn"
+                //   onClick={() => handleLogout()}
+                // >
+
+                //   로그아웃
+                // </button>
+                <div>
+                  <button onClick={openModal} className="headerSigninBtn">
+                    로그아웃
+                  </button>
+                  <AlertModal
+                    open={modalOpen}
+                    close={handleLogout}
+                    alertString="로그아웃 되었습니다."
+                    alertBtn="확인"
+                  />
+                </div>
               ) : (
                 <Link to="/signin" className="signin_link">
                   <button className="headerSigninBtn">로그인</button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 // import { useHistory } from 'react-router-dom';
-import AlertModal from '../../utils/alert-modal';
+// import AlertModal from '../../utils/alert-modal';
 
 function LoadingText() {
   // let history = useHistory();
@@ -12,7 +12,7 @@ function LoadingText() {
 
   return (
     <>
-      <AlertModal />
+      {/* <AlertModal /> */}
       <div className="loadingText">
         <div className="loadingTitle stop-dragging">
           로딩 중입니다. <p>잠시만 기다려 주십시오.</p>

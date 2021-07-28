@@ -104,9 +104,10 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_url: res.data.projectdata.project_url,
           });
         })
-        .catch((err) => {
-          alert('실패');
-        });
+        .then((_) => history.go(-1));
+      // .catch((err) => {
+      //   alert('실패');
+      // });
     };
     getProjectData();
   }, [hasUserId]);

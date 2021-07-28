@@ -73,7 +73,7 @@ function App() {
   const logoutHandler = () => {
     setHasUserId(undefined);
     window.localStorage.removeItem('userId');
-    history.push('/');
+    // history.push('/');
   };
 
   return (

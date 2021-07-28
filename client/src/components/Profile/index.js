@@ -130,7 +130,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
       <div className="profileUserProjects">
         <div className="projectList">
           {!projectDataLength ? (
-            <div>등록된 프로젝트가 없습니다.</div>
+            <div className="noProject">등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
               {hasUserId !== undefined
