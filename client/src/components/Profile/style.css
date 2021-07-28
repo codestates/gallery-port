@@ -4,7 +4,13 @@
   box-sizing: border-box;
 }
 
-button{cursor: pointer; background: inherit; border:none ;padding:0; margin:0}
+button {
+  cursor: pointer;
+  background: inherit;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
 
 .ProfileWrapper {
   position: relative;
@@ -87,4 +93,8 @@ button{cursor: pointer; background: inherit; border:none ;padding:0; margin:0}
   margin: 0 auto;
   display: block;
   cursor: pointer;
+}
+
+.projectList .noProject {
+  font-family: 'NotoSansKR-M', sans-serif;
 }

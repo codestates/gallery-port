@@ -3,10 +3,13 @@ import Footer from '../components/Common/Footer';
 import Header from '../components/Common/Header';
 import SignUpWrapper from '../components/SignUp/SignUpWrapper';
 
-function Signup({ setStackProjectData ,setStackString}) {
+function Signup({ setStackProjectData, setStackString }) {
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <Header setStackProjectData={setStackProjectData} setStackString={setStackString} />
+      <Header
+        setStackProjectData={setStackProjectData}
+        setStackString={setStackString}
+      />
       <SignUpWrapper />
       <Footer />
     </div>
@@ -14,3 +17,5 @@ function Signup({ setStackProjectData ,setStackString}) {
 }
 
 export default Signup;
+
+// props.setStackString(stackString);
