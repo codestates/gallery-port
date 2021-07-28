@@ -92,13 +92,24 @@
   /* height: 100vh; */
 }
 
-.headerBtn button {
+.headerBtn .headerProfileBtn,
+.headerBtn .headerSigninBtn,
+.headerBtn .headerSigninBtn {
+  /* display: block; */
   width: 110px;
+  /* width: 500px; */
   height: 40px;
   border-radius: 4px;
   cursor: pointer;
   /* border: 1px solid red; */
 }
+
+/* .headerBtn button {
+  width: 110px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
 
 .headerProfileBtn {
   margin-right: 16px;

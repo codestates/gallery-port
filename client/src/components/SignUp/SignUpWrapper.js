@@ -7,8 +7,8 @@ import './SignUpWrapper.css';
 import { useHistory } from 'react-router-dom';
 import AlertModal from '../../utils/alert-modal';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignUpWrapper() {
   const [user_info, setUser_info] = useState({
@@ -62,7 +62,7 @@ function SignUpWrapper() {
     formData.append('user_info', JSON.stringify(user_info));
 
     for (let el of formData.entries()) {
-      console.log(el);
+      // console.log(el);
     }
     return axios //preview화면에서 업로드 버튼을 누르면 post요청이 일어나고 로딩화면으로 전환, profile화면으로 redirection 그리고 get으로 post해놓은 data를 불러온다 200ok 떨어지면 로딩화면 off
       .post(`${END_POINT}/signup`, formData, {
@@ -83,10 +83,11 @@ function SignUpWrapper() {
   }
 
   const closeModal = () => {
+    setModalOpen(false);
+
     if (joinSucc === true) {
       history.go(-1);
     }
-    setModalOpen(false);
   };
 
   return (

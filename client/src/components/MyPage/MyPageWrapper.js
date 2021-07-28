@@ -14,8 +14,8 @@ import '../SignUp/SignUpWrapper.css';
 import { hash } from 'bcryptjs';
 import AlertModal from '../../utils/alert-modal';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
   const [user_info, setUser_info] = useState({
