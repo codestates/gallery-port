@@ -82,7 +82,7 @@ module.exports = {
             const project_info = JSON.parse(req.body.project_info);
 
             try {
-
+                
                 if (!project_info.project_start) {
                     delete project_info.project_start
                 }
@@ -100,12 +100,13 @@ module.exports = {
                 await data.save();
                 
                 // 서버 로컬 디렉토리에 저장된 폴더 이름 변경 
-                const oldPath = __dirname + `/../${req.files.thumbnail[0].destination}`;
-                const newPath = __dirname + `/../uploads/project/${data.id}`
-                fs.renameSync(oldPath, newPath);
+                // const oldPath = __dirname + `/../${req.files.thumbnail[0].destination}`;
+                // const newPath = __dirname + `/../uploads/project/${data.id}`
+                // fs.renameSync(oldPath, newPath);
                 
                 // 서버 로컬 디렉토리에 저장된 파일 이름 변경
-                fs.renameSync(newPath + '/' + req.files.thumbnail[0].filename, newPath + '/' + newThumbnailFile);
+                const path = __dirname + '/../uploads/project/'
+                fs.renameSync(path + req.files.thumbnail[0].filename, path + newThumbnailFile);
                 
                 // ProjectByUser 에 저장
                 const tokenData = await verifyAccessToken(req)
@@ -128,7 +129,7 @@ module.exports = {
                     let newImageFile = projectImages[i].filename.split('_');
                     newImageFile.splice(1,1, data.id);
                     newImageFile = newImageFile.join('_');
-                    fs.renameSync(newPath + '/' + projectImages[i].filename, newPath + '/' + newImageFile);
+                    fs.renameSync(path + projectImages[i].filename, path + newImageFile);
                     await Content.create({ 
                         project_id: data.id, 
                         content_image: process.env.IMAGE_ENDPOINT + '/image/project/' + newImageFile, 
@@ -250,12 +251,21 @@ module.exports = {
             if (!checkUser) {
                 return res.status(404).json({"message": "Invalid user"})
             }
+            
+            const contentData = await Content.findAll({ where: { project_id: projectId }});
+            for (let el of contentData){
+                let filePathImage = el.content_image.split('/').pop();
+                fs.rmdirSync(__dirname + `/../uploads/project/${filePathImage}`, {recursive: true})
+            }
+
+            const projectData = await Project.findOne({ where: { id: projectId }});
+            const filePathThumbnail = projectData.project_thumbnail.split('/').pop();
+            fs.rmdirSync(__dirname + `/../uploads/project/${filePathThumbnail}`, {recursive: true})
+
             await ProjectByUser.destroy({ where: { project_id: projectId }});
             await StackForProject.destroy({ where: { project_id: projectId }});
-            await Project.destroy({ where: { id: projectId }});
             await Content.destroy({ where: { project_id: projectId }});
-
-            // fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
+            await Project.destroy({ where: { id: projectId }});
 
             return res.sendStatus(200)
         } catch (err) {

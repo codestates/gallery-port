@@ -32,11 +32,11 @@ module.exports = {
 
         const projectId = req.params.projectid || req.headers.temp_id 
         
-        const dir = `./uploads/project/${projectId}`
+        const dir = `./uploads/project/`
         try {
             fs.accessSync(dir)
-            fs.rmdirSync(dir, {recursive: true})
-            fs.mkdirSync(dir, {recursive: true})
+            // fs.rmdirSync(dir, {recursive: true})
+            // fs.mkdirSync(dir, {recursive: true})
         } catch (err) {
             fs.mkdirSync(dir, {recursive: true})
         }
