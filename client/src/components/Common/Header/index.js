@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from '../../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
-const END_POINT = process.env.REACT_APP_API_URL;
+const END_POINT = 'https://gallery-port-server.com';
+// const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
   const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
