@@ -235,10 +235,11 @@ module.exports = {
             await Project.destroy({ where: { id: projectId }});
             await Content.destroy({ where: { project_id: projectId }});
 
-            fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
+            // fs.rmdirSync(__dirname + `/../uploads/project/${projectId}/`, {recursive: true})
 
             return res.sendStatus(200)
         } catch (err) {
+            console.log(err);
             return res.status(500).send(err)
         }
         

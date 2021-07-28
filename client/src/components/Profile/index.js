@@ -19,11 +19,11 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
   const [userIntroduction, setUserIntroduction] = useState('');
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const tempUserId = hasUserId || window.localStorage.getItem('userId');
 
-    const [isLoading, setIsLoading] = useState(false);
     if (!hasUserId) {
       history.push('/error');
     }
