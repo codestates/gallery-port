@@ -19,7 +19,7 @@ function MyPageInfo({
   pw_confirm,
 }) {
   const textInputData = [
-    ['유저 이름', 'user_name', '팀원', 72, 40, 'text'],
+    ['유저 이름', 'user_name', '팀원', 72, 40, 'text', '0'],
     [
       '유저 소개',
       'user_introduction',
@@ -27,8 +27,9 @@ function MyPageInfo({
       112,
       80,
       'text',
+      '36px',
     ],
-    ['깃허브 링크', 'user_github', 'url', 72, 40, 'url'],
+    ['깃허브 링크', 'user_github', 'url', 72, 40, 'url', '0'],
   ];
 
   const requiredTextInputData = [
@@ -111,6 +112,7 @@ function MyPageInfo({
               user_info={user_info}
               onChangeHandler={onChangeHandler}
               type={el[5]}
+              paddingBottom={el[6]}
             />
           );
         })}

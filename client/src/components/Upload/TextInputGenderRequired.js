@@ -21,6 +21,7 @@ function TextInputGenderRequired({
         className="input_small"
         value={stateName}
         onChange={e => stateFunc(e.target.value)}
+        maxLength="20"
       />
     </div>
   );
