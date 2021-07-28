@@ -82,7 +82,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           alert(res.message);
         } else {
           alert('삭제');
-          window.location.href = `/profile/${hasUserId}`
+          window.location.href = `/profile`
         }
       });
   }
