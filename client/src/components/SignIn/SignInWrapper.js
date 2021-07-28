@@ -5,8 +5,8 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 import AlertModal from '../../utils/alert-modal';
 
-const END_POINT = 'https://gallery-port-server.com';
-// const END_POINT = process.env.REACT_APP_API_URL;
+// const END_POINT = 'https://gallery-port-server.com';
+const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   const [signInInfo, setSignInInfo] = useState({
