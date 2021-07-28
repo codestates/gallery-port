@@ -3,7 +3,7 @@ import axios from 'axios';
 import Modal from './Modal';
 import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
-import { convertURLtoFile } from '../../utils/fileHandler';
+// import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 
@@ -24,13 +24,14 @@ function UploadEditWrapper({ hasUserId, projectId }) {
     project_url: '',
   });
   const [firstStack, setFirstStack] = useState([]);
-  const [firstDesc, setFirstDesc] = useState([]);
-  const [project_name, setProject_name] = useState(''); //필수
-  const [project_stack, setProject_stack] = useState([]); //필수
-  const [project_thumbnail, setProject_thumbnail] = useState(''); //필수
-  const [curFiles, setCurFiles] = useState(''); //필수
-  const [descriptions, setDescription] = useState(); //필수
+  // const [firstDesc, setFirstDesc] = useState([]);
+  const [project_name, setProject_name] = useState('');
+  const [project_stack, setProject_stack] = useState([]);
+  const [project_thumbnail, setProject_thumbnail] = useState('');
+  const [curFiles, setCurFiles] = useState([]);
+  const [descriptions, setDescription] = useState('');
   const [modalOn, setModalOn] = useState(false);
+  let history = useHistory();
 
   const stackArray = [
     'JavaScript',
@@ -43,26 +44,39 @@ function UploadEditWrapper({ hasUserId, projectId }) {
   ];
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${projectId}`, {
           withCredentials: true,
         })
         .then(res => {
-          console.log(res);
-          const urlArr = [];
-          const descArr = [];
+          // console.log(res);
+          // const urlArr = [];
+          // const descArr = [];
 
-          res.data.projectdata.project_content.forEach(el => {
-            urlArr.push(el.image);
-            descArr.push(el.text);
-          });
+          // res.data.projectdata.project_content.forEach(el => {
+          //   urlArr.push(el.image);
+          //   descArr.push(el.text);
+          // });
 
-          const fileArr = [];
+          // const fileArr = [];
 
-          for (let el of urlArr) {
-            fileArr.push(convertURLtoFile(el));
-          }
+          // for (let el of urlArr) {
+          //   const toFile = async el => {
+          //     const response = await axios.get(el);
+          //     const data = await response.blob();
+          //     const jpg = el.split('.').pop();
+          //     const filename = el.split('/').pop();
+          //     const metadata = { type: `image/${jpg}` };
+          //     return new File([data], filename, metadata);
+          //   };
+          //   const data = toFile(el);
+          //   fileArr.push(data);
+          // }
 
           const isChecked = stackArray.map(el => {
             if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
@@ -71,12 +85,11 @@ function UploadEditWrapper({ hasUserId, projectId }) {
               return false;
             }
           });
-          setCurFiles(fileArr);
-          setProject_thumbnail(
-            convertURLtoFile(res.data.projectdata.project_thumbnail)
-          );
+          setCurFiles([]);
+          setProject_thumbnail('');
+          // convertURLtoFile(res.data.projectdata.project_thumbnail)
           setFirstStack(isChecked);
-          setFirstDesc(descArr);
+          // setFirstDesc(descArr);
           setProject_name(res.data.projectdata.project_name);
           setProject_info({
             project_start: res.data.projectdata.project_start,
@@ -96,7 +109,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         });
     };
     getProjectData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     const descElemArray = document.querySelectorAll('.descriptionInput');
@@ -118,8 +131,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
     }
   }
 
-  let history = useHistory();
-
   function patchHandler() {
     const formData = new FormData();
     const project_content = [];
@@ -138,7 +149,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       console.log(el);
     }
     return axios
-      .patch(`${END_POINT}/project`, formData, {
+      .patch(`${END_POINT}/project/${projectId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -172,7 +183,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           stackArray={stackArray}
           curFiles={curFiles}
           setCurFiles={setCurFiles}
-          firstDesc={firstDesc}
+          // firstDesc={firstDesc}
           firstStack={firstStack}
         />
         <div

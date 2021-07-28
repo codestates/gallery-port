@@ -31,14 +31,19 @@ function MyPageWrapper({ hasUserId }) {
   const [password_confirm, setPassword_confirm] = useState(''); //필수
   const [user_image, setUser_image] = useState(''); //필수
   const [hashedPassword, setHashedPassword] = useState('');
+  let history = useHistory();
 
   useEffect(() => {
+    if (!hasUserId) {
+      history.push('/error');
+    }
+
     const getUserData = () => {
       axios
         .get(`${END_POINT}/mypage/${hasUserId}`, {
           withCredentials: true,
         })
-        .then(res => {
+        .then((res) => {
           const file = convertURLtoFile(res.data.data.user_photo);
           setUser_image(file);
           setUser_email(res.data.data.user_email);
@@ -49,12 +54,12 @@ function MyPageWrapper({ hasUserId }) {
             user_github: res.data.data.user_github,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           alert('실패');
         });
     };
     getUserData();
-  }, []);
+  }, [hasUserId]);
 
   useEffect(() => {
     if (checkEmail(user_email)) {
@@ -89,8 +94,6 @@ function MyPageWrapper({ hasUserId }) {
     }
   }, 800);
 
-  let history = useHistory();
-
   function patchHandler() {
     const formData = new FormData();
 
@@ -109,11 +112,11 @@ function MyPageWrapper({ hasUserId }) {
         },
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         alert('성공');
         history.go(-1);
       })
-      .catch(err => {
+      .catch((err) => {
         alert('실패');
       });
   }

@@ -5,11 +5,12 @@ import newProjectClick from '../../images/new_project.svg';
 import ProjectList from '../Landing/ProjectList';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../../pages/Loading';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
-function ProfileWrapper({ hasUserId, setProjectId}) {
+function ProfileWrapper({ hasUserId, setProjectId }) {
   const [profile, setProfile] = useState('');
   const [projectDataLength, setProjectDataLength] = useState([]);
   const [newNotProjectData, setNewNotProjectData] = useState([]);
@@ -18,30 +19,36 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
   const [userIntroduction, setUserIntroduction] = useState('');
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
-    
-    
-  
+
   useEffect(() => {
     const tempUserId = hasUserId || window.localStorage.getItem('userId')
+
+    const [isLoading, setIsLoading] = useState(false);
+    if (!hasUserId) {
+      history.push('/error');
+    }
+    setIsLoading(true);
+
     axios
       .get(`${END_POINT}/profile/${tempUserId}`, {
         withCredentials: true,
       })
-      .then((res)=>{
-        const data1 = res.data.data.projects
-        setProjectDataLength(data1)
-        setNewNotProjectData(data1)
-        const data2 = res.data.data.user_email
-        setUserEmail(data2)
-        const data3 = res.data.data.user_github
-        setUserGithub(data3)
-        const data4 = res.data.data.user_introduction
-        setUserIntroduction(data4)
-        const data5 = res.data.data.user_name
-        setUserName(data5)
-        const data6 = res.data.data.user_photo
-        setUserPhoto(data6)
-      })
+      .then(res => {
+        const data1 = res.data.data.projects;
+        setProjectDataLength(data1);
+        setNewNotProjectData(data1);
+        const data2 = res.data.data.user_email;
+        setUserEmail(data2);
+        const data3 = res.data.data.user_github;
+        setUserGithub(data3);
+        const data4 = res.data.data.user_introduction;
+        setUserIntroduction(data4);
+        const data5 = res.data.data.user_name;
+        setUserName(data5);
+        const data6 = res.data.data.user_photo;
+        setUserPhoto(data6);
+        setIsLoading(false);
+      });
   }, []);
 
   let history = useHistory();
@@ -51,7 +58,7 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: 'upload',
-      newproject:true,
+      newproject: true,
     };
 
     projectDataLength.unshift(newproject);
@@ -61,7 +68,7 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
       project_thumbnail: newProjectClick,
       project_name: 'new project',
       id: 'upload',
-      newproject:true,
+      newproject: true,
     };
 
     projectDataLength.unshift(newproject);
@@ -82,7 +89,14 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
     return history.push(`/mypage/${hasUserId}`);
   }
 
-  return (
+  return isLoading ? (
+    <Loading
+      // logoutHandler={logoutHandler}
+      hasUserId={hasUserId}
+      // setStackProjectData={setStackProjectData}
+      // setStackString={setStackString}
+    />
+  ) : (
     <div className="ProfileWrapper">
       <div className="profileUserInfo">
         <div className="photoWraaper">
@@ -119,26 +133,27 @@ function ProfileWrapper({ hasUserId, setProjectId}) {
             <div>등록된 프로젝트가 없습니다.</div>
           ) : (
             <div>
-             {hasUserId !== undefined ?
-              projectDataLength.map((project) => {
-                return (
-                  <ProjectList
-                    key={project.thumbnail}
-                    project={project}
-                    setProjectId={setProjectId}
-                    hasUserId={hasUserId}
-                  />
-                );
-              }): newNotProjectData.map((project) => {
-                return (
-                  <ProjectList
-                    key={project.thumbnail}
-                    project={project}
-                    setProjectId={setProjectId}
-                    hasUserId={hasUserId}
-                  />
-                );
-              })}
+              {hasUserId !== undefined
+                ? projectDataLength.map(project => {
+                    return (
+                      <ProjectList
+                        key={project.thumbnail}
+                        project={project}
+                        setProjectId={setProjectId}
+                        hasUserId={hasUserId}
+                      />
+                    );
+                  })
+                : newNotProjectData.map(project => {
+                    return (
+                      <ProjectList
+                        key={project.thumbnail}
+                        project={project}
+                        setProjectId={setProjectId}
+                        hasUserId={hasUserId}
+                      />
+                    );
+                  })}
             </div>
           )}
         </div>
