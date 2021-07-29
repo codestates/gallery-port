@@ -35,8 +35,6 @@ module.exports = {
         const dir = `./uploads/project/`
         try {
             fs.accessSync(dir)
-            // fs.rmdirSync(dir, {recursive: true})
-            // fs.mkdirSync(dir, {recursive: true})
         } catch (err) {
             fs.mkdirSync(dir, {recursive: true})
         }
