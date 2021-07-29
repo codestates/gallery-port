@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from '../../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function Header(props) {
@@ -19,19 +18,6 @@ function Header(props) {
   const openModal = () => {
     setModalOpen(true);
   };
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  //   setIsLogin(false);
-  //   props.logoutHandler();
-
-  //   return axios.post(
-  //     `${END_POINT}/signout`,
-  //     {},
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  // };
 
   let history = useHistory();
 
@@ -46,7 +32,6 @@ function Header(props) {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res);
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
@@ -167,13 +152,6 @@ function Header(props) {
                 </button>
               </Link>
               {props.hasUserId ? (
-                // <button
-                // className="headerSigninBtn"
-                //   onClick={() => handleLogout()}
-                // >
-
-                //   로그아웃
-                // </button>
                 <div>
                   <button onClick={openModal} className="headerSigninBtn">
                     로그아웃
