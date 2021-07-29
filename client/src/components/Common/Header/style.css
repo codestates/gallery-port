@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.fixedBox {
+  width: 100vw;
+  height: 80px;
+  z-index: 1;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e2e7;
+}
+
+.fixedBox.unfixed {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+}
+
+.fixedBox.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.header {
+  width: 100vw;
+  height: 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e2e7;
+}
+
+.headerInner {
+  width: 1120px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.headerInner img {
+  width: 126px;
+  height: 80px;
+  -webkit-user-drag: none;
+  left: 0;
+  vertical-align: middle;
+}
+
+.headerInner nav {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.headerInner nav li {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 24px;
+  font-family: 'Roboto-B', sans-serif;
+  cursor: pointer;
+}
+
+.headerInner nav li.active {
+  color: #3d5afe;
+}
+
+.headerInner nav li:hover {
+  color: #3d5afe;
+}
+
+.headerInner .on {
+  color: #3d5afe;
+}
+
+.focused {
+  color: #3d5afe;
+}
+
+.headerBtn {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 20px;
+  /* transform: translate(0%, -50%); */
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 24px;
+  /* border: 1px solid red; */
+  width: 236px;
+  height: 40px;
+  /* width: 100vw; */
+  /* height: 100vh; */
+}
+
+.headerBtn .headerProfileBtn,
+.headerBtn .headerSigninBtn,
+.headerBtn .headerSigninBtn {
+  /* display: block; */
+  width: 110px;
+  /* width: 500px; */
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+/* .headerBtn button {
+  width: 110px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+.headerProfileBtn {
+  margin-right: 16px;
+  background-color: #ffffff;
+  border: 1px solid #3d5afe;
+  color: #3d5afe;
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: 1px solid red; */
+}
+
+.headerSigninBtn {
+  background-color: #3d5afe;
+  color: #ffffff;
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

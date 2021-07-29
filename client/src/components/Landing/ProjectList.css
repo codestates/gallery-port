@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.list {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
+
+.list:first-child {
+  color: #3d5afe;
+}
+
+.upload {
+  display: none;
+}
+
+.listimg {
+  width: 170px;
+  height: 280px;
+  object-fit: cover;
+}
+
+.listName {
+  padding-top: 10px;
+  font-family: 'NotoSansKR-B', sans-serif;
+  font-size: 14px;
+}

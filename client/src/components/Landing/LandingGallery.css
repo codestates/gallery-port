@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.stop-dragging {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.front,
+.back {
+  /* pointer-events: none; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 104px;
+  text-align: center;
+  font-family: 'Roboto-B', sans-serif;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.front {
+  color: transparent;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: white;
+}
+
+.mainText {
+  font-family: 'NotoSansKR-L', sans-serif;
+  font-size: 24px;
+  margin: 32px 0;
+  letter-spacing: 1px;
+}
+
+.mainProjectGo {
+  font-family: 'NotoSansKR-L', sans-serif;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: 100;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.canvasWrapper {
+  background: #3d5afe;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.mainArrow {
+  width: 24px;
+  height: 89px;
+  -webkit-user-drag: none;
+}

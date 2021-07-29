@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'NotoSansKR-L';
+  src: url('./fonts/NotoSansKR-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NotoSansKR-R';
+  src: url('./fonts/NotoSansKR-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NotoSansKR-M';
+  src: url('./fonts/NotoSansKR-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NotoSansKR-B';
+  src: url('./fonts/NotoSansKR-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto-L';
+  src: url('./fonts/Roboto-Light.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto-R';
+  src: url('./fonts/Roboto-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto-M';
+  src: url('./fonts/Roboto-Medium.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto-B';
+  src: url('./fonts/Roboto-Bold.ttf') format('opentype');
+}
