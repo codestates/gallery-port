@@ -12,8 +12,10 @@ function Modal({
   project_info,
   project_name,
   editSucc,
+  modalOpen,
+  setModalOpen,
 }) {
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
   // const [editSucc, setEditSucc] = useState(false);
   let history = useHistory();
 
@@ -26,17 +28,6 @@ function Modal({
 
   return (
     <>
-      <AlertModal
-        style={{ zindex: '999' }}
-        open={modalOpen}
-        close={closeModal}
-        alertString={
-          editSucc
-            ? '프로젝트 수정하였습니다.'
-            : '프로젝트 수정에 실패하였습니다.'
-        }
-        alertBtn="확인"
-      />
       {modalOn && curFiles ? (
         <div className="modalBackdrop">
           <div className="modalView" style={{ overflow: 'hidden' }}>
@@ -50,6 +41,17 @@ function Modal({
               project_name={project_name}
             />
           </div>
+          <AlertModal
+            style={{ zindex: '999' }}
+            open={modalOpen}
+            close={closeModal}
+            alertString={
+              editSucc
+                ? '프로젝트 수정하였습니다.'
+                : '프로젝트 수정에 실패하였습니다.'
+            }
+            alertBtn="확인"
+          />
         </div>
       ) : null}
     </>
