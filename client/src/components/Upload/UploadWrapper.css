@@ -810,7 +810,7 @@ a {
   height: 40px;
   background: #e0e2e7;
   border-radius: 4px;
-  z-index: 10000;
+  /* z-index: 10000; */
   font-family: 'NotoSansKR-B', sans-serif;
   font-style: normal;
   font-weight: bold;
