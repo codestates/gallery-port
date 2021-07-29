@@ -12,7 +12,7 @@
 <br/>
 
 # 🔨 Tech Stack
-<center><img src="https://user-images.githubusercontent.com/40759230/127431424-7bf28f2e-b99f-41c6-8800-27ca93161976.png" width="700"></center>
+<center><img src="https://user-images.githubusercontent.com/81145387/127497378-88ce61b7-2af5-4ad1-9fa8-a572dde97e33.jpg" width="700"></center>
 
 # 🛠 Flow Chart
 <center><img src="https://user-images.githubusercontent.com/40759230/127435825-062bafab-55f7-4a87-8d21-679a4cad7c32.png" width="700"></center>
