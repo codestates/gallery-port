@@ -106,7 +106,6 @@ function ProjectUploadInfo({
       <div className="project_stack" style={{ display: 'flex' }}>
         <div className="subject_wrapper">
           프로젝트 주요스택
-          {/* <span className="required">(필수)</span> */}
         </div>
         <div
           className="checkboxInputContainer"

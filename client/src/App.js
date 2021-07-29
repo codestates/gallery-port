@@ -12,9 +12,7 @@ import Upload from './pages/Upload';
 import UploadEdit from './pages/UploadEdit';
 import Loading from './pages/Loading';
 import ErrorPage from './pages/Error';
-import { useHistory } from 'react-router-dom';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function App() {
@@ -22,16 +20,6 @@ function App() {
   const [projectId, setProjectId] = useState('');
   const [stackProjectData, setStackProjectData] = useState('');
   const [stackString, setStackString] = useState('');
-
-  let history = useHistory();
-
-  useEffect(() => {
-    if (hasUserId !== '') {
-      // console.log('app.js확인중 - hasUserId :', hasUserId);
-      // console.log('app.js확인중 - projectId : ', projectId);
-      // console.log('app.js확인중 - stackString : ', stackString);
-    }
-  });
 
   useEffect(() => {
     if (stackString !== '') {

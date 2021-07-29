@@ -7,7 +7,6 @@ import './UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
 import AlertModal from '../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadWrapper({ hasUserId }) {
@@ -92,12 +91,9 @@ function UploadWrapper({ hasUserId }) {
         withCredentials: true,
       })
       .then((res) => {
-        // alert('성공');
-        // history.go(-1);
         setProSucc(true);
       })
       .catch((err) => {
-        // alert('실패');
         setProSucc(false);
       });
   }

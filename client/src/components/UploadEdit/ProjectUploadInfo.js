@@ -104,7 +104,6 @@ function ProjectUploadInfo({
         condition_desc2={
           '1120x450(px),  150KB 이하, jpg, jpeg, png, gif만 가능'
         }
-        // firstDesc={firstDesc}
       />
       <div className="project_stack" style={{ display: 'flex' }}>
         <div className="subject_wrapper">프로젝트 주요스택</div>
