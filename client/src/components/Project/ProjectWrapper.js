@@ -5,6 +5,7 @@ import ProjectInfoRender from './ProjectInfoRender';
 import anonymous from '../../images/anonymous.jpg';
 import '../Upload/UploadWrapper.css';
 import AlertModal from '../../utils/alert-modal';
+import { scrollTo } from '../../utils/etc';
 
 // const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -32,6 +33,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
   const [delSucc, setDelSucc] = useState(false);
 
   useEffect(() => {
+
     const getProjectData = () => {
       axios
         .get(`${END_POINT}/project/${projectId}`, {
@@ -64,6 +66,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
           setUser_id(res.data.userdata.user_id);
           setUser_name(res.data.userdata.user_name);
           setUser_photo(res.data.userdata.user_photo);
+          scrollTo(0)
         })
         .catch((err) => {
           alert('프로젝트 정보를 받아오는데 실패하였습니다.');
@@ -140,7 +143,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
               </div>
             </div>
           </div>
-          {/* {user_id === hasUserId && user_id ? ( */}
+          {user_id === Number(window.localStorage.getItem('userId')) && user_id ? (
           <div className="project_button_wrapper">
             <Link to="/uploadedit" className="landing_link">
               <div className="project_button">수정</div>
@@ -154,7 +157,7 @@ function ProjectWrapper({ hasUserId, projectId }) {
               삭제
             </div>
           </div>
-          {/* ) : null} */}
+          ) : null}
         </div>
         <ProjectInfoRender
           curFiles={curFiles}
