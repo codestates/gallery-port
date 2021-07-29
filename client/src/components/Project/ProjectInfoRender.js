@@ -8,7 +8,12 @@ function Item(props) {
     <Paper>
       <img
         src={props.curFile}
-        style={{ width: '1120px', height: '450px', top: '24px' }}
+        style={{
+          width: '1120px',
+          height: '450px',
+          top: '24px',
+          objectFit: 'contain',
+        }}
         alt="description"
       />
       <p className="project_page_carousel_desc">
