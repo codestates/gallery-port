@@ -457,7 +457,7 @@ img.preview {
 /* ////////////////// Modal ///////////////////// */
 
 div.modalBackdrop {
-  z-index: 1000;
+  z-index: 900;
   position: fixed;
   top: 0;
   left: 0;
@@ -472,7 +472,7 @@ div.modalBackdrop {
 .modalView {
   position: relative;
   overflow-x: hidden;
-  z-index: 1000;
+  z-index: 900;
   background-color: #fff;
   width: 547px;
   height: 884px;
