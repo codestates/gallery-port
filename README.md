@@ -8,7 +8,7 @@
 > gallery:port 입니다.
 
 <br/>
-<a href="https://www.gallery-port.com/" target="_blank">Gallery:port에 놀러가기!</a> 
+<a href="https://www.gallery-port.com/" target="_blank">Gallery:port에 놀러가기</a> 
 <br/>
 
 # 🔨 Tech Stack
