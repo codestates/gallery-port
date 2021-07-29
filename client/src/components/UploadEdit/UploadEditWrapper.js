@@ -107,8 +107,8 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_deploy_stack: res.data.projectdata.project_deploy_stack,
             project_url: res.data.projectdata.project_url,
           });
-        })
-        // .then((_) => history.go(-1));
+        });
+      // .then((_) => history.go(-1));
       // .catch((err) => {
       //   alert('실패');
       // });
@@ -162,7 +162,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
       .then((res) => {
         // alert('프로젝트 수정하였습니다.');
         setEditSucc(true);
-        history.go(-1);
+        // history.go(-1);
       })
       .catch((err) => {
         // alert('프로젝트 수정에 실패하였습니다.');
@@ -226,6 +226,8 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_info={project_info}
             project_name={project_name}
             editSucc={editSucc}
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
           />
         </div>
       </div>
