@@ -46,6 +46,7 @@ function Header(props) {
         withCredentials: true,
       })
       .then((res) => {
+        // console.log(res);
         const projects = res.data.data.projects;
         props.setStackProjectData(projects);
         history.push('/');
