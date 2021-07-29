@@ -177,8 +177,7 @@ module.exports = {
                 for (let key in project_info) {
                     data[key] = project_info[key];
                 }
-                // await data.save();
-
+                
                 // StackForProject 에서 stack 정보 업데이트
                 const stackData = JSON.parse(req.body.project_stack);
                 let currentStackCode = await StackForProject.findAll({where: {
