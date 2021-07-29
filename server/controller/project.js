@@ -255,12 +255,12 @@ module.exports = {
             const contentData = await Content.findAll({ where: { project_id: projectId }});
             for (let el of contentData){
                 let filePathImage = el.content_image.split('/').pop();
-                fs.rmdirSync(__dirname + `/../uploads/project/${filePathImage}`, {recursive: true})
+                fs.unlinkSync(__dirname + `/../uploads/project/${filePathImage}`)
             }
 
             const projectData = await Project.findOne({ where: { id: projectId }});
             const filePathThumbnail = projectData.project_thumbnail.split('/').pop();
-            fs.rmdirSync(__dirname + `/../uploads/project/${filePathThumbnail}`, {recursive: true})
+            fs.unlinkSync(__dirname + `/../uploads/project/${filePathThumbnail}`)
 
             await ProjectByUser.destroy({ where: { project_id: projectId }});
             await StackForProject.destroy({ where: { project_id: projectId }});
