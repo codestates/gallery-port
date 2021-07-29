@@ -8,7 +8,7 @@
 > gallery:port 입니다.
 
 # 🔨 Tech Stack
-![image](https://user-images.githubusercontent.com/40759230/127431424-7bf28f2e-b99f-41c6-8800-27ca93161976.png)
+<center> <img src="https://user-images.githubusercontent.com/40759230/127431424-7bf28f2e-b99f-41c6-8800-27ca93161976.png" width="500"></center>
 
 # 👤 Team
 <table>
