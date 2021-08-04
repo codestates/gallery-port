@@ -5,7 +5,6 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import './SignInWrapper.css';
 import AlertModal from '../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
@@ -15,10 +14,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
   });
   const [modalOpen, setModalOpen] = useState(false);
   const [signinSucc, setSigninSucc] = useState(true);
-
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
 
   function onChangeHandler(e, property) {
     const copied = Object.assign({}, signInInfo);
@@ -48,7 +43,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
         setModalOpen(true);
         console.log(err);
         setSigninSucc(false);
-        // alert('실패');
       });
   }
 
@@ -77,7 +71,6 @@ function SignInWrapper({ loginHandler, setHasUserId, hasUserId }) {
                 />
               );
             })}
-            {/* <div className="signinBtn" onClick={postHandler}> */}
             <div className="signinBtn" onClick={postHandler}>
               로그인
             </div>

@@ -14,7 +14,6 @@ import '../SignUp/SignUpWrapper.css';
 import { hash } from 'bcryptjs';
 import AlertModal from '../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper({ hasUserId }) {
@@ -50,7 +49,6 @@ function MyPageWrapper({ hasUserId }) {
           withCredentials: true,
         })
         .then((res) => {
-          // const file = convertURLtoFile(res.data.data.user_photo);
           setUser_image('');
           setUser_email(res.data.data.user_email);
           setHashedPassword(res.data.data.user_password);
@@ -117,12 +115,9 @@ function MyPageWrapper({ hasUserId }) {
         withCredentials: true,
       })
       .then((res) => {
-        // alert('성공');
-        // history.go(-1);
         setUserSucc(true);
       })
       .catch((err) => {
-        // alert('실패');
         setUserSucc(false);
       });
   }

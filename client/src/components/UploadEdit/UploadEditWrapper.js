@@ -3,13 +3,9 @@ import axios from 'axios';
 import Modal from './Modal';
 import ProjectUploadInfo from './ProjectUploadInfo';
 import { scrollTo } from '../../utils/etc';
-// import { convertURLtoFile } from '../../utils/fileHandler';
 import '../Upload/UploadWrapper.css';
 import { useHistory } from 'react-router-dom';
-import { first } from 'lodash';
-import AlertModal from '../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function UploadEditWrapper({ hasUserId, projectId }) {
@@ -26,7 +22,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
     project_url: '',
   });
   const [firstStack, setFirstStack] = useState([]);
-  // const [firstDesc, setFirstDesc] = useState([]);
   const [project_name, setProject_name] = useState('');
   const [project_stack, setProject_stack] = useState([]);
   const [project_thumbnail, setProject_thumbnail] = useState('');
@@ -58,30 +53,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           withCredentials: true,
         })
         .then((res) => {
-          // console.log(res);
-          // const urlArr = [];
-          // const descArr = [];
-
-          // res.data.projectdata.project_content.forEach(el => {
-          //   urlArr.push(el.image);
-          //   descArr.push(el.text);
-          // });
-
-          // const fileArr = [];
-
-          // for (let el of urlArr) {
-          //   const toFile = async el => {
-          //     const response = await axios.get(el);
-          //     const data = await response.blob();
-          //     const jpg = el.split('.').pop();
-          //     const filename = el.split('/').pop();
-          //     const metadata = { type: `image/${jpg}` };
-          //     return new File([data], filename, metadata);
-          //   };
-          //   const data = toFile(el);
-          //   fileArr.push(data);
-          // }
-
           const isChecked = stackArray.map((el) => {
             if (res.data.projectdata.project_stack.includes(el.toLowerCase())) {
               return true;
@@ -91,9 +62,7 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           });
           setCurFiles([]);
           setProject_thumbnail('');
-          // convertURLtoFile(res.data.projectdata.project_thumbnail)
           setFirstStack(isChecked);
-          // setFirstDesc(descArr);
           setProject_name(res.data.projectdata.project_name);
           setProject_info({
             project_start: res.data.projectdata.project_start,
@@ -108,10 +77,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
             project_url: res.data.projectdata.project_url,
           });
         });
-      // .then((_) => history.go(-1));
-      // .catch((err) => {
-      //   alert('실패');
-      // });
     };
     getProjectData();
   }, [hasUserId]);
@@ -160,12 +125,9 @@ function UploadEditWrapper({ hasUserId, projectId }) {
         withCredentials: true,
       })
       .then((res) => {
-        // alert('프로젝트 수정하였습니다.');
         setEditSucc(true);
-        // history.go(-1);
       })
       .catch((err) => {
-        // alert('프로젝트 수정에 실패하였습니다.');
         setEditSucc(false);
       });
   }
@@ -196,7 +158,6 @@ function UploadEditWrapper({ hasUserId, projectId }) {
           stackArray={stackArray}
           curFiles={curFiles}
           setCurFiles={setCurFiles}
-          // firstDesc={firstDesc}
           firstStack={firstStack}
         />
         <div

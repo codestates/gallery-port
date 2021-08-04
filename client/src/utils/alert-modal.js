@@ -1,6 +1,5 @@
 import React from 'react';
 import './alert-modal.css';
-// import { useHistory } from 'react-router-dom';
 
 function AlertModal(props) {
   const { open, close, alertString, alertBtn } = props;

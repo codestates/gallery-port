@@ -17,5 +17,3 @@ function Signup({ setStackProjectData, setStackString }) {
 }
 
 export default Signup;
-
-// props.setStackString(stackString);

@@ -7,7 +7,6 @@ import '../Upload/UploadWrapper.css';
 import AlertModal from '../../utils/alert-modal';
 import { scrollTo } from '../../utils/etc';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProjectWrapper({ hasUserId, projectId }) {
@@ -86,11 +85,8 @@ function ProjectWrapper({ hasUserId, projectId }) {
           res.message === 'Unauthorized user'
         ) {
           setDelSucc(false);
-          // alert(res.message);
         } else {
-          // window.history.go(-1);
           setDelSucc(true);
-          // alert('삭제');
         }
       });
   }
