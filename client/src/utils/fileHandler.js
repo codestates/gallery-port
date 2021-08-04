@@ -32,10 +32,3 @@ export const convertURLtoFile = async url => {
   const metadata = { type: `image/${jpg}` };
   return new File([data], filename, metadata);
 };
-
-// export function convertURLtoFile(url) {
-// return fetch(url).then(res => res.blob());
-// .then(blob => {
-//   return URL.createObjectURL(blob);
-// });
-// }

@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../pages/Loading';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function ProfileWrapper({ hasUserId, setProjectId }) {
@@ -91,10 +90,7 @@ function ProfileWrapper({ hasUserId, setProjectId }) {
 
   return isLoading ? (
     <Loading
-      // logoutHandler={logoutHandler}
       hasUserId={hasUserId}
-      // setStackProjectData={setStackProjectData}
-      // setStackString={setStackString}
     />
   ) : (
     <div className="ProfileWrapper">

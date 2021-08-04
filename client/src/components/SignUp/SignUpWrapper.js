@@ -7,7 +7,6 @@ import './SignUpWrapper.css';
 import { useHistory } from 'react-router-dom';
 import AlertModal from '../../utils/alert-modal';
 
-// const END_POINT = 'https://gallery-port-server.com';
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function SignUpWrapper() {
@@ -26,10 +25,6 @@ function SignUpWrapper() {
   const [user_image, setUser_image] = useState(''); //필수
   const [modalOpen, setModalOpen] = useState(false);
   const [joinSucc, setJoinSucc] = useState(false);
-
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
 
   let history = useHistory();
 
@@ -72,13 +67,10 @@ function SignUpWrapper() {
         withCredentials: true,
       })
       .then((res) => {
-        // history.go(-1);
         setJoinSucc(true);
-        // alert('회원가입에 성공하였습니다.');
       })
       .catch((err) => {
         setJoinSucc(false);
-        // alert('회원가입에 실패하였습니다.');
       });
   }
 
@@ -108,15 +100,7 @@ function SignUpWrapper() {
           pw_isValid={pw_isValid}
           pw_confirm={pw_confirm}
         />
-        <div
-          style={
-            {
-              // display: 'flex',
-              // flexDirection: 'column',
-              // alignItems: 'center',
-            }
-          }
-        >
+        <div>
           <div
             className="previewBtn"
             onClick={() =>

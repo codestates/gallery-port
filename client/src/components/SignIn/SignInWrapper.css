@@ -23,7 +23,6 @@
   height: 324px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
 }
 
 .signinFormWrapper {
@@ -158,6 +157,7 @@
   align-items: center;
   font-family: 'NotoSansKR-L', sans-serif;
 }
+
 .signupBtn {
   cursor: pointer;
   position: static;

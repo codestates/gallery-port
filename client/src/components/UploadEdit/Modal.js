@@ -15,8 +15,6 @@ function Modal({
   modalOpen,
   setModalOpen,
 }) {
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [editSucc, setEditSucc] = useState(false);
   let history = useHistory();
 
   const closeModal = () => {
