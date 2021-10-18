@@ -34,3 +34,5 @@ const config: IConfigGroup = {
     "dialect": "mysql"
   }
 }
+
+export default config;
